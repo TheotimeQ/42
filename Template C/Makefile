@@ -6,9 +6,11 @@
 #    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/17 16:06:55 by tquere            #+#    #+#              #
-#    Updated: 2022/09/23 21:51:02 by zelinsta         ###   ########.fr        #
+#    Updated: 2022/11/07 16:58:45 by zelinsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# Help makefile : https://shiftcode.fr/comprendre-les-makefiles/
 
 .PHONY:     all clean clear fclean re
 

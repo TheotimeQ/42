@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fcts_struct_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:43:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/07/27 13:57:14 by tquere           ###   ########.fr       */
+/*   Updated: 2022/10/28 11:42:22 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,8 @@ t_map_var	init_map(void)
 t_map_var	get_map_in_file(t_map_var map)
 {
 	long int		cnt_char;
-	int				x_map;
-	int				y_map;
 	char			*crt_lin;
 
-	x_map = 0;
-	y_map = 0;
 	cnt_char = 0;
 	crt_lin = malloc(20);
 	if (crt_lin != 0)
