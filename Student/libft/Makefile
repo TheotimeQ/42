@@ -1,40 +1,54 @@
 
 
-.PHONY:     all sanit bonus clean fclean re
+#ATTENTION POUR LE RENDU , DISPOSITION DES FICHIER / MAKEFILE
 
-NAME		=	libft.a
+.PHONY:     		all sanit make_lib bonus clean fclean re
 
-SRCS 		=	ft_.c
-OBJS 		=	${SRCS:.c=.o}
-HEAD		=	libft.h
+NAME				= libft.a
 
-GCC 		=	gcc
-CFLAGS 		=	-Wall -Wextra -Werror
-SANIT_FLAG 	=	-g -fsanitize=address
+SOURCEDIR_1 		= Partie_1
+SOURCEDIR_2 		= Partie_2
+SOURCEDIR_BONUS		= Partie_Bonus
+BUILDDIR  			= Build
+HEADERDIR 			= Header
 
-RM 			=	rm -rf
-LIB 		=   ar rc
-
-all:	 ${NAME} moove
-
-${NAME}:	${OBJS}	${HEAD}	Makefile
-			${GCC} ${CFLAG}	${OBJS}	-o $@
+HEADER_FILE			= $(shell find $(HEADERDIR) -name '*.h')
 			
+SOURCE_1			= $(shell find $(SOURCEDIR_1) -name '*.c')
+SOURCE_2			= $(shell find $(SOURCEDIR_2) -name '*.c')
+SOURCE_BONUS		= $(shell find $(SOURCEDIR_BONUS) -name '*.c')
+SOURCE_MAIN 		= main.c $(SOURCE_1) $(SOURCE_2)
+SOURCE_MAIN_BONUS	= main.c $(SOURCE_1) $(SOURCE_2) $(SOURCE_BONUS)   
 
-%.o:	%.c	${HEAD} Makefile
-			${GCC} ${CFLAGS} -I -c $< -o $@
+OBJECTS_MAIN	    = $(addprefix $(BUILDDIR)/,$(SOURCE_MAIN:%.c=%.o))
+OBJECTS_MAIN_BONUS  = $(addprefix $(BUILDDIR)/,$(SOURCE_MAIN_BONUS:%.c=%.o))
 
-make_lib:	${OBJS}
-			${LIB} ${NAME} ${OBJS}
+GCC					= gcc
+CFLAGS				= -Wall -Wextra -Werror 
+SANITIZE			= -Wall -Wextra -Werror -g -fsanitize=address
 
-sanit:		${OBJS}	${HEAD}	Makefile
-			${GCC} ${CFLAG} ${SANIT_FLAG} ${OBJS}	-o $@
+RM 					= rm -rf
+LIB 				= ar -crs
 
-bonus:
-			echo "bonus"
+all: $(NAME) Makefile
+
+$(BUILDDIR)/%.o: %.c
+			$(GCC) $(CFLAGS) -I$(HEADERDIR) -I$(dir $<) -c $< -o $@
+
+$(NAME): 	$(OBJECTS_MAIN) $(HEADER_FILE) Makefile
+			$(GCC) $(CFLAGS) $(OBJECTS_MAIN) -o $(NAME)
+
+sanit: 		$(OBJECTS_MAIN) $(HEADER_FILE) Makefile
+			$(GCC) $(SANITIZE) $(OBJECTS_MAIN) -o $(NAME)
+
+make_lib:	${OBJECTS_MAIN} Makefile
+			${LIB} ${NAME} ${OBJECTS_MAIN}
+
+bonus:		${OBJECTS_MAIN} Makefile
+			${LIB} ${NAME} ${OBJECTS_MAIN_BONUS}
 
 clean:
-			${RM} ${OBJS}
+			${RM} ${OBJECTS_MAIN}
 
 fclean:		clean
 			${RM} ${NAME}
