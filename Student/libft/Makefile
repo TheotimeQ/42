@@ -4,7 +4,8 @@
 
 .PHONY:     		all sanit make_lib bonus clean fclean re
 
-NAME				= libft.a
+NAME_LIB			= libft.a
+NAME				= LIB_TEST
 
 SOURCEDIR_1 		= Partie_1
 SOURCEDIR_2 		= Partie_2
@@ -25,7 +26,7 @@ OBJECTS_MAIN_BONUS  = $(addprefix $(BUILDDIR)/,$(SOURCE_MAIN_BONUS:%.c=%.o))
 
 GCC					= gcc
 CFLAGS				= -Wall -Wextra -Werror 
-SANITIZE			= -Wall -Wextra -Werror -g -fsanitize=address
+SANITIZE			= $(CFLAGS) -g -fsanitize=address
 
 RM 					= rm -rf
 LIB 				= ar -crs
@@ -36,13 +37,13 @@ $(BUILDDIR)/%.o: %.c
 			$(GCC) $(CFLAGS) -I$(HEADERDIR) -I$(dir $<) -c $< -o $@
 
 $(NAME): 	$(OBJECTS_MAIN) $(HEADER_FILE) Makefile
-			$(GCC) $(CFLAGS) $(OBJECTS_MAIN) -o $(NAME)
+			@$(GCC) $(CFLAGS) $(OBJECTS_MAIN) -o $(NAME)
 
 sanit: 		$(OBJECTS_MAIN) $(HEADER_FILE) Makefile
-			$(GCC) $(SANITIZE) $(OBJECTS_MAIN) -o $(NAME)
+			@$(GCC) $(SANITIZE) $(OBJECTS_MAIN) -o $(NAME)
 
 make_lib:	${OBJECTS_MAIN} Makefile
-			${LIB} ${NAME} ${OBJECTS_MAIN}
+			${LIB} ${NAME_LIB} ${OBJECTS_MAIN}
 
 bonus:		${OBJECTS_MAIN} Makefile
 			${LIB} ${NAME} ${OBJECTS_MAIN_BONUS}
