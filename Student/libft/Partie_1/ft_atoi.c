@@ -6,8 +6,14 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:34:06 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/08 13:52:55 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/08 17:23:05 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Header/libft.h"
+
+int		atoi(const char *str)
+{
+
+	
+}

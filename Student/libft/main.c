@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:49 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/08 14:48:28 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/08 17:22:39 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,97 +184,261 @@
 
 //    memset(str,'$',15);
 //    puts(str);
-   
+
 //    strcpy(str2,"This is string.h library function");
 //    ft_memset(str2, '$', 15);
 //    puts(str2);
-   
+
 //    return(0);
 // }
 
 // bzero
-// int main()
-// {   
-//     return (1);
+// int main () {
+//    char str[50];
+//    char str2[50];
+
+//    strcpy(str,"This is string.h library function");
+//    printf("Base : %s\n", str);
+
+//    bzero(str, 1);
+//    printf("Built-in : %s\n", str);
+
+//    strcpy(str2,"This is string.h library function");
+//    ft_bzero(str2, 1);
+//    printf("Ma fonction : %s", str);
+//    puts(str2);
+
+//    return(0);
 // }
 
 // memcpy
 // int main()
-// {   
-//     return (1);
+// {
+// 	const char src[50] = "Ceci est un test";
+// 	char dest[50];
+// 	strcpy(dest,"Fck Jocelyn le clown");
+// 	printf("BUILT-IN : Before memcpy dest   %s\n", dest);
+// 	printf("return                          %s \n",memcpy(dest, src, 5));
+// 	printf("After memcpy dest               %s\n", dest);
+// 	printf("After memcpy src                %s\n", src);
+
+// 	const char src2[50] = "Ceci est un test";
+// 	char dest2[50];
+// 	strcpy(dest2,"Fck Jocelyn le clown");
+// 	printf("Before memcpy dest              %s\n", dest2);
+// 	printf("Return                          %s \n",ft_memcpy(dest2, src2, 5));
+// 	printf("After memcpy dest               %s\n", dest2);
+// 	printf("After memcpy src                %s\n", src2);
+
+//    return(0);
 // }
 
 // memmove
 // int main()
-// {   
-//     return (1);
+// {
+//     char str1[50] = "I am going from Delhi to Gorakhpur";
+//     char str2[50] = "I am going from Delhi to Gorakhpur";
+// 	char str3[50] = "I am going from Delhi to Gorakhpur";
+// 	char str4[50] = "I am going from Delhi to Gorakhpur";
+//     //Use of memmove
+//     printf( "Function:	t_memmove with overlap 1\n" );
+//     printf( "Orignal :	%s\n",str1);
+//     printf( "Source:		     %s\n", str1 + 5 );
+//     printf( "Destination:	           %s\n", str1 + 11 );
+//     memmove( str1 + 11, str1 + 5, 29 );
+//     printf( "Result:		%s\n", str1 );
+//     printf( "Length:		%lu characters\n\n", strlen( str1 ) );
+
+//     //Use of ft_memmove
+//     printf( "Function:	t_memmove with overlap 1\n" );
+//     printf( "Orignal :	%s\n",str2);
+//     printf( "Source:		     %s\n", str2 + 5 );
+//     printf( "Destination:	           %s\n", str2 + 11 );
+//     ft_memmove( str2 + 11, str2 + 5, 29 );
+//     printf( "Result:		%s\n", str2 );
+//     printf( "Length:		%lu characters\n\n\n", strlen( str2 ) );
+
+// 	//Use of memmove
+//     printf( "Function:	t_memmove with overlap 2\n" );
+//     printf( "Orignal :	%s\n",str3);
+//     printf( "Source:		           %s\n", str3 + 11 );
+//     printf( "Destination:	     %s\n", str3 + 5 );
+//     memmove( str3 + 5, str3 + 11, 29 );
+//     printf( "Result:		%s\n", str3 );
+//     printf( "Length:		%lu characters\n\n", strlen( str3 ) );
+
+// 	//Use of ft_memmove
+//     printf( "Function:	t_memmove with overlap 2\n" );
+//     printf( "Orignal :	%s\n",str4);
+//     printf( "Source:		           %s\n", str4 + 11 );
+//     printf( "Destination:	     %s\n", str4 + 5 );
+//     ft_memmove( str4 + 5, str4 + 11, 29 );
+//     printf( "Result:		%s\n", str4 );
+//     printf( "Length:		%lu characters\n\n\n", strlen( str4 ) );
+//     return 0;
 // }
 
 // strlcpy
 // int main()
-// {   
-//     return (1);
+// {
+//     char src[50] = "la chaine source";
+//     char dest[25];
+//     printf("%lu", strlcpy(dest, src, 5));
+//     printf("\n%s", dest);
+
+//     char src2[50] = "la chaine source";
+//     char dest2[25];
+//     printf("\n\n%lu", ft_strlcpy(dest2, src2, 5));
+//     printf("\n%s", dest2);
 // }
 
-// strlcat
-// int main()
-// {   
-//     return (1);
+// strlcat		NUL
+// int    main(void)
+// {
+//     char s1a[10] = "Test1";
+//     char s2a[] = "OK";
+
+// 	printf("%s\n", strlcat(s1a, s2a, 6));
+//     printf("%s\n", ft_strlcat(s1a, s2a, 6));
+//     return (0);
 // }
 
 // toupper
 // int main()
-// {   
-//     return (1);
+// {
+//     printf("%c\n", ft_toupper('a'));
+//     printf("%c\n", ft_toupper('z'));
+//     printf("%c\n", ft_toupper('A'));
+//     printf("%c\n", ft_toupper('Z'));
+//     printf("%c\n", ft_toupper('1'));
+//     printf("%c\n", ft_toupper('7'));
 // }
 
 // tolower
 // int main()
-// {   
-//     return (1);
+// {
+//     printf("%c\n", ft_tolower('a'));
+//     printf("%c\n", ft_tolower('z'));
+//     printf("%c\n", ft_tolower('A'));
+//     printf("%c\n", ft_tolower('Z'));
+//     printf("%c\n", ft_tolower('1'));
+//     printf("%c\n", ft_tolower('7'));
 // }
 
 // strchr
 // int main()
-// {   
-//     return (1);
+// {
+//     printf("%s", strchr("salut les meufs", 'm'));
+//     printf("\n");
+//     printf("%s", strchr("salut les meufs", 's'));
+//     printf("\n");
+//     printf("%s", strchr("salut les meufs", 'x'));
+//     printf("\n");
+//     printf("%s", strchr("salut les meufs", 'S'));
+//     printf("\n");
 // }
 
 // strrchr
 // int main()
-// {   
-//     return (1);
+// {
+//     printf("%s", ft_strrchr("salut les meufs", 'm'));
+//     printf("\n");
+//     printf("%s", ft_strrchr("salut les meufs", 's'));
+//     printf("\n");
+//     printf("%s", ft_strrchr("salut les meufs", 'x'));
+//     printf("\n");
+//     printf("%s", ft_strrchr("salut les meufs", 'S'));
+//     printf("\n");
 // }
 
 // strncmp
 // int main()
-// {   
-//     return (1);
+// {
+//     printf("%d \n",ft_strncmp("abc","abdwgwgwe",7));
+//     printf("%d \n",strncmp("abc","abdwgwgwe",7));
 // }
 
 // memchr
 // int main()
-// {   
-//     return (1);
+// {
+//     printf("%s", ft_memchr("Salut les meufs", ' ', 16));
+//     printf("\n");
+//     printf("%s", memchr("Salut les meufs", ' ', 16));
+//     printf("\n");
+//     printf("\n");
+//     printf("%s", ft_memchr("Salut les meufs", 'S', 16));
+//     printf("\n");
+//     printf("%s", memchr("Salut les meufs", 'S', 16));
+//     printf("\n");
+//     printf("\n");
+//     printf("%s", ft_memchr("Salut les meufs", 'z', 16));
+//     printf("\n");
+//     printf("%s", memchr("Salut les meufs", 'z', 16));
 // }
 
 // memcmp
 // int main()
-// {   
-//     return (1);
+// {
+//     printf("%d",ft_memcmp("Si tu lis t'es gay", "Si tu lis t'es gay", 19));
+//     printf("\n");
+//     printf("%d",memcmp("Si tu lis t'es gay", "Si tu lis t'es gay", 19));
+//     printf("\n");
+//     printf("\n");
+//     printf("%d",ft_memcmp("Si tu lis t'es gay", "Si tu lis t'es", 19));
+//     printf("\n");
+//     printf("%d",memcmp("Si tu lis t'es gay", "Si tu lis t'es", 19));
+//     printf("\n");
+//     printf("\n");
+//     printf("%d",ft_memcmp("Si tu lis t'es gay", "Si tu lis t'es homo", 19));
+//     printf("\n");
+//     printf("%d",memcmp("Si tu lis t'es gay", "Si tu lis t'es homo", 19));
+//     printf("\n");
+//     printf("\n");
+//     printf("%d",ft_memcmp("Si tu liS t'es gay", "Si tu lis t'es gay", 19));
+//     printf("\n");
+//     printf("%d",memcmp("Si tu liS t'es gay", "Si tu lis t'es gay", 19));
 // }
 
 // strnstr
 // int main()
-// {   
-//     return (1);
+// {
+//     printf("%s", ft_strnstr("Foo Bar Baz", "Bar", 4));
+//     printf("\n");
+//     printf("%s", strnstr("Foo Bar Baz", "Bar", 4));
+//     printf("\n");
+//     printf("\n");
+//     printf("%s", ft_strnstr("Foo Bar Baz", "Bar", 12));
+//     printf("\n");
+//     printf("%s", strnstr("Foo Bar Baz", "Bar", 12));
+//     printf("\n");
+//     printf("\n");
+//     printf("%s", ft_strnstr("Foo Bar Baz", "Bar", 20));
+//     printf("\n");
+//     printf("%s", strnstr("Foo Bar Baz", "Bar", 20));
+//     printf("\n");
+//     printf("\n");
+//     printf("%s", ft_strnstr("Foo Bar Baz", "Bard", 12));
+//     printf("\n");
+//     printf("%s", strnstr("Foo Bar Baz", "Bard", 12));
+//     printf("\n");
+//     printf("\n");
 // }
 
 // atoi
-// int main()
-// {   
-//     return (1);
-// }
+int main()
+{
+    printf("%d", ft_atoi("-45"));
+    printf(" %d", atoi("-45"));
+    printf("\n");
+    printf("%d", ft_atoi("0"));
+    printf(" %d", atoi("0"));
+    printf("\n");
+    printf("%d", ft_atoi("45"));
+    printf(" %d", atoi("45"));
+    printf("\n");
+    printf("%d", ft_atoi("-2147483648"));
+    printf(" %d", atoi("-2147483648"));
+}
 
 // calloc
 // int main()
