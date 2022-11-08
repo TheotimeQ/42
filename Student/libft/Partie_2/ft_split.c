@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:12 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/08 11:16:36 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/08 13:37:47 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*cut_char(char const *s, int start, int end)
 	char	*str;
 
 	str = malloc(sizeof(char) * (end - start + 1));
+	if (str == NULL)
+		return (NULL);
 	index = 0;
 	while (s[index])
 	{
@@ -36,7 +38,6 @@ char	**ft_split(char const *s, char c)
 	int		index_tab;
 	int		index_s;
 	int		start;
-	int		end;
 
 	tab = malloc(sizeof(char *) * ft_strlen(s));
 	if (tab == NULL)
@@ -50,9 +51,10 @@ char	**ft_split(char const *s, char c)
 		start = index_s;
 		while (s[index_s] != c && s[index_s])
 			index_s++;
-		end = index_s;
-		if (start < end)
-			tab[index_tab++] = cut_char(s, start, end);
+		if (start < index_s)
+			tab[index_tab] = cut_char(s, start, index_s);
+		if (start < index_s && tab[index_tab++] == NULL )
+			return (NULL);
 	}
 	tab[index_tab] = NULL;
 	return (tab);

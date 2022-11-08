@@ -6,8 +6,14 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:23 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/08 10:22:24 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/08 13:19:27 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "../Header/libft.h"
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	ft_putstr_fd(ft_itoa(n), fd);
+}
