@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:49 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/08 17:22:39 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/08 18:10:12 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,46 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <assert.h>
 
 #include "Header/libft.h"
 
 //--------------- ANNEXES ---------------
 
-// void print_tab(char **tab)
-// {
-//     int index;
+void print_tab(char **tab)
+{
+    int index;
 
-//     index = 0;
-//     while(tab[index] != NULL)
-//     {
-//         printf("|%s|\n",tab[index]);
-//         index++;
-//     }
-// }
+    index = 0;
+    while(tab[index] != NULL)
+    {
+        printf("|%s|\n",tab[index]);
+        index++;
+    }
+}
 
-// void free_tab(char **tab)
-// {
-//     int index;
+void free_tab(char **tab)
+{
+    int index;
 
-//     index = 0;
-//     while(tab[index] != NULL)
-//     {
-//         free(tab[index]);
-//         index++;
-//     }
-//     free(tab);
-// }
+    index = 0;
+    while(tab[index] != NULL)
+    {
+        free(tab[index]);
+        index++;
+    }
+    free(tab);
+}
 
-// char    on_char1(unsigned int nb, char c)
-// {
-//     return (c + nb); 
-// }
+char    on_char1(unsigned int nb, char c)
+{
+    return (c + nb); 
+}
 
-// void    on_char2(unsigned int nb, char *s)
-// {
-//     s[nb] = s[nb] + nb; 
-// }
+void    on_char2(unsigned int nb, char *s)
+{
+    s[nb] = s[nb] + nb; 
+}
 
 //--------------- Partie 1 ---------------
 
@@ -425,31 +426,57 @@
 // }
 
 // atoi
-int main()
-{
-    printf("%d", ft_atoi("-45"));
-    printf(" %d", atoi("-45"));
-    printf("\n");
-    printf("%d", ft_atoi("0"));
-    printf(" %d", atoi("0"));
-    printf("\n");
-    printf("%d", ft_atoi("45"));
-    printf(" %d", atoi("45"));
-    printf("\n");
-    printf("%d", ft_atoi("-2147483648"));
-    printf(" %d", atoi("-2147483648"));
-}
+// int main()
+// {
+//     printf("%d", ft_atoi("-45"));
+//     printf(" %d", atoi("-45"));
+//     printf("\n");
+//     printf("%d", ft_atoi("0"));
+//     printf(" %d", atoi("0"));
+//     printf("\n");
+//     printf("%d", ft_atoi("45"));
+//     printf(" %d", atoi("45"));
+//     printf("\n");
+//     printf("%d", ft_atoi("-2147483648"));
+//     printf(" %d", atoi("-2147483648"));
+// 	printf("\n");
+//     printf("%d", ft_atoi("  --2147483648"));
+//     printf(" %d", atoi("  --2147483648"));
+// }
 
 // calloc
-// int main()
-// {   
-//     return (1);
-// }
+#define INT_NUMBER 10
+int main() {
+
+    int i;
+    int *pointer = (int *) calloc( INT_NUMBER, sizeof(int) );
+    assert( pointer != NULL ); //Test calloc
+    for ( i=0; i<INT_NUMBER; i++ )
+        pointer[i] = i;
+    for (i=0; i<INT_NUMBER; i++ )
+        printf( "%d ", pointer[i] );
+    printf( "\n" );
+    free( pointer );
+
+    int j;
+    int *pointerT = (int *) ft_calloc( INT_NUMBER, sizeof(int) );
+    assert( pointerT != NULL ); //Test calloc
+    for ( j=0; j<INT_NUMBER; j++ )
+        pointerT[j] = j;
+    for (j=0; j<INT_NUMBER; j++ )
+        printf( "%d ", pointerT[j] );
+    printf( "\n" );
+    free( pointerT );
+
+    return 0;
+}
 
 // strdup
 // int main()
-// {   
-//     return (1);
+// {
+//     char    *dest = ft_strdup("J'aime les nouilles");
+//     printf("%s", dest);
+//     return (0);
 // }
 
 //--------------- Partie 2 ---------------
