@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/08 10:14:25 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/08 10:15:23 by tquere           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "../Header/libft.h"
 
-static int check_in_set(char c,char const *set)
+static int	check_in_set(char c, char const *set)
 {
 	int		index;
 
@@ -12,29 +23,29 @@ static int check_in_set(char c,char const *set)
 		index++;
 	if (set[index])
 		return (1);
-	return (0); 
+	return (0);
 }
 
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		index;
-	int 	start;
+	int		start;
 	int		end;
-	char 	*str;
+	char	*str;
 
 	str = malloc(sizeof(char) * ft_strlen(s1));
 	index = 0;
 	while (s1[index])
 	{
-		if (check_in_set(s1[index],set) == 0)
-			break;
+		if (check_in_set(s1[index], set) == 0)
+			break ;
 		else
 			index++;
 	}
 	start = index;
 	while (s1[index])
 	{
-		if (check_in_set(s1[index],set) == 0)
+		if (check_in_set(s1[index], set) == 0)
 			end = index;
 		index++;
 	}
