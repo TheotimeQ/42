@@ -53,18 +53,22 @@ $(BUILD_DIR)/%.o:	$(DIR_BONUS)/%.c
 
 #Rule for compile
 $(NAME): 	clear $(TEST_OBJECT) $(HEADER) Makefile 
+			@echo "----Compiling----"
 			@$(GCC) $(CFLAGS) $(TEST_OBJECT) -o $(NAME)
 
 sanit: 	$(OBJECTS) $(HEADER) Makefile
+			@echo "----Ready for sanitizing ? ----"
 			$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME)
 
 
 #Rule to make lib
 lib:		${OBJECTS} Makefile
-			${LIB} ${NAME_LIB} ${OBJECTS}
+			@echo "----Making Lib----"
+			@${LIB} ${NAME_LIB} ${OBJECTS}
 
 bonus:	${OBJECTS_BONUS} Makefile
-			${LIB} ${NAME} ${OBJECTS} ${OBJECTS_BONUS}
+			@echo "----Making Bonus----"
+			@${LIB} ${NAME} ${OBJECTS} ${OBJECTS_BONUS}
 
 #Other
 clear:
