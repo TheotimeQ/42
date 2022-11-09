@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:12 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/09 15:58:46 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/09 22:07:39 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ char	**ft_split(char const *s, char c)
 		while (s[index_s] != c && s[index_s])
 			index_s++;
 		if (start < index_s)
-			tab[index_tab] = cut_char(s, start, index_s);
+			tab[index_tab] = cut_char(s, start, index_s); //REMPLACER PAR SUBSTR
 		if (start < index_s && tab[index_tab++] == NULL )
+			//FREE LES AUTRES MALLOC DU TAB
 			return (NULL);
 	}
 	tab[index_tab] = NULL;
