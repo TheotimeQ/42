@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:49 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/08 18:10:12 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/09 15:10:58 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -445,31 +445,31 @@ void    on_char2(unsigned int nb, char *s)
 // }
 
 // calloc
-#define INT_NUMBER 10
-int main() {
+// #define INT_NUMBER 10
+// int main() {
 
-    int i;
-    int *pointer = (int *) calloc( INT_NUMBER, sizeof(int) );
-    assert( pointer != NULL ); //Test calloc
-    for ( i=0; i<INT_NUMBER; i++ )
-        pointer[i] = i;
-    for (i=0; i<INT_NUMBER; i++ )
-        printf( "%d ", pointer[i] );
-    printf( "\n" );
-    free( pointer );
+//     int i;
+//     int *pointer = (int *) calloc( INT_NUMBER, sizeof(int) );
+//     assert( pointer != NULL ); //Test calloc
+//     for ( i=0; i<INT_NUMBER; i++ )
+//         pointer[i] = i;
+//     for (i=0; i<INT_NUMBER; i++ )
+//         printf( "%d ", pointer[i] );
+//     printf( "\n" );
+//     free( pointer );
 
-    int j;
-    int *pointerT = (int *) ft_calloc( INT_NUMBER, sizeof(int) );
-    assert( pointerT != NULL ); //Test calloc
-    for ( j=0; j<INT_NUMBER; j++ )
-        pointerT[j] = j;
-    for (j=0; j<INT_NUMBER; j++ )
-        printf( "%d ", pointerT[j] );
-    printf( "\n" );
-    free( pointerT );
+//     int j;
+//     int *pointerT = (int *) ft_calloc( INT_NUMBER, sizeof(int) );
+//     assert( pointerT != NULL ); //Test calloc
+//     for ( j=0; j<INT_NUMBER; j++ )
+//         pointerT[j] = j;
+//     for (j=0; j<INT_NUMBER; j++ )
+//         printf( "%d ", pointerT[j] );
+//     printf( "\n" );
+//     free( pointerT );
 
-    return 0;
-}
+//     return 0;
+// }
 
 // strdup
 // int main()
@@ -594,4 +594,203 @@ int main() {
 //     printf("\n");
 //     ft_putnbr_fd(5,1);
 //     printf("\n");
+// }
+
+//--------------- BONUS ---------------
+
+void print_list(t_list *list)
+{   
+    int index;
+
+    index = 0;
+    while (list != NULL)
+    {
+        printf("%d : %s , %p\n",index++,(char *)list->content,list->next);
+        list = list->next;
+    }
+}
+
+// ft_lstnew
+// int main()
+// {	
+//     char *content = "J'aime les chatons malades";
+
+//     t_list 	*list = ft_lstnew((void *)content);
+//     print_list(list);
+//     free(list);
+// }
+
+// ft_lstadd_front
+// int main()
+// {	
+//     char *content1 = "J'aime les chatons malades";
+//     char *content2 = "Non je ne metterai pas les include Valentin <3";
+
+//     t_list 	*list1 = ft_lstnew((void *)content1);
+//     t_list 	*list2 = ft_lstnew((void *)content2);
+//     ft_lstadd_front(&list1, list2);
+//     print_list(list2);
+//     free(list2);
+//     free(list1);
+// }
+
+//ft_lstsize
+// int main()
+// {	
+//     char *content1 = "J'aime les chatons malades";
+//     char *content2 = "Non je ne metterai pas les include Valentin <3";
+//     char *content3 = "Les segfault c'est pour les zozos";
+
+//     t_list 	*list1 = ft_lstnew((void *)content1);
+//     t_list 	*list2 = ft_lstnew((void *)content2);
+//     t_list 	*list3 = ft_lstnew((void *)content3);
+//     ft_lstadd_front(&list1, list2);
+//     ft_lstadd_front(&list2, list3);
+//     printf("List size : %d\n",ft_lstsize(list3));
+//     free(list3);
+//     free(list2);
+//     free(list1);
+// }
+
+
+//ft_lstlast
+// int main()
+// {	
+//     char *content1 = "J'aime les chatons malades";
+//     char *content2 = "Non je ne metterai pas les include Valentin <3";
+//     char *content3 = "Les segfault c'est pour les zozos";
+
+//     t_list 	*list1 = ft_lstnew((void *)content1);
+//     t_list 	*list2 = ft_lstnew((void *)content2);
+//     t_list 	*list3 = ft_lstnew((void *)content3);
+//     ft_lstadd_front(&list1, list2);
+//     ft_lstadd_front(&list2, list3);
+//     printf("ALL LIST : \n");
+//     print_list(list3);
+//     printf("LAST ELEM : \n");
+//     print_list(ft_lstlast(list3));
+//     free(list3);
+//     free(list2);
+//     free(list1);
+// }
+
+// ft_lstadd_back
+// int main()
+// {	
+//     char *content1 = "J'aime les chatons malades";
+//     char *content2 = "Non je ne metterai pas les include Valentin <3";
+//     char *content3 = "Les segfault c'est pour les zozos";
+
+//     t_list 	*list1 = ft_lstnew((void *)content1);
+//     t_list 	*list2 = ft_lstnew((void *)content2);
+//     ft_lstadd_back(&list1, list2);
+//     t_list 	*list3 = ft_lstnew((void *)content3);
+//     ft_lstadd_back(&list1, list3);
+//     print_list(list1);
+//     free(list3);
+//     free(list2);
+//     free(list1);
+// }
+
+void del_function(void *content)
+{   
+    printf("DELETE CONTENT : %s\n",(char *)content);
+}
+
+void del_function2(void *content)
+{   
+    return ;
+}
+
+void function(void *content)
+{   
+    printf("FUNCTION : %s\n",(char *)content);
+}
+
+void *function2(void *content)
+{   
+    char *test = "Ceci est un test";
+    return (test);
+}
+
+// // ft_lstdelone
+// int main()
+// {	
+//     char *content = "Non je ne metterai pas les include Valentin <3";
+//     t_list 	*list = ft_lstnew((void *)content);
+
+//     ft_lstdelone(list, &del_function);
+// }
+
+// ft_lstclear
+// int main()
+// {	
+//     char *content1 = "Non je ne metterai pas les include Valentin <3";
+//     char *content2 = "Mes main sont vraiment genial";
+//     char *content3 = "Pourquoi je suis tout seul en coa air? ";
+//     char *content4 = "Eh heu booouhhh , la terre c'est trop un truc de worms ca";
+
+//     t_list 	*list1 = ft_lstnew((void *)content1);
+//     t_list 	*list2 = ft_lstnew((void *)content2);
+//     ft_lstadd_back(&list1, list2);
+//     t_list 	*list3 = ft_lstnew((void *)content3);
+//     ft_lstadd_back(&list1, list3);
+//     t_list 	*list4 = ft_lstnew((void *)content4);
+//     ft_lstadd_back(&list1, list4);
+
+//     printf("BEFORE CLEAR : \n");
+//     print_list(list1);
+//     ft_lstclear(&list3, &del_function);
+//     printf("PTR NULL : %p \n",list3);
+//     free(list1);
+//     free(list2);
+// }
+
+//ft_lstiter
+// int main()
+// {	
+//     char *content1 = "Non je ne metterai pas les include Valentin <3";
+//     char *content2 = "Mes main sont vraiment genial";
+//     char *content3 = "Pourquoi je suis tout seul en coa air? ";
+//     char *content4 = "Eh heu booouhhh , la terre c'est trop un truc de worms ca";
+
+//     t_list 	*list1 = ft_lstnew((void *)content1);
+//     t_list 	*list2 = ft_lstnew((void *)content2);
+//     ft_lstadd_back(&list1, list2);
+//     t_list 	*list3 = ft_lstnew((void *)content3);
+//     ft_lstadd_back(&list1, list3);
+//     t_list 	*list4 = ft_lstnew((void *)content4);
+//     ft_lstadd_back(&list1, list4);
+
+//     ft_lstiter(list1, &function);
+//     free(list1);
+//     free(list2);
+//     free(list3);
+//     free(list4);
+// }
+
+//ft_lstmap
+// int main()
+// {	
+//     char *content1 = "Non je ne metterai pas les include Valentin <3";
+//     char *content2 = "Mes main sont vraiment genial";
+//     char *content3 = "Pourquoi je suis tout seul en coa air? ";
+//     char *content4 = "Eh heu booouhhh , la terre c'est trop un truc de worms ca";
+
+//     t_list 	*new_list;
+//     t_list 	*list1 = ft_lstnew((void *)content1);
+//     t_list 	*list2 = ft_lstnew((void *)content2);
+//     ft_lstadd_back(&list1, list2);
+//     t_list 	*list3 = ft_lstnew((void *)content3);
+//     ft_lstadd_back(&list1, list3);
+//     t_list 	*list4 = ft_lstnew((void *)content4);
+//     ft_lstadd_back(&list1, list4);
+
+//     new_list = ft_lstmap(list1,&function2, &del_function);
+//     printf("OLD LIST\n");
+//     print_list(list1);
+//     printf("NEW LIST\n");
+//     print_list(new_list);
+//     ft_lstclear(&list1, *del_function2);
+//     ft_lstclear(&new_list, *del_function2);
 // }
