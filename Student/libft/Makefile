@@ -1,65 +1,77 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/08 10:22:54 by tquere            #+#    #+#              #
-#    Updated: 2022/11/09 17:09:58 by zelinsta         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-#ATTENTION POUR LE RENDU , DISPOSITION DES FICHIER / MAKEFILE
-
-.PHONY:     		all sanit make_lib bonus clean fclean re
+.PHONY:     		all $(NAME) sanit lib bonus clean fclean re
 
 NAME_LIB			= libft.a
 NAME				= LIB_TEST
 
-SOURCEDIR_1 		= .
-SOURCEDIR_2 		= .
-SOURCEDIR_BONUS		= _Bonus
-BUILDDIR  			= Build
-HEADERDIR 			= Header
+#Directory
+BUILD_DIR  			= build
+DIR_BONUS			= bonus
+LIB_DIR				=
 
-HEADER_FILE			= $(shell find $(HEADERDIR) -name '*.h')
-			
-SOURCE_1			= $(shell find $(SOURCEDIR_1) -name '*.c')
-SOURCE_2			= $(shell find $(SOURCEDIR_2) -name '*.c')
-SOURCE_BONUS		= $(shell find $(SOURCEDIR_BONUS) -name '*.c')
-SOURCE_MAIN 		= main.c $(SOURCE_1) $(SOURCE_2) $(SOURCE_BONUS)
-SOURCE_MAIN_BONUS	= main.c $(SOURCE_1) $(SOURCE_2) $(SOURCE_BONUS)   
+#Sans bonus
+SOURCE		 		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+OBJECTS			    = $(SOURCE:%.c=$(BUILD_DIR)/%.o)
+HEADER				= .
 
-OBJECTS_MAIN	    = $(addprefix $(BUILDDIR)/,$(SOURCE_MAIN:%.c=%.o))
-OBJECTS_MAIN_BONUS  = $(addprefix $(BUILDDIR)/,$(SOURCE_MAIN_BONUS:%.c=%.o))
+#Avec bonus
+BONUS	 			= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+OBJECTS_BONUS		= $(BONUS:%.c=$(BUILD_DIR)/%.o)
+HEADER_BONUS		= bonus/
 
+#Pour les test
+TEST_SRC			= main.c 
+TEST_OBJECT			= $(BUILD_DIR)/main.o $(OBJECTS) $(OBJECTS_BONUS)
+
+#Option compilation
 GCC					= gcc
-CFLAGS				= #-Wall -Wextra -Werror 
+CFLAGS				= -Wall -Wextra -Werror 
 SANITIZE			= $(CFLAGS) -g -fsanitize=address
 
-RM 					= rm -rf
+#Pour faire la lib
+SOURCE_LIB		 	= 
+OBJECTS_LIB		    = 
+HEADER_LIB			= 
 LIB 				= ar -crs
+
+#Autres commande
+RM 					= rm -rf
+CLEAR				= clear
+
 
 all: $(NAME) Makefile
 
-$(BUILDDIR)/%.o: %.c
-			$(GCC) $(CFLAGS) -I$(HEADERDIR) -I$(dir $<) -c $< -o $@
+#Rule for Object
+%.o:	%.c
+			$(GCC) $(CFLAGS) -I $(HEADER_BONUS) -I$(HEADER) -c $< -o $@
 
-$(NAME): 	$(OBJECTS_MAIN) $(HEADER_FILE) Makefile
-			@$(GCC) $(CFLAGS) $(OBJECTS_MAIN) -o $(NAME)
+$(BUILD_DIR)/%.o:	%.c
+			$(GCC) $(CFLAGS) -I $(HEADER) -c $< -o $@
 
-sanit: 		$(OBJECTS_MAIN) $(HEADER_FILE) Makefile
-			@$(GCC) $(SANITIZE) $(OBJECTS_MAIN) -o $(NAME)
+$(BUILD_DIR)/%.o:	$(DIR_BONUS)/%.c
+			$(GCC) $(CFLAGS) -I $(HEADER_BONUS) -c $< -o $@
 
-make_lib:	${OBJECTS_MAIN} Makefile
-			${LIB} ${NAME_LIB} ${OBJECTS_MAIN}
 
-bonus:		${OBJECTS_MAIN} Makefile
-			${LIB} ${NAME} ${OBJECTS_MAIN_BONUS}
+#Rule for compile
+$(NAME): 	clear $(TEST_OBJECT) $(HEADER) Makefile 
+			@$(GCC) $(CFLAGS) $(TEST_OBJECT) -o $(NAME)
+
+sanit: 	$(OBJECTS) $(HEADER) Makefile
+			$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME)
+
+
+#Rule to make lib
+lib:		${OBJECTS} Makefile
+			${LIB} ${NAME_LIB} ${OBJECTS}
+
+bonus:	${OBJECTS_BONUS} Makefile
+			${LIB} ${NAME} ${OBJECTS} ${OBJECTS_BONUS}
+
+#Other
+clear:
+			$(CLEAR)
 
 clean:
-			${RM} ${OBJECTS_MAIN}
+			${RM} ${TEST_OBJECT}
 
 fclean:		clean
 			${RM} ${NAME}

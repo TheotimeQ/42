@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:49 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/09 15:10:58 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:07:13 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include <string.h>
 #include <assert.h>
 
-#include "Header/libft.h"
+#include "libft.h"
+#include "bonus/libft.h"
 
 //--------------- ANNEXES ---------------
 
@@ -58,28 +59,28 @@ void    on_char2(unsigned int nb, char *s)
 //--------------- Partie 1 ---------------
 
 // isalpha
-// int main()
-// {  
-// 	int a = 'A';
-//     int b = 67;
-//     int c = '*';
-//     int d = 65;
-//     int e = '9';
+int main()
+{  
+	int a = 'A';
+    int b = 67;
+    int c = '*';
+    int d = 65;
+    int e = '9';
 
-//     printf ("%d\n", isalpha(a));
-//     printf ("%d\n", isalpha(b));
-//     printf ("%d\n", isalpha(c));
-//     printf ("%d\n", isalpha(d));
-//     printf ("%d\n\n", isalpha(e));
+    printf ("%d\n", isalpha(a));
+    printf ("%d\n", isalpha(b));
+    printf ("%d\n", isalpha(c));
+    printf ("%d\n", isalpha(d));
+    printf ("%d\n\n", isalpha(e));
 
-//     printf ("%d\n", ft_isalpha(a));
-//     printf ("%d\n", ft_isalpha(b));
-//     printf ("%d\n", ft_isalpha(c));
-//     printf ("%d\n", ft_isalpha(d));
-//     printf ("%d\n", ft_isalpha(e));
+    printf ("%d\n", ft_isalpha(a));
+    printf ("%d\n", ft_isalpha(b));
+    printf ("%d\n", ft_isalpha(c));
+    printf ("%d\n", ft_isalpha(d));
+    printf ("%d\n", ft_isalpha(e));
 
-//     return (1);
-// }
+    return (1);
+}
 
 // isdigit
 // int    main ()
@@ -598,17 +599,17 @@ void    on_char2(unsigned int nb, char *s)
 
 //--------------- BONUS ---------------
 
-void print_list(t_list *list)
-{   
-    int index;
+// void print_list(t_list *list)
+// {   
+//     int index;
 
-    index = 0;
-    while (list != NULL)
-    {
-        printf("%d : %s , %p\n",index++,(char *)list->content,list->next);
-        list = list->next;
-    }
-}
+//     index = 0;
+//     while (list != NULL)
+//     {
+//         printf("%d : %s , %p\n",index++,(char *)list->content,list->next);
+//         list = list->next;
+//     }
+// }
 
 // ft_lstnew
 // int main()
@@ -692,26 +693,26 @@ void print_list(t_list *list)
 //     free(list1);
 // }
 
-void del_function(void *content)
-{   
-    printf("DELETE CONTENT : %s\n",(char *)content);
-}
+// void del_function(void *content)
+// {   
+//     printf("DELETE CONTENT : %s\n",(char *)content);
+// }
 
-void del_function2(void *content)
-{   
-    return ;
-}
+// void del_function2(void *content)
+// {   
+//     return ;
+// }
 
-void function(void *content)
-{   
-    printf("FUNCTION : %s\n",(char *)content);
-}
+// void function(void *content)
+// {   
+//     printf("FUNCTION : %s\n",(char *)content);
+// }
 
-void *function2(void *content)
-{   
-    char *test = "Ceci est un test";
-    return (test);
-}
+// void *function2(void *content)
+// {   
+//     char *test = "Ceci est un test";
+//     return (test);
+// }
 
 // // ft_lstdelone
 // int main()
