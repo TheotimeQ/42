@@ -24,7 +24,7 @@ all: $(NAME) Makefile
 			$(GCC) $(CFLAGS) -I $(HEADER_BONUS) -I$(HEADER) -c $< -o $@
 
 %.o:		$(DIR_BONUS)/%.c
-			$(GCC) $(CFLAGS) -I $(HEADER_BONUS) -c $< -o $@
+			$(GCC) $(CFLAGS) -I $(HEADER_BONUS) I$(HEADER) -c $< -o $@
 
 $(NAME): 	${OBJECTS} $(HEADER) Makefile 
 			${LIB} ${NAME} ${OBJECTS}
