@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:39:02 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/10 15:27:36 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/10 13:28:08 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/10 14:39:48 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_lstsize(t_list *lst)
 {
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
+	int		index;
 
-	i = 0;
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	while (i < n)
+	if (lst == NULL)
+		return (0);
+	index = 1;
+	while (lst->next != NULL)
 	{
-		if (str1[i] != str2[i] || !str1[1] || !str2[2])
-			return (str1[i] - str2[i]);
-		i++;
+		lst = lst->next;
+		index++;
 	}
-	return (0);
+	return (index);
 }
