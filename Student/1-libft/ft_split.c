@@ -3,60 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:12 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/09 22:07:39 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:09:21 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*cut_char(char const *s, int start, int end)
+void	free_tab(char **tab)
 {
-	int		index;
-	char	*str;
+	int	index;
 
-	str = malloc(sizeof(char) * (end - start + 1));
-	if (str == NULL)
-		return (NULL);
 	index = 0;
-	while (s[index])
+	while (tab[index] != NULL)
 	{
-		if (start <= index && index <= end)
-			str[index - start] = s[index];
+		free(tab[index]);
 		index++;
-	}	
-	str[end - start] = '\0';
-	return (str);
+	}
+	free(tab);
+}
+
+int	fill_tab(char const *s, char c, char **tab)
+{
+	int		index_tab;
+	int		index_s;
+	int		start;
+
+	index_s = 0;
+	index_tab = 0;
+	while (s[index_s])
+	{
+		while (s[index_s] && s[index_s] == c)
+			index_s++;
+		start = index_s;
+		while (s[index_s] && s[index_s] != c)
+			index_s++;
+		if (start < index_s)
+		{
+			tab[index_tab] = ft_substr(s, start, index_s - start);
+			if (tab[index_tab++] == NULL)
+			{
+				free_tab(tab);
+				return (-1);
+			}
+		}
+	}
+	return (index_tab);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 	int		index_tab;
-	int		index_s;
-	int		start;
 
-	tab = malloc(sizeof(char *) * ft_strlen(s));
-	if (tab == NULL)
+	tab = malloc(sizeof(char *) * (ft_strlen(s) + 1));
+	if (tab == NULL || s == NULL)
 		return (NULL);
-	index_s = 0;
-	index_tab = 0;
-	while (s[index_s])
-	{
-		while (s[index_s] == c && s[index_s])
-			index_s++;
-		start = index_s;
-		while (s[index_s] != c && s[index_s])
-			index_s++;
-		if (start < index_s)
-			tab[index_tab] = cut_char(s, start, index_s); //REMPLACER PAR SUBSTR
-		if (start < index_s && tab[index_tab++] == NULL )
-			//FREE LES AUTRES MALLOC DU TAB
-			return (NULL);
-	}
-	tab[index_tab] = NULL;
+	index_tab = fill_tab(s, c, tab);
+	if (index_tab >= 0)
+		tab[index_tab] = NULL;
 	return (tab);
 }

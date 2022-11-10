@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 10:22:49 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/09 21:07:13 by zelinsta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,66 +10,66 @@
 
 //--------------- ANNEXES ---------------
 
-void print_tab(char **tab)
-{
-    int index;
+// void print_tab(char **tab)
+// {
+//     int index;
 
-    index = 0;
-    while(tab[index] != NULL)
-    {
-        printf("|%s|\n",tab[index]);
-        index++;
-    }
-}
+//     index = 0;
+//     while(tab[index] != NULL)
+//     {
+//         printf("|%s|\n",tab[index]);
+//         index++;
+//     }
+// }
 
-void free_tab(char **tab)
-{
-    int index;
+// void free_tab_2(char **tab)
+// {
+//     int index;
 
-    index = 0;
-    while(tab[index] != NULL)
-    {
-        free(tab[index]);
-        index++;
-    }
-    free(tab);
-}
+//     index = 0;
+//     while(tab[index] != NULL)
+//     {
+//         free(tab[index]);
+//         index++;
+//     }
+//     free(tab);
+// }
 
-char    on_char1(unsigned int nb, char c)
-{
-    return (c + nb); 
-}
+// char    on_char1(unsigned int nb, char c)
+// {
+//     return (c + nb); 
+// }
 
-void    on_char2(unsigned int nb, char *s)
-{
-    s[nb] = s[nb] + nb; 
-}
+// void    on_char2(unsigned int nb, char *s)
+// {
+//     s[nb] = s[nb] + nb; 
+// }
 
 //--------------- Partie 1 ---------------
 
 // isalpha
-int main()
-{  
-	int a = 'A';
-    int b = 67;
-    int c = '*';
-    int d = 65;
-    int e = '9';
+// int main()
+// {  
+// 	int a = 'A';
+//     int b = 67;
+//     int c = '*';
+//     int d = 65;
+//     int e = '9';
 
-    printf ("%d\n", isalpha(a));
-    printf ("%d\n", isalpha(b));
-    printf ("%d\n", isalpha(c));
-    printf ("%d\n", isalpha(d));
-    printf ("%d\n\n", isalpha(e));
+//     printf ("%d\n", isalpha(a));
+//     printf ("%d\n", isalpha(b));
+//     printf ("%d\n", isalpha(c));
+//     printf ("%d\n", isalpha(d));
+//     printf ("%d\n\n", isalpha(e));
 
-    printf ("%d\n", ft_isalpha(a));
-    printf ("%d\n", ft_isalpha(b));
-    printf ("%d\n", ft_isalpha(c));
-    printf ("%d\n", ft_isalpha(d));
-    printf ("%d\n", ft_isalpha(e));
+//     printf ("%d\n", ft_isalpha(a));
+//     printf ("%d\n", ft_isalpha(b));
+//     printf ("%d\n", ft_isalpha(c));
+//     printf ("%d\n", ft_isalpha(d));
+//     printf ("%d\n", ft_isalpha(e));
 
-    return (1);
-}
+//     return (1);
+// }
 
 // isdigit
 // int    main ()
@@ -508,28 +497,27 @@ int main()
 // }
 
 //ft_strtrim
-// int main()
-// {   
-//     char src[50] = "1254618451    1451 J'aime les nouilles 1235481254";
-//     char set[50] = "0123456789 ";
-//     char *out = ft_strtrim(src, set);
+int main()
+{   
+    char s1[] = "etetlorem ipsum dolor sit amet";
+    char *out = ft_strtrim(s1, "te");
 
-//     printf("%s",out);
-//     free(out);
+    printf("%s\n",out);
 
-//     return (1);
-// }
+    char s2[] = "     ";
+	out = ft_strtrim(s2, "  ");
+    printf("%s\n",out);
+
+    free(out);
+    return (1);
+}
 
 // ft_split
 // int main()
 // {   
-//     char src[100] = "  Coucou maman, j'aime les poneys   ";
-//     char set = ' ';
-//     char **out = ft_split(src, set);
-
+//     char **out = ft_split("          ", ' ');
 //     print_tab(out);
-//     free_tab(out);
-
+//     free_tab_2(out);
 //     return (1);
 // }
 

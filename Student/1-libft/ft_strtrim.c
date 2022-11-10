@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:14:25 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/09 15:58:46 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:25:49 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,58 @@ static int	check_in_set(char c, char const *set)
 	int		index;
 
 	index = 0;
-	while (set[index] != c && set[index])
-		index++;
-	if (set[index])
-		return (1);
+	while (set[index])
+	{
+		if (set[index++] == c)
+			return (1);
+	}
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+int	get_start(char const *s1, char const *set)
 {
 	int		index;
-	int		start;
-	int		end;
-	char	*str;
 
-	str = malloc(sizeof(char) * ft_strlen(s1));
 	index = 0;
 	while (s1[index])
 	{
 		if (check_in_set(s1[index], set) == 0)
 			break ;
-		else
-			index++;
-	}
-	start = index;
-	while (s1[index])
-	{
-		if (check_in_set(s1[index], set) == 0)
-			end = index;
 		index++;
 	}
-	str = ft_substr(s1, start, end - start);
+	return (index);
+}
+
+int	get_end(char const *s1, char const *set)
+{
+	int		index;
+
+	index = ft_strlen(s1);
+	while (index--)
+	{
+		if (check_in_set(s1[index], set) == 0)
+			break ;
+	}
+	return (index);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	int		start;
+	int		end;
+	char	*str;
+
+	if (s1 == NULL)
+		return (NULL);
+	if (set == NULL)
+		return (ft_strdup(s1));
+	start = get_start(s1, set);
+	end = get_end(s1, set);
+	if (start >= end)
+		return (ft_strdup(""));
+	str = malloc(sizeof(char) * (end - start + 1));
+	if (str == NULL)
+		return (NULL);
+	str = ft_substr(s1, start, end - start + 1);
 	return (str);
 }
