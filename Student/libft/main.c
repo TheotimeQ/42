@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:49 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/08 18:10:12 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/08 18:13:45 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -445,31 +445,31 @@ void    on_char2(unsigned int nb, char *s)
 // }
 
 // calloc
-#define INT_NUMBER 10
-int main() {
+// #define INT_NUMBER 10
+// int main() {
 
-    int i;
-    int *pointer = (int *) calloc( INT_NUMBER, sizeof(int) );
-    assert( pointer != NULL ); //Test calloc
-    for ( i=0; i<INT_NUMBER; i++ )
-        pointer[i] = i;
-    for (i=0; i<INT_NUMBER; i++ )
-        printf( "%d ", pointer[i] );
-    printf( "\n" );
-    free( pointer );
+//     int i;
+//     int *pointer = (int *) calloc( INT_NUMBER, sizeof(int) );
+//     assert( pointer != NULL ); //Test calloc
+//     for ( i=0; i<INT_NUMBER; i++ )
+//         pointer[i] = i;
+//     for (i=0; i<INT_NUMBER; i++ )
+//         printf( "%d ", pointer[i] );
+//     printf( "\n" );
+//     free( pointer );
 
-    int j;
-    int *pointerT = (int *) ft_calloc( INT_NUMBER, sizeof(int) );
-    assert( pointerT != NULL ); //Test calloc
-    for ( j=0; j<INT_NUMBER; j++ )
-        pointerT[j] = j;
-    for (j=0; j<INT_NUMBER; j++ )
-        printf( "%d ", pointerT[j] );
-    printf( "\n" );
-    free( pointerT );
+//     int j;
+//     int *pointerT = (int *) ft_calloc( INT_NUMBER, sizeof(int) );
+//     assert( pointerT != NULL ); //Test calloc
+//     for ( j=0; j<INT_NUMBER; j++ )
+//         pointerT[j] = j;
+//     for (j=0; j<INT_NUMBER; j++ )
+//         printf( "%d ", pointerT[j] );
+//     printf( "\n" );
+//     free( pointerT );
 
-    return 0;
-}
+//     return 0;
+// }
 
 // strdup
 // int main()
