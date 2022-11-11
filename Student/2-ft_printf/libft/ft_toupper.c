@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 10:46:18 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 11:09:15 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/08 13:39:23 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/09 15:58:46 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
-#include "libft/libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_toupper(int c)
 {
-
-	return (0);
+	if ('a' <= c && c <= 'z')
+		c = c - 32 ;
+	return (c);
 }

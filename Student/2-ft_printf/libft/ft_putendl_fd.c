@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 10:46:18 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 11:09:15 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/08 10:22:26 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/10 14:37:01 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
-#include "libft/libft.h"
-#include <stdio.h>
+#include <unistd.h>
+#include "libft.h"
 
-int	main(void)
+void	ft_putendl_fd(char *s, int fd)
 {
+	int		index;
 
-	return (0);
+	index = 0;
+	while (s[index])
+	{
+		write(fd, &s[index++], 1);
+	}
+	write(fd, "\n", 1);
 }

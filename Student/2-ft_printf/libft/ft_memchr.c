@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 10:46:18 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 11:09:15 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/08 13:34:26 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/10 14:33:52 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
-#include "libft/libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
+	unsigned char		*str;
 
-	return (0);
+	str = (unsigned char *)s;
+	while (n--)
+	{
+		if (*str == (unsigned char )c)
+			return (str);
+		str++;
+	}
+	return (NULL);
 }

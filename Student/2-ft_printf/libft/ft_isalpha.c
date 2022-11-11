@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 10:46:18 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 11:09:15 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/10 13:16:29 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/10 13:16:31 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
-#include "libft/libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_isalpha(int c)
 {
-
+	if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z'))
+		return (1);
 	return (0);
 }

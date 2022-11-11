@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 10:46:18 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 11:09:15 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/08 13:34:16 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/10 13:16:17 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
-#include "libft/libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_isascii(int c)
 {
-
+	if (0 <= c && c <= 127)
+		return (1);
 	return (0);
 }

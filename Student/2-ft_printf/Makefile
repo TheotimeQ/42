@@ -1,37 +1,30 @@
 .PHONY:     		all $(NAME) sanit lib bonus clean fclean re
 
-NAME_LIB			= libftprintf.a
+LIB_NAME			= libftprintf.a
 NAME				= test
 
 #Directory
-BUILD_DIR  			= build
 DIR_BONUS			= bonus/
-LIB_DIR				=
+LIB_DIR				= libft/
 
 #Sans bonus
-SOURCE		 		= main.c
-OBJECTS			    = $(SOURCE:%.c=$(BUILD_DIR)/%.o)
+SOURCE		 		= 
+OBJECTS			    = $(SOURCE:%.c=%.o)
 HEADER				= .
 
 #Avec bonus
 BONUS	 			= 
-OBJECTS_BONUS		= $(BONUS:%.c=$(BUILD_DIR)/%.o)
+OBJECTS_BONUS		= $(BONUS:$(DIR_BONUS)/%.c=%.o)
 HEADER_BONUS		= $(DIR_BONUS)
 
 #Pour les test
 TEST_SRC			= main.c 
-TEST_OBJECT			= $(TEST_SRC:%.c=$(BUILD_DIR)/%.o) $(OBJECTS) $(OBJECTS_BONUS) #$(BUILD_DIR)/main.o
+TEST_OBJECT			= $(TEST_SRC:%.c=%.o) $(OBJECTS) $(OBJECTS_BONUS)
 
 #Option compilation
 GCC					= gcc
 CFLAGS				= -Wall -Wextra -Werror 
 SANITIZE			= $(CFLAGS) -g -fsanitize=address
-
-#Pour faire la lib
-SOURCE_LIB		 	= 
-OBJECTS_LIB		    = $(SOURCE_LIB:%.c=$(LIB_DIR)/%.o)
-HEADER_LIB			= $(LIB_DIR)
-LIB 				= ar -crs
 
 #Autres commande
 RM 					= rm -rf
@@ -44,35 +37,40 @@ all: $(NAME) Makefile
 %.o:				%.c
 					$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(HEADER) -c $< -o $@
 
-$(BUILD_DIR)/%.o:	%.c
-					$(GCC) $(CFLAGS) -I$(HEADER) -c $< -o $@
-
-$(BUILD_DIR)/%.o:	$(DIR_BONUS)/%.c
+%.o:				$(DIR_BONUS)/%.c
 					$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(HEADER) -c $< -o $@
 
 
 #Rule for compile
-$(NAME):	$(TEST_OBJECT) $(HEADER) Makefile 
+$(NAME):	lib $(TEST_OBJECT) $(HEADER) Makefile 
 			@echo "----Compiling----"
-			@$(GCC) $(CFLAGS) $(TEST_OBJECT) -o $(NAME)
+			@$(GCC) $(CFLAGS) $(TEST_OBJECT) -o $(NAME) $(LIB_NAME) 
+			@echo 'run ./$(NAME) to test'
 
-sanit: 		$(OBJECTS) $(HEADER) Makefile
+sanit: 		lib $(OBJECTS) $(HEADER) Makefile
 			@echo "----Ready for sanitizing ? ----"
-			$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME)
+			$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_NAME)
+			@echo 'run ./$(NAME) to test'
 
 #Rule to make lib
-lib:		${OBJECTS} Makefile
+lib:		Makefile
 			@echo "----Making Lib----"
-			@${LIB} ${NAME_LIB} ${OBJECTS}
+			cd $(LIB_DIR) && make
 
-bonus:		${OBJECTS_BONUS} Makefile
+#Rule to make bonus
+bonus:		lib ${OBJECTS_BONUS} Makefile
 			@echo "----Making Bonus----"
 			@$(GCC) $(CFLAGS) $(OBJECTS_BONUS) -o $(NAME)
 
 clean:
-			${RM} ${TEST_OBJECT}
+			@echo "----Cleaning----"
+			@${RM} ${TEST_OBJECT}
+			@cd $(LIB_DIR) && make clean
 
 fclean:		clean
-			${RM} ${NAME}
+			@echo "----Fcleaning----"
+			@${RM} ${NAME}
+			@cd $(LIB_DIR) && make fclean
+
 
 re:			fclean all

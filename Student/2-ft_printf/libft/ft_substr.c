@@ -1,27 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:34:12 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 10:02:39 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/08 10:21:51 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/10 17:07:25 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
 #include <stdlib.h>
+
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	void		*mem;
+	size_t			index;
+	char			*str;
 
-	if (count > SIZE_MAX / size)
+	if (s == NULL)
 		return (NULL);
-	mem = malloc(count * size);
-	if (mem == NULL)
+	if ((size_t)start > ft_strlen(s))
+	{
+		str = malloc(1);
+		if (str == NULL)
+			return (NULL);
+		str[0] = '\0';
+		return (str);
+	}
+	str = malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
 		return (NULL);
-	ft_bzero(mem, count * size);
-	return (mem);
+	index = start;
+	while (index - start < len)
+	{
+		str[index - start] = s[index];
+		index++;
+	}
+	str[index - start] = '\0';
+	return (str);
 }
