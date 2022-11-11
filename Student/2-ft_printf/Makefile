@@ -3,12 +3,15 @@
 LIB_NAME			= libftprintf.a
 NAME				= test
 
+#Libft
+LIBFT				= libft.a
+
 #Directory
 DIR_BONUS			= bonus/
 LIB_DIR				= libft/
 
 #Sans bonus
-SOURCE		 		= 
+SOURCE		 		= ft_printf.c print_c.c print_s.c print_p.c print_d.c print_i.c print_u.c print_x.c print_xx.c convert_base.c
 OBJECTS			    = $(SOURCE:%.c=%.o)
 HEADER				= .
 
@@ -29,27 +32,27 @@ SANITIZE			= $(CFLAGS) -g -fsanitize=address
 #Autres commande
 RM 					= rm -rf
 CLEAR				= clear
-
+LIB 				= ar -crs
+EXTRACT_LIB			= ar -x
 
 all: $(NAME) Makefile
 
 #Rule for Object
 %.o:				%.c
-					$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(HEADER) -c $< -o $@
+					$(GCC) $(CFLAGS) -I$(HEADER) -I$(LIB_DIR) -c $< -o $@
 
 %.o:				$(DIR_BONUS)/%.c
-					$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(HEADER) -c $< -o $@
-
+					$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(HEADER) -I$(LIB_DIR) -c $< -o $@
 
 #Rule for compile
-$(NAME):	lib $(TEST_OBJECT) $(HEADER) Makefile 
-			@echo "----Compiling----"
-			@$(GCC) $(CFLAGS) $(TEST_OBJECT) -o $(NAME) $(LIB_NAME) 
-			@echo 'run ./$(NAME) to test'
+$(NAME):	lib $(OBJECTS) $(OBJECTS_BONUS) ${OBJECT_LIB} Makefile 
+			@echo "----Making liftprintf.a----"
+			@${EXTRACT_LIB} $(LIB_DIR)$(LIBFT)  
+			@${LIB} ${LIB_NAME} ${OBJECTS} ${OBJECTS_BONUS} ${OBJECT_LIB}
 
-sanit: 		lib $(OBJECTS) $(HEADER) Makefile
+sanit: 		lib $(TEST_OBJECT) $(HEADER) Makefile
 			@echo "----Ready for sanitizing ? ----"
-			$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_NAME)
+			$(GCC) $(SANITIZE) $(TEST_OBJECT) -o $(NAME) $(LIB_DIR)$(LIBFT)  
 			@echo 'run ./$(NAME) to test'
 
 #Rule to make lib
@@ -69,6 +72,7 @@ clean:
 
 fclean:		clean
 			@echo "----Fcleaning----"
+			@${RM} ${LIB_NAME}
 			@${RM} ${NAME}
 			@cd $(LIB_DIR) && make fclean
 
