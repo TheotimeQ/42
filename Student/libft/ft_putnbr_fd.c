@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 11:05:42 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 16:01:53 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/08 10:22:23 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/11 17:38:15 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include <unistd.h>
+#include "libft.h"
 
-typedef struct s_map_var
-{
-	int		x;
-	int		y;
-	char	empty;
-	char	obstacle;
-	char	full;
-	char	**map;
-	int		sol_x;
-	int		sol_y;
-	int		sol_side_len;
-	int		error;
-	int		stop;
-	int		file;
-	int		visual;
-	int		crt_lin;
-	int		last_count_size;
-	int		malloc_len;
-}	t_map_var;
+void	ft_putnbr_fd(int n, int fd)
+{	
+	long int	nb;
 
-#endif
+	nb = n;
+	if (nb < 0)
+	{
+		nb = -nb;
+		ft_putchar_fd('-', fd);
+	}
+	if (nb >= 10)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
+	}
+	else
+		ft_putchar_fd(nb + '0', fd);
+}

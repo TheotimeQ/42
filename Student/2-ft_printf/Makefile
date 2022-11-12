@@ -5,9 +5,8 @@ NAME				= test
 
 #Libft
 LIBFT				= libft.a
-
-#Directory
-DIR_BONUS			= bonus/
+SRC_LIB		 		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+OBJ_LIB			    = $(SRC_LIB:%.c=$(LIB_DIR)/%.o)
 LIB_DIR				= libft/
 
 #Sans bonus
@@ -19,6 +18,7 @@ HEADER				= .
 BONUS	 			= 
 OBJECTS_BONUS		= $(BONUS:$(DIR_BONUS)/%.c=%.o)
 HEADER_BONUS		= $(DIR_BONUS)
+DIR_BONUS			= bonus/
 
 #Pour les test
 TEST_SRC			= main.c 
@@ -45,10 +45,10 @@ all: $(NAME) Makefile
 					$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(HEADER) -I$(LIB_DIR) -c $< -o $@
 
 #Rule for compile
-$(NAME):	lib $(OBJECTS) $(OBJECTS_BONUS) ${OBJECT_LIB} Makefile 
+$(NAME):	lib $(OBJECTS) $(OBJECTS_BONUS) ${OBJ_LIB} Makefile 
 			@echo "----Making liftprintf.a----"
 			@${EXTRACT_LIB} $(LIB_DIR)$(LIBFT)  
-			@${LIB} ${LIB_NAME} ${OBJECTS} ${OBJECTS_BONUS} ${OBJECT_LIB}
+			@${LIB} ${LIB_NAME} ${OBJECTS} ${OBJECTS_BONUS} ${OBJ_LIB}
 
 sanit: 		lib $(TEST_OBJECT) $(HEADER) Makefile
 			@echo "----Ready for sanitizing ? ----"

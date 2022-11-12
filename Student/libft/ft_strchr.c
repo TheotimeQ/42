@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 11:05:42 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 16:01:53 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/08 13:34:37 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/12 09:09:28 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include "libft.h"
 
-typedef struct s_map_var
-{
-	int		x;
-	int		y;
-	char	empty;
-	char	obstacle;
-	char	full;
-	char	**map;
-	int		sol_x;
-	int		sol_y;
-	int		sol_side_len;
-	int		error;
-	int		stop;
-	int		file;
-	int		visual;
-	int		crt_lin;
-	int		last_count_size;
-	int		malloc_len;
-}	t_map_var;
+char	*ft_strchr(const char *s, int c)
+{	
+	char	*str;
+	int		index_str;
+	char	c_char;
 
-#endif
+	c_char = c;
+	str = (char *)s;
+	index_str = 0;
+	while (str[index_str] != c_char)
+	{
+		if (str[index_str] == '\0')
+			return (NULL);
+		index_str++;
+	}
+	return (&str[index_str]);
+}

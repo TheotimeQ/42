@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fcts_struct_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:43:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/10/28 11:42:22 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:10:23 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "ft_printf.h"
 #include <stdlib.h>
 #include <unistd.h>
 

@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 11:05:42 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 16:01:53 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/08 10:21:58 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/11 17:26:57 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include <stdlib.h>
+#include "libft.h"
 
-typedef struct s_map_var
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int		x;
-	int		y;
-	char	empty;
-	char	obstacle;
-	char	full;
-	char	**map;
-	int		sol_x;
-	int		sol_y;
-	int		sol_side_len;
-	int		error;
-	int		stop;
-	int		file;
-	int		visual;
-	int		crt_lin;
-	int		last_count_size;
-	int		malloc_len;
-}	t_map_var;
+	int		index;
+	char	*str;
 
-#endif
+	if (!s || !f)
+		return (NULL);
+	str = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (str == NULL)
+		return (NULL);
+	index = 0;
+	while (s[index])
+	{
+		str[index] = (*f)(index, s[index]);
+		index++;
+	}
+	str[index] = '\0';
+	return (str);
+}

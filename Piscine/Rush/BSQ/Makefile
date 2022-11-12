@@ -4,7 +4,7 @@ OBJS 	= ${SRCS:.c=.o}
 
 NAME 	= bsq
 
-HEAD	= header.h
+HEAD	= ft_printf.h
 
 GCC 	= gcc
 

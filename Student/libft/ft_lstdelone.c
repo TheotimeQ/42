@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 11:05:42 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 16:01:53 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/10 13:21:39 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/11 17:35:31 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include <stdlib.h>
+#include "libft.h"
 
-typedef struct s_map_var
-{
-	int		x;
-	int		y;
-	char	empty;
-	char	obstacle;
-	char	full;
-	char	**map;
-	int		sol_x;
-	int		sol_y;
-	int		sol_side_len;
-	int		error;
-	int		stop;
-	int		file;
-	int		visual;
-	int		crt_lin;
-	int		last_count_size;
-	int		malloc_len;
-}	t_map_var;
-
-#endif
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
+{	
+	if (!lst || !del)
+		return ;
+	(*del)(lst->content);
+	free(lst);
+}

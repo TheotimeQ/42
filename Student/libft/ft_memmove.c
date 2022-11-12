@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 11:05:42 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 16:01:53 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/08 13:34:33 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/11 17:17:13 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include "libft.h"
 
-typedef struct s_map_var
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int		x;
-	int		y;
-	char	empty;
-	char	obstacle;
-	char	full;
-	char	**map;
-	int		sol_x;
-	int		sol_y;
-	int		sol_side_len;
-	int		error;
-	int		stop;
-	int		file;
-	int		visual;
-	int		crt_lin;
-	int		last_count_size;
-	int		malloc_len;
-}	t_map_var;
+	int			index;
+	char		*from;
+	char		*to;
 
-#endif
+	from = (char *) src;
+	to = (char *) dst;
+	if (from < to && (size_t)(to - from) < len)
+	{
+		index = len;
+		while (index-- > 0)
+			to[index] = from[index];
+		return (dst);
+	}
+	ft_memcpy(dst, src, len);
+	return (dst);
+}
