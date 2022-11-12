@@ -5,7 +5,7 @@ NAME				= LIB_TEST
 
 #Directory
 BUILD_DIR  			= build
-DIR_BONUS			= bonus
+DIRbonus			= bonus
 LIB_DIR				=
 
 #Sans bonus
@@ -15,12 +15,12 @@ HEADER				= .
 
 #Avec bonus
 BONUS	 			= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
-OBJECTS_BONUS		= $(BONUS:%.c=$(BUILD_DIR)/%.o)
-HEADER_BONUS		= bonus/
+OBJECTSbonus		= $(BONUS:%.c=$(BUILD_DIR)/%.o)
+HEADERbonus		= bonus/
 
 #Pour les test
 TEST_SRC			= main.c 
-TEST_OBJECT			= $(BUILD_DIR)/main.o $(OBJECTS) $(OBJECTS_BONUS)
+TEST_OBJECT			= $(BUILD_DIR)/main.o $(OBJECTS) $(OBJECTSbonus)
 
 #Option compilation
 GCC					= gcc
@@ -42,13 +42,13 @@ all: $(NAME) Makefile
 
 #Rule for Object
 %.o:	%.c
-			$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(HEADER) -c $< -o $@
+			$(GCC) $(CFLAGS) -I$(HEADERbonus) -I$(HEADER) -c $< -o $@
 
 $(BUILD_DIR)/%.o:	%.c
 			$(GCC) $(CFLAGS) -I$(HEADER) -c $< -o $@
 
-$(BUILD_DIR)/%.o:	$(DIR_BONUS)/%.c
-			$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -c $< -o $@
+$(BUILD_DIR)/%.o:	$(DIRbonus)/%.c
+			$(GCC) $(CFLAGS) -I$(HEADERbonus) -c $< -o $@
 
 
 #Rule for compile
@@ -66,9 +66,9 @@ lib:		${OBJECTS} Makefile
 			@echo "----Making Lib----"
 			@${LIB} ${NAME_LIB} ${OBJECTS}
 
-bonus:	${OBJECTS_BONUS} Makefile
+bonus:	${OBJECTSbonus} Makefile
 			@echo "----Making Bonus----"
-			@${LIB} ${NAME} ${OBJECTS} ${OBJECTS_BONUS}
+			@${LIB} ${NAME} ${OBJECTS} ${OBJECTSbonus}
 
 #Other
 clear:

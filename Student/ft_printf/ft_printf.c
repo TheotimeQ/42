@@ -6,15 +6,16 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 14:55:10 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/12 15:29:12 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libft/libft.h"
 #include "ft_printf.h"
+#include "bonus/ft_printf.h"
 
-static void	all_test(const char *str, va_list arg, t_flag *all_flag)
+void	all_test(const char *str, va_list arg, t_flag *all_flag)
 {	
 	if (str[all_flag->index] == 'c')
 		print_c(arg, all_flag);

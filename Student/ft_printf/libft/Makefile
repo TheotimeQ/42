@@ -6,7 +6,7 @@
 #    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 13:23:47 by tquere            #+#    #+#              #
-#    Updated: 2022/11/11 16:08:09 by tquere           ###   ########.fr        #
+#    Updated: 2022/11/12 15:29:12 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SOURCE		 		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft
 OBJECTS			    = $(SOURCE:%.c=%.o)
 
 BONUS	 			= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
-OBJECTS_BONUS		= $(BONUS:%.c=%.o)
+OBJECTSbonus		= $(BONUS:%.c=%.o)
 
 GCC					= gcc
 CFLAGS				= -Wall -Wextra -Werror 
@@ -33,12 +33,12 @@ all: 		$(NAME) Makefile
 %.o:		%.c
 			$(GCC) $(CFLAGS) -I$(HEADER) -c $< -o $@
 
-$(NAME): 	${OBJECTS_BONUS} ${OBJECTS} Makefile
-			@${LIB} ${NAME} ${OBJECTS} ${OBJECTS_BONUS}
+$(NAME): 	${OBJECTSbonus} ${OBJECTS} Makefile
+			@${LIB} ${NAME} ${OBJECTS} ${OBJECTSbonus}
 			@${RANLIB} ${NAME}
 
 clean:
-			@${RM} ${OBJECTS} ${OBJECTS_BONUS}
+			@${RM} ${OBJECTS} ${OBJECTSbonus}
 
 fclean:		clean
 			@${RM} ${NAME}
