@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 10:22:36 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 15:03:03 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/11 12:44:41 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/12 14:22:33 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdarg.h>
+#include "libft/libft.h"
+#include "ft_printf.h"
 #include <stdlib.h>
-#include "libft.h"
+
+#include <stdio.h>
 
 static int	len_int(long int n)
 {
@@ -51,21 +55,35 @@ static int	get_char(long int nbr, int len_nb, char *char_nb)
 	return (len_nb);
 }
 
-char	*ft_itoa(int n)
+static char	*my_ft_itoa(unsigned long int n)
 {
-	char		*char_nb;
-	int			len_nb;
-	long int	nbr;
+	char				*char_nb;
+	int					len_nb;
+	unsigned long int	nbr;
 
 	nbr = n;
 	len_nb = len_int(nbr);
-	if (nbr < 0)
-		char_nb = malloc(sizeof(char) * (len_nb + 2));
-	else
-		char_nb = malloc(sizeof(char) * (len_nb + 1));
+	char_nb = malloc(sizeof(char) * (len_nb + 2));
 	if (char_nb == NULL)
 		return (NULL);
 	len_nb = get_char(nbr, len_nb, char_nb);
 	char_nb[len_nb] = '\0';
 	return (char_nb);
+}
+
+void	print_u(va_list arg, t_flag *all_flag)
+{
+	unsigned long int			u;
+	char						*str;
+
+	u = va_arg(arg, unsigned long int);
+	str = my_ft_itoa(u);
+	if (str == NULL)
+	{
+		all_flag->nb_caract = -1;
+		return ;
+	}
+	ft_putstr_fd(str, 1);
+	all_flag->nb_caract = all_flag->nb_caract + ft_strlen(str);
+	free(str);
 }
