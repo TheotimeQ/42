@@ -6,13 +6,12 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:57:12 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 13:23:23 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 14:50:06 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdlib.h>
 
 char	*long_int_to_hex(unsigned long int val)
 {
@@ -27,12 +26,6 @@ char	*long_int_to_hex(unsigned long int val)
 	ft_bzero(str, 33);
 	index = 15;
 	index_str = 0;
-	while (index >= 0 && digit == 0)
-	{	
-		digit = (val >> 4 * index) & 0xf ;
-		index--;
-	}
-	str[index_str++] = "0123456789abcdef"[digit];
 	while (index >= 0)
 	{	
 		digit = (val >> 4 * index) & 0xf ;
@@ -41,4 +34,19 @@ char	*long_int_to_hex(unsigned long int val)
 	}
 	str[index_str++] = '\0';
 	return (str);
+}
+
+char	*clear_0(char *str)
+{
+	int		index;
+	char	*new_str;
+
+	index = 0;
+	while (str[index] && str[index] == '0' && index < (int)ft_strlen(str) - 1)
+	{
+		index++;
+	}
+	new_str = ft_substr(str, index, ft_strlen(str) - index);
+	free(str);
+	return (new_str);
 }

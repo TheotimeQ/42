@@ -2,6 +2,7 @@
 
 LIB_NAME			= libftprintf.a
 NAME				= test
+HEADER				= ft_printf.h
 
 #Libft
 LIBFT				= libft.a
@@ -12,13 +13,10 @@ OBJ_LIB			    = $(SRC_LIB:%.c=$(LIB_DIR)/%.o)
 #Sans bonus
 SOURCE		 		= ft_printf.c print_c.c print_s.c print_p.c print_d.c print_i.c print_u.c print_x.c print_xx.c convert_base.c
 OBJECTS			    = $(SOURCE:%.c=%.o)
-HEADER				= .
 
 #Avec bonus
 BONUS	 			= check_flag.c
-DIR_BONUS			= bonus
-HEADER_BONUS		= $(DIR_BONUS)
-OBJECTS_BONUS		= bonus/check_flag.o
+OBJECTS_BONUS		= $(BONUS:%.c=%.o)
 
 #Pour les test
 TEST_SRC			= main.c 
@@ -39,10 +37,8 @@ all: $(NAME) Makefile
 
 #Rule for Object
 %.o:				%.c
-					$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(HEADER) -I$(LIB_DIR) -c $< -o $@
+					$(GCC) $(CFLAGS) -include$(HEADER) -I$(LIB_DIR) -c $< -o $@
 
-%.o:				$(DIR_BONUS)/%.c
-					$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(HEADER) -I$(LIB_DIR) -c $< -o $@
 
 #Rule for compile
 $(NAME):	lib $(OBJECTS) $(OBJECTS_BONUS) ${OBJ_LIB} Makefile 

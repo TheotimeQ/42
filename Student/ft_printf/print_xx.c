@@ -6,28 +6,29 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:44:29 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 14:37:14 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 15:48:01 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdlib.h>
 
-void	print_xx(va_list arg, t_flag *all_flag)
+char	*print_xx(va_list arg, t_flag *all_flag)
 {
-	int					index;
-	unsigned long int	i;
-	char				*str;
+	unsigned int			x;
+	char					*str;
+	int						index;
+	char					*cat_left;
 
-	i = va_arg(arg, unsigned long int);
-	str = long_int_to_hex(i);
+	x = va_arg(arg, unsigned int);
+	str = long_int_to_hex(x);
 	if (str == NULL)
 	{
 		all_flag->nb_caract = -1;
-		return ;
+		return (ft_strdup(""));
 	}
+	str = clear_0(str);
+	str = put_0(str, all_flag);
 	index = 0;
 	while (str[index])
 	{
@@ -36,10 +37,8 @@ void	print_xx(va_list arg, t_flag *all_flag)
 	}
 	if (all_flag->flag_hash == 1)
 	{
-		ft_putstr_fd("0X",1);
-		all_flag->nb_caract += 2;
+		cat_left = ft_strdup("0X");
+		str = my_strcat(cat_left, str);
 	}
-	ft_putstr_fd(str, 1);
-	all_flag->nb_caract += ft_strlen(str);
-	free(str);
+	return (str);
 }

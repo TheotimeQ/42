@@ -6,18 +6,14 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:44:41 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 14:22:33 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 14:46:32 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdlib.h>
 
-#include <stdio.h>
-
-static int	len_int(long int n)
+static int	len_int(unsigned int n)
 {
 	int	index;
 
@@ -34,7 +30,7 @@ static int	len_int(long int n)
 	return (index);
 }
 
-static int	get_char(long int nbr, int len_nb, char *char_nb)
+static int	get_char(unsigned int nbr, int len_nb, char *char_nb)
 {	
 	int			index;
 
@@ -55,11 +51,11 @@ static int	get_char(long int nbr, int len_nb, char *char_nb)
 	return (len_nb);
 }
 
-static char	*my_ft_itoa(unsigned long int n)
+static char	*my_ft_itoa(unsigned int n)
 {
-	char				*char_nb;
-	int					len_nb;
-	unsigned long int	nbr;
+	char					*char_nb;
+	int						len_nb;
+	unsigned long int		nbr;
 
 	nbr = n;
 	len_nb = len_int(nbr);
@@ -71,19 +67,23 @@ static char	*my_ft_itoa(unsigned long int n)
 	return (char_nb);
 }
 
-void	print_u(va_list arg, t_flag *all_flag)
+char	*print_u(va_list arg, t_flag *all_flag)
 {
-	unsigned long int			u;
+	unsigned int				u;
 	char						*str;
+	char						*cat_left;
 
-	u = va_arg(arg, unsigned long int);
+	u = va_arg(arg, unsigned int);
 	str = my_ft_itoa(u);
+	if (all_flag->flag_plus && u > 0)
+	{
+		cat_left = ft_strdup("+");
+		str = my_strcat(cat_left, str);
+	}
 	if (str == NULL)
 	{
 		all_flag->nb_caract = -1;
-		return ;
+		return (ft_strdup(""));
 	}
-	ft_putstr_fd(str, 1);
-	all_flag->nb_caract = all_flag->nb_caract + ft_strlen(str);
-	free(str);
+	return (str);
 }

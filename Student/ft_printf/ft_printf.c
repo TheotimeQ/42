@@ -6,42 +6,49 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 15:29:12 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 15:24:52 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libft/libft.h"
 #include "ft_printf.h"
-#include "bonus/ft_printf.h"
 
-void	all_test(const char *str, va_list arg, t_flag *all_flag)
+#define BONUS 1
+
+char	*all_test(const char *str, va_list arg, t_flag *all_flag)
 {	
+	char	*s;
+
+	s = NULL;
 	if (str[all_flag->index] == 'c')
-		print_c(arg, all_flag);
+		s = print_c(arg, all_flag);
 	else if (str[all_flag->index] == 's')
-		print_s(arg, all_flag);
+		s = print_s(arg);
 	else if (str[all_flag->index] == 'p')
-		print_p(arg, all_flag);
+		s = print_p(arg, all_flag);
 	else if (str[all_flag->index] == 'd')
-		print_d(arg, all_flag);
+		s = print_d(arg, all_flag);
 	else if (str[all_flag->index] == 'i')
-		print_i(arg, all_flag);
+		s = print_i(arg, all_flag);
 	else if (str[all_flag->index] == 'u')
-		print_u(arg, all_flag);
+		s = print_u(arg, all_flag);
 	else if (str[all_flag->index] == 'x')
-		print_x(arg, all_flag);
+		s = print_x(arg, all_flag);
 	else if (str[all_flag->index] == 'X')
-		print_xx(arg, all_flag);
+		s = print_xx(arg, all_flag);
 	else if (str[all_flag->index] == '%')
 	{
 		ft_putchar_fd('%', 1);
 		all_flag->nb_caract++;
 	}
+	return (s);
 }
 
 static void	print_my_str(const char *str, va_list arg, t_flag *all_flag)
-{
+{	
+	char	*s;
+
+	s = NULL;
 	while (str[all_flag->index])
 	{
 		if (str[all_flag->index] != '%')
@@ -52,8 +59,16 @@ static void	print_my_str(const char *str, va_list arg, t_flag *all_flag)
 		else
 		{	
 			all_flag->index++;
-			//all_test(str, arg, &index, all_flag);
-			ck_flag(str, arg, all_flag);
+			if (BONUS)
+				s = ck_flag(str, arg, all_flag);
+			else
+				s = all_test(str, arg, all_flag);
+			if (s != NULL)
+			{	
+				ft_putstr_fd(s, 1);
+				all_flag->nb_caract += ft_strlen(s);
+				free(s);
+			}
 		}
 		all_flag->index++;
 	}
