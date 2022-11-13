@@ -6,11 +6,10 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:34:39 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/10 13:37:17 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 13:52:47 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strdup(const char *s1)

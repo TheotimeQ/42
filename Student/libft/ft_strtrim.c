@@ -6,11 +6,10 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:14:25 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 10:03:49 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 13:52:34 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 static int	check_in_set(char c, char const *set)

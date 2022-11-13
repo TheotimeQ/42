@@ -6,12 +6,10 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:21:51 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 10:03:57 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 13:52:31 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

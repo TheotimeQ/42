@@ -6,11 +6,10 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:12 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 09:58:34 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 13:52:50 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 static void	free_tab(char **tab, int tab_size)

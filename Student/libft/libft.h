@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:44 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 15:39:07 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 13:53:02 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 
 # include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {

@@ -6,11 +6,10 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:36 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/12 15:03:03 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/13 13:53:28 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 static int	len_int(long int n)
