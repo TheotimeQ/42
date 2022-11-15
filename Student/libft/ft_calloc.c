@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:34:12 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/13 13:53:34 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/15 17:13:11 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	void		*mem;
 
-	if (count > SIZE_MAX / size && size > 0)
+	if (size > 0 && count > SIZE_MAX / size)
 		return (NULL);
 	mem = malloc(count * size);
 	if (mem == NULL)
