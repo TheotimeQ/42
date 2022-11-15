@@ -17,7 +17,7 @@ TEST_OBJECT			= $(TEST_SRC:%.c=%.o)
 
 #Option compilation
 GCC					= gcc
-CFLAGS				= -Wall -Wextra -Werror -D BUFFER_SIZE=3
+CFLAGS				= -Wall -Wextra -Werror -D BUFFER_SIZE=4
 SANITIZE			= $(CFLAGS) -g -fsanitize=address
 
 #Autres commande
@@ -31,12 +31,10 @@ all: $(NAME) Makefile
 			$(GCC) $(CFLAGS) -include$(HEADER) -c $< -o $@
 
 sanit: 		lib $(TEST_OBJECT) $(OBJECTS) $(HEADER) Makefile
-			@echo "----Ready for basic sanitizing ? ----"
 			@$(GCC) $(SANITIZE) $(TEST_OBJECT) $(OBJECTS) -o basic $(LIB_DIR)$(LIBFT)  
 			@echo 'run ./basic to test'
 
 sanit_bonus: 	lib $(TEST_OBJECT) $(OBJECTS_BONUS) $(HEADER) Makefile
-				@echo "----Ready for bonus sanitizing ? ----"
 				@$(GCC) $(SANITIZE) $(TEST_OBJECT) $(OBJECTS_BONUS) -o bonus $(LIB_DIR)$(LIBFT)  
 				@echo 'run ./bonus to test'
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:29:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 18:46:44 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/15 21:14:12 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (index);
 }
 
-static char	*my_strncat(char *dest, char *src, size_t n, size_t start)
+static char	*my_strncat(char *dest, char *src, size_t n)
 {
 	size_t	index_dest;
 	size_t	index_src;
@@ -35,70 +35,91 @@ static char	*my_strncat(char *dest, char *src, size_t n, size_t start)
 	index_dest = -1;
 	while (dest[++index_dest])
 		new_str[index_dest] = dest[index_dest];
-	while (src[++index_src + start] && index_src + start < n)
-		new_str[index_dest + index_src] = src[index_src + start];
+	while (src[++index_src] && index_src < n)
+		new_str[index_dest + index_src] = src[index_src];
 	new_str[index_dest + index_src] = '\0';
 	free(dest);
 	return (new_str);
 }
 
-static char	*save(char *str, char *buffer, int i, int start)
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	int			index;
+	char		*from;
+	char		*to;
+
+	from = (char *) src;
+	to = (char *) dst;
+	if (from < to && (size_t)(to - from) < len)
+	{
+		index = len;
+		while (index-- > 0)
+			to[index] = from[index];
+		return (dst);
+	}
+	while ((size_t)index < len)
+	{
+		to[index] = from[index];
+		index++;
+	}
+	return (dst);
+}
+
+static char	*save(char *str, char *buffer, int i)
 {
 	if (str == NULL)
 	{
 		str = malloc(0);
 		str[0] = '\0';
 	}
-	str = my_strncat(str, buffer, i, start);
+	str = my_strncat(str, buffer, i + 1) ;
+	ft_memmove(buffer, buffer + i + 1, BUFFER_SIZE - i);
+	buffer[BUFFER_SIZE - i - 1] = '\0';
 	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	static char			buffer[BUFFER_SIZE];
-	char				*str;
-	int					bytes;
-	int					i;
+	static char		buffer[BUFFER_SIZE + 100];
+	char			*str;
+	int				bytes;
+	int				i;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, buffer, 0) == -1)
 		return (NULL);
 	str = NULL;
+	buffer[BUFFER_SIZE] = '\0';
+	
 	//ANCIEN BUFFER
 	i = 0;
-	if (buffer[i] == '\n')
+	if (buffer[i])
 	{	
-		i++;
-		if (!buffer[i])
-			return (NULL);
 		while (buffer[i] && buffer[i] != '\n')
 			i++;
 		if (buffer[i] == '\n')
-			return (save(str, buffer, i - 1, 1));
+			return (save(str, buffer, i));
 		else
-			str = save(str, buffer, i - 1, 1);
+			str = save(str, buffer, i);
 	}
 	//NOUVEAUX BUFFER
-	i = 0;
 	bytes = read (fd, buffer, BUFFER_SIZE);
 	while (buffer[i] && bytes > 0)
 	{	
 		if (buffer[i] && buffer[i] == '\n')
-		{
-			str = save(str, buffer, i + 1, 0);
-			return (str);
-		}
+			return (save(str, buffer, i));
 		i++;
 		if (i == bytes)
 		{
-			str = save(str, buffer, i, 0);
+			str = save(str, buffer, i - 1);
 			bytes = read (fd, buffer, BUFFER_SIZE);
 			i = 0;
 		}
 	}
+	str = save(str, buffer, i);
 	return (str);
 }
-				BUFFER CHANGEABLE ? SI OUI CHANGER LES /n
-				OU FAIRE UNE COPIE CHANGEABLE
+// 				BUFFER CHANGEABLE ? SI OUI CHANGER LES /n
+// 				OU FAIRE UNE COPIE CHANGEABLE
 
 // static char	*buffer_loop(int fd, char g_buffer[])
 // {

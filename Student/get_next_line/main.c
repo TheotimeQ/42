@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:30:02 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 17:46:42 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/15 21:14:39 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,29 @@
 
 int	main(void)
 {
-	int	fd;
+	int		fd;
+	char 	*str;
 
 	fd = open("test.txt", O_RDONLY);
-	printf("LINE : %s", get_next_line(fd));
-	printf("LINE : %s", get_next_line(fd));
-	printf("LINE : %s", get_next_line(fd));
+	str = get_next_line(fd);
+	printf("LINE : %s", str);
+	free(str);
+
+	str = get_next_line(fd);
+	printf("LINE : %s", str);
+	free(str);
+
+	str = get_next_line(fd);
+	printf("LINE : %s", str);
+	free(str);
+
+	str = get_next_line(fd);
+	printf("LINE : %s", str);
+	free(str);
+
+	str = get_next_line(fd);
+	printf("LINE : %s", str);
+	free(str);
+	
 	return (0);
 }

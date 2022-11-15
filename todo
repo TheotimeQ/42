@@ -24,3 +24,5 @@ PUSH PRINTF
 
 https://github.com/paulo-santana/ft_printf_tester.git
 START GETNELINE
+
+sudo journalctl --vacuum-size=200M
