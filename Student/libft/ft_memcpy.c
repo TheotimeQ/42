@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:34:30 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 17:16:39 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:17:51 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 {	
 	size_t		index;
 
-	if (!dst || !src)
+	if (!dst && !src)
 		return (NULL);
 	index = 0;
 	while (index < n)

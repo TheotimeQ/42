@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:39:08 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/11 17:50:43 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:21:52 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t		index_str;
 	size_t		index_find;
 
-	if (!haystack)
+	if (!haystack && len == 0)
 		return (NULL);
 	length_find = ft_strlen(needle);
 	if (needle[0] == '\0')

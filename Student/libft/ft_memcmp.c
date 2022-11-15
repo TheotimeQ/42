@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:34:28 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/10 15:29:13 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:18:32 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	str1 = (unsigned const char *)s1;
 	str2 = (unsigned const char *)s2;
-	while (i < n && str1 && str2)
+	while (i < n)
 	{
 		if (str1[i] != str2[i])
 			return (str1[i] - str2[i]);

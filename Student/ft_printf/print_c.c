@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:40:08 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/13 14:46:11 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:19:55 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*print_c(va_list arg, t_flag *all_flag)
 	if (!c)
 	{
 		all_flag->nb_caract += 1;
-		ft_putchar_fd(c,1);
+		ft_putchar_fd(c, 1);
 	}
 	str = malloc(2 * sizeof(char));
 	str[0] = (char)c;

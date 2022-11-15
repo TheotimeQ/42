@@ -11,11 +11,11 @@ SRC_LIB		 		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c f
 OBJ_LIB			    = $(SRC_LIB:%.c=$(LIB_DIR)/%.o)
 
 #Sans bonus
-SOURCE		 		= add_zeros.c print_pourc.c ft_print_str.c ft_printf.c print_c.c print_s.c print_p.c print_d.c print_i.c print_u.c print_x.c print_xx.c convert.c
+SOURCE		 		= 
 OBJECTS			    = $(SOURCE:%.c=%.o)
 
 #Avec bonus
-BONUS	 			= add_zeros.c print_pourc.c check_flag_bonus.c ft_print_str_bonus.c ft_printf.c print_c.c print_s.c print_p.c print_d.c print_i.c print_u.c print_x.c print_xx.c convert.c
+BONUS	 			= 
 OBJECTS_BONUS		= $(BONUS:%.c=%.o)
 
 #Pour les test
@@ -30,22 +30,12 @@ SANITIZE			= $(CFLAGS) -g -fsanitize=address
 #Autres commande
 RM 					= rm -rf
 CLEAR				= clear
-LIB 				= ar -crs
-EXTRACT_LIB			= ar -x
 
 all: $(NAME) Makefile
 
 #Rule for Object
-%.o:				%.c
-					$(GCC) $(CFLAGS) -include$(HEADER) -I$(LIB_DIR) -c $< -o $@
-
-#Rule for compile
-$(NAME):	lib $(OBJECTS_BONUS) ${OBJ_LIB} Makefile 
-			@${LIB} ${LIB_NAME} ${OBJECTS_BONUS} ${OBJ_LIB}
-
-#Rule to make bonus
-bonus:		lib ${OBJECTS_BONUS} Makefile
-			@$(GCC) $(CFLAGS) $(OBJECTS_BONUS) -o $(NAME)
+%.o:		%.c
+			$(GCC) $(CFLAGS) -include$(HEADER) -I$(LIB_DIR) -c $< -o $@
 
 sanit: 		lib $(TEST_OBJECT) $(OBJECTS) $(HEADER) Makefile
 			@echo "----Ready for sanitizing ? ----"
@@ -56,11 +46,6 @@ sanit_bonus: 	lib $(TEST_OBJECT) $(OBJECTS_BONUS) $(HEADER) Makefile
 				@echo "----Ready for sanitizing ? ----"
 				@$(GCC) $(SANITIZE) $(TEST_OBJECT) $(OBJECTS_BONUS) -o $(NAME) $(LIB_DIR)$(LIBFT)  
 				@echo 'run ./$(NAME) to test'
-
-#Rule to make lib
-lib:		Makefile
-			@echo "----Making Lib----"
-			cd $(LIB_DIR) && make
 
 clean:
 			@echo "----Cleaning----"

@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:44:41 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/13 14:46:32 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:46:48 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,13 @@ char	*print_u(va_list arg, t_flag *all_flag)
 
 	u = va_arg(arg, unsigned int);
 	str = my_ft_itoa(u);
-	if (all_flag->flag_plus && u > 0)
+	if (all_flag->flag_plus && u >= 0)
 	{
 		cat_left = ft_strdup("+");
 		str = my_strcat(cat_left, str);
 	}
+	str = put_0(str, all_flag);
 	if (str == NULL)
-	{
-		all_flag->nb_caract = -1;
 		return (ft_strdup(""));
-	}
 	return (str);
 }

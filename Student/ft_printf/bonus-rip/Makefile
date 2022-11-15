@@ -39,9 +39,10 @@ all: $(NAME) Makefile
 %.o:				%.c
 					$(GCC) $(CFLAGS) -include$(HEADER) -I$(LIB_DIR) -c $< -o $@
 
+
 #Rule for compile
-$(NAME):	lib $(OBJECTS_BONUS) ${OBJ_LIB} Makefile 
-			@${LIB} ${LIB_NAME} ${OBJECTS_BONUS} ${OBJ_LIB}
+$(NAME):	lib $(OBJECTS) ${OBJ_LIB} Makefile 
+			@${LIB} ${LIB_NAME} ${OBJECTS} ${OBJ_LIB}
 
 #Rule to make bonus
 bonus:		lib ${OBJECTS_BONUS} Makefile
