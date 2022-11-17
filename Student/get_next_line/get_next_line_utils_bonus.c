@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 16:29:57 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/17 16:42:06 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/17 17:40:36 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/17 17:40:38 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static char	*my_strncat(char *dest, char *src, size_t n)
 	char	*new_str;
 
 	new_str = malloc((ft_strlen(dest) + n + 1) * sizeof(char));
+	if (new_str == NULL)
+		return (NULL);
 	index_src = -1;
 	index_dest = -1;
 	while (dest[++index_dest])
@@ -89,6 +91,8 @@ char	*save(char *str, char *buffer, int i)
 		str[0] = '\0';
 	}
 	str = my_strncat(str, buffer, i + 1);
+	if (str == NULL)
+		return (NULL);
 	ft_memmove(buffer, buffer + i + 1, BUFFER_SIZE - i - 1);
 	ft_memset(buffer + BUFFER_SIZE - i - 1, '\0', i + 1);
 	return (str);
