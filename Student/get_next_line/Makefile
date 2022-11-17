@@ -8,7 +8,7 @@ SOURCE		 		= get_next_line.c get_next_line_utils.c
 OBJECTS			    = $(SOURCE:%.c=%.o)
 
 #Avec bonus
-BONUS	 			= get_next_line.c get_next_line_utils.c
+BONUS	 			= get_next_line_bonus.c get_next_line_utils.c
 OBJECTS_BONUS		= $(BONUS:%.c=%.o)
 
 #Pour les test
@@ -17,7 +17,7 @@ TEST_OBJECT			= $(TEST_SRC:%.c=%.o)
 
 #Option compilation
 GCC					= gcc
-CFLAGS				= -Wall -Wextra -Werror -D BUFFER_SIZE=4
+CFLAGS				= -Wall -Wextra -Werror -D BUFFER_SIZE=200
 SANITIZE			= $(CFLAGS) -g -fsanitize=address
 
 #Autres commande

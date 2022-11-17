@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:29:20 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 16:58:23 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/16 19:27:48 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 
 char	*get_next_line(int fd);
+char	*save(char *str, char *buffer, int i);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 2
