@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 18:18:38 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/17 09:21:25 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:39:15 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line_bonus.h"
 
-#include "get_next_line.h"
-
-static char	*loop_read(char *buffer,int fd, char *str)
+static char	*loop_read(char *buffer, int fd, char *str)
 {	
 	int				bytes;
 	int				i;
-	
+
 	i = 0;
 	bytes = read (fd, buffer, BUFFER_SIZE);
 	if (!buffer[i])
-		return (NULL);
+		return (str);
 	while (buffer[i] && bytes > 0)
 	{	
 		if (buffer[i] && buffer[i] == '\n')
@@ -34,7 +33,7 @@ static char	*loop_read(char *buffer,int fd, char *str)
 			i = 0;
 		}
 		if (!buffer[i])
-			break;
+			break ;
 	}
 	str = save(str, buffer, i);
 	return (str);
@@ -55,7 +54,7 @@ char	*get_next_line(int fd)
 	{	
 		while (buffer[fd][i] && buffer[fd][i] != '\n')
 			i++;
-		if (buffer[fd][i] == '\n')
+		if (buffer[fd][i] == '\n' || (!buffer[i] && i < BUFFER_SIZE))
 			return (save(str, buffer[fd], i));
 		else
 			str = save(str, buffer[fd], i);

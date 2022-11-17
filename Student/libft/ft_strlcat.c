@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:34:41 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 16:20:25 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:57:18 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t			dest_size;
 	size_t			src_size;
 
-	if (dstsize == 0)
+	if (dst == NULL && dstsize == 0)
 		return (0);
 	dest_size = ft_strlen(dst);
 	src_size = ft_strlen(src);
@@ -36,6 +36,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		j++;
 	}
 	if (dstsize > 0)
-		dst[i + j] = '\0'; 
+		dst[i + j] = '\0';
 	return (dest_size + src_size);
 }

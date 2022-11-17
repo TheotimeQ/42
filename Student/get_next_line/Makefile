@@ -1,7 +1,7 @@
 .PHONY:     		all $(NAME) sanit lib bonus clean fclean re
 
 NAME				= test
-HEADER				= get_next_line.h
+HEADER				= .
 
 #Sans bonus
 SOURCE		 		= get_next_line.c get_next_line_utils.c
@@ -17,7 +17,7 @@ TEST_OBJECT			= $(TEST_SRC:%.c=%.o)
 
 #Option compilation
 GCC					= gcc
-CFLAGS				= -Wall -Wextra -Werror -D BUFFER_SIZE=200
+CFLAGS				= -Wall -Wextra -Werror -D BUFFER_SIZE=42
 SANITIZE			= $(CFLAGS) -g -fsanitize=address
 
 #Autres commande
@@ -28,15 +28,15 @@ all: $(NAME) Makefile
 
 #Rule for Object
 %.o:		%.c
-			$(GCC) $(CFLAGS) -include$(HEADER) -c $< -o $@
+			$(GCC) $(CFLAGS) -I$(HEADER) -c $< -o $@
 
-sanit: 		lib $(TEST_OBJECT) $(OBJECTS) $(HEADER) Makefile
+$(NAME): 	lib $(TEST_OBJECT) $(OBJECTS) Makefile
 			@$(GCC) $(SANITIZE) $(TEST_OBJECT) $(OBJECTS) -o basic $(LIB_DIR)$(LIBFT)  
 			@echo 'run ./basic to test'
 
-sanit_bonus: 	lib $(TEST_OBJECT) $(OBJECTS_BONUS) $(HEADER) Makefile
-				@$(GCC) $(SANITIZE) $(TEST_OBJECT) $(OBJECTS_BONUS) -o bonus $(LIB_DIR)$(LIBFT)  
-				@echo 'run ./bonus to test'
+bonus: 		lib $(TEST_OBJECT) $(OBJECTS_BONUS) Makefile
+			@$(GCC) $(SANITIZE) $(TEST_OBJECT) $(OBJECTS_BONUS) -o bonus $(LIB_DIR)$(LIBFT)  
+			@echo 'run ./bonus to test'
 
 clean:
 			@${RM} ${TEST_OBJECT} $(OBJECTS_BONUS) $(OBJECTS) $(OBJ_LIB)

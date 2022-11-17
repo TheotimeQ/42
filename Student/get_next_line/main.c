@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:30:02 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/17 09:21:02 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:37:40 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,31 @@
 
 int	main(void)
 {
-	int		fd_1;
-	int		fd_2;
-	char 	*str;
+	int		fd;
+	char	*str;
 
-	fd_1 = open("test1.txt", O_RDONLY);
-	fd_2 = open("test2.txt", O_RDONLY);
-
-	str = get_next_line(fd_2);
-	printf("FD : %d  |  %s", fd_2, str);
+	fd = open("gnlTester/files/43_no_nl", O_RDWR);
+	str = get_next_line(fd);
+	printf("\n     OUTPUT:%s\n", str);
 	free(str);
 
-	str = get_next_line(fd_2);
-	printf("FD : %d  |  %s", fd_2, str);
+	str = get_next_line(fd);
+	printf("\n     OUTPUT:%s\n", str);
 	free(str);
 
-	str = get_next_line(fd_2);
-	printf("FD : %d  |  %s", fd_2, str);
+	str = get_next_line(fd);
+	printf("\n     OUTPUT:%s\n", str);
 	free(str);
 
-	str = get_next_line(fd_1);
-	printf("FD : %d  |  %s", fd_1, str);
+	str = get_next_line(fd);
+	printf("\n     OUTPUT:%s\n", str);
 	free(str);
-
-	str = get_next_line(fd_1);
-	printf("FD : %d  |  %s", fd_1, str);
-	free(str);
-
-	str = get_next_line(fd_1);
-	printf("FD : %d  |  %s", fd_1, str);
-	free(str);
-
-	str = get_next_line(fd_2);
-	printf("FD : %d  |  %s", fd_2, str);
-	free(str);
-
-	close(fd_1);
-	close(fd_2);
-
+	// while (str != NULL)
+	// {
+	// 	str = get_next_line(fd);
+	// 	printf("\n STR = %s", str);
+	// 	free(str);
+	// }
+	close(fd); 
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:29:57 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/16 19:27:59 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:41:30 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,28 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 			to[index] = from[index];
 		return (dst);
 	}
+	index = 0;
 	while ((size_t)index < len)
 	{
 		to[index] = from[index];
 		index++;
 	}
 	return (dst);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t		index;
+	char		*str;
+
+	str = b;
+	index = 0;
+	while (index < len)
+	{
+		str[index] = (unsigned char)c;
+		index++;
+	}
+	return (b);
 }
 
 char	*save(char *str, char *buffer, int i)
@@ -72,8 +88,8 @@ char	*save(char *str, char *buffer, int i)
 		str = malloc(1 * sizeof(char));
 		str[0] = '\0';
 	}
-	str = my_strncat(str, buffer, i + 1) ;
+	str = my_strncat(str, buffer, i + 1);
 	ft_memmove(buffer, buffer + i + 1, BUFFER_SIZE - i - 1);
-	buffer[BUFFER_SIZE - i - 1] = '\0';
+	ft_memset(buffer + BUFFER_SIZE - i - 1, '\0', i + 1);
 	return (str);
 }
