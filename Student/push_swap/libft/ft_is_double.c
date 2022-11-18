@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_is_double.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:34:06 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/18 19:26:44 by zelinsta         ###   ########.fr       */
+/*   Created: 2022/11/18 10:49:05 by zelinsta          #+#    #+#             */
+/*   Updated: 2022/11/18 10:53:08 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int ft_is_double(int *tab, int size)
 {
-	int				i;
-	int				sign;
-	long long int	nb;
+    int i;
+    int j;
 
-	i = 0;
-	sign = 1;
-	nb = 0;
-	while (str[i] == ' ' || str[i] == '\t'
-		|| str[i] == '\n' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
+    i = 0;
+	while (i < size)
+	{	
+        j = i + 1;
+        while (j < size)
+        {	
+            if (tab[i] == tab[j])
+                return (1);
+            j++;
+        }
+        i++;
 	}
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		nb = nb * 10 + (str[i] - '0');
-		i++;
-	}
-	nb *= sign;
-	return ((int)nb);
+    return (0);
 }

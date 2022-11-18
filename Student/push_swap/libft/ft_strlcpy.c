@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:34:06 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/18 19:26:44 by zelinsta         ###   ########.fr       */
+/*   Created: 2022/11/08 13:34:43 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/09 15:58:46 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int				i;
-	int				sign;
-	long long int	nb;
+	size_t		i;
+	int			lenght;
 
+	lenght = ft_strlen(src);
 	i = 0;
-	sign = 1;
-	nb = 0;
-	while (str[i] == ' ' || str[i] == '\t'
-		|| str[i] == '\n' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	while (src[i] && i + 1 < dstsize)
 	{
-		if (str[i] == '-')
-			sign *= -1;
+		dst[i] = src[i];
 		i++;
 	}
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		nb = nb * 10 + (str[i] - '0');
-		i++;
-	}
-	nb *= sign;
-	return ((int)nb);
+	if (dstsize != 0)
+		dst[i] = '\0';
+	return (lenght);
 }
