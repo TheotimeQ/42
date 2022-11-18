@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:56:21 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/18 19:19:28 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:21:15 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void    resolve_push_swap(t_stack *a, t_stack *b)
 
     data = malloc(sizeof(t_data));
     
+    print_list(a,b);
     while (!is_sorted(-1,a) && a->index > 0)
     {   
         if (a->data[a->index - 1] > b->data[b->index - 1] && a->index > 0 && b->index > 0 && is_sorted(-1,a))
@@ -125,5 +126,6 @@ void    resolve_push_swap(t_stack *a, t_stack *b)
         pb(a,b);
     }
     push_all_b(a, b);
+    print_list(a,b);
     free(data);
 }

@@ -10,6 +10,8 @@
 
 //--------------- ANNEXES ---------------
 
+//NOMBRE NEGATIF
+
 // void print_tab(char **tab)
 // {
 //     int index;
