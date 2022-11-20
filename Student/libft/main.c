@@ -5,7 +5,7 @@
 #include <string.h>
 #include <assert.h>
 
-#include "libft.h"
+#include "../libft.h"
 #include "bonus/libft.h"
 
 //--------------- ANNEXES ---------------
