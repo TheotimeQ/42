@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:10:16 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/19 20:40:13 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/20 09:45:10 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 t_gbc   *gbc_init();
-void	*ft_malloc(size_t count, size_t size);
+void 	gbc_add(void *ptr_malloc, t_gbc *gbc)
+void	gbc_remove(t_gbc *gbc);
+void	gbc_all_clear(t_gbc *gbc);
+void	*ft_malloc(size_t count, size_t size, t_gbc *gdb, size_t add_gbc);
 
 #endif
