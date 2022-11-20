@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 16:29:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/17 16:42:20 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/19 10:39:11 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/19 11:11:31 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,13 @@ char	*get_next_line(int fd)
 	char			*str;
 	int				i;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, buffer, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
+	if (read(fd, buffer, 0) == -1)
+	{
+		ft_memset(buffer, '\0', BUFFER_SIZE + 1);
+		return (NULL);
+	}
 	str = NULL;
 	buffer[BUFFER_SIZE] = '\0';
 	i = 0;

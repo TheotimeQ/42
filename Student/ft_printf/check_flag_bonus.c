@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 14:55:16 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 15:01:36 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/20 17:14:00 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ char	*print_str_flag(t_flag *all_flag, char *s)
 	int		nb_space_to_place;
 	char	*cat;
 
+	if (!s)
+	{
+		// all_flag->error = 1;
+		return (NULL);
+	}	
 	nb_space = 0;
 	nb_space_to_place = 0;
 	if (all_flag->point_right < (int)ft_strlen(s))
 		all_flag->point_right = ft_strlen(s);
 	if (all_flag->flag_point == 1 && all_flag->point_right == 0)
-	{	
-		s = ft_substr(s, 0, 0);
-	}
+		s[0] = '\0';
 	nb_space_to_place = all_flag->point_left - ft_strlen(s);
 	while (nb_space++ < nb_space_to_place)
 	{	
@@ -40,7 +43,7 @@ char	*print_str_flag(t_flag *all_flag, char *s)
 }
 
 static void	get_first_nb(const char *str, t_flag *all_flag)
-{
+{	
 	while ('0' <= str[all_flag->index] && str[all_flag->index] <= '9')
 	{	
 		if (all_flag->point_left < 0)
@@ -52,7 +55,7 @@ static void	get_first_nb(const char *str, t_flag *all_flag)
 }
 
 static void	get_point_value(const char *str, va_list arg, t_flag *all_flag)
-{
+{	
 	if (str[all_flag->index] == '.')
 	{
 		all_flag->flag_point = 1;
@@ -90,9 +93,8 @@ char	*ck_flag(const char *str, va_list arg, t_flag *all_flag)
 {	
 	char	*s;
 
-	while (check_flag_set(str[all_flag->index], "#*+-O."))
+	while (check_flag_set(str[all_flag->index], "#*+-O ."))
 	{	
-		
 		if (str[all_flag->index] == '0' && all_flag->index++)
 			all_flag->flag_zeros = 1;
 		if (str[all_flag->index] == '*' && all_flag->index++)
@@ -109,10 +111,8 @@ char	*ck_flag(const char *str, va_list arg, t_flag *all_flag)
 			get_first_nb(str, all_flag);
 		if (str[all_flag->index] == '.')
 			get_point_value(str, arg, all_flag);
-			
-		// if (str[all_flag->index] == ' ' && all_flag->index++)
-		// 	all_flag->flag_space = 1;
-
+		if (str[all_flag->index] == ' ' && all_flag->index++)
+			all_flag->flag_space = 1;
 		if (str[all_flag->index] == '#' && all_flag->index++)
 			all_flag->flag_hash = 1;
 		if (str[all_flag->index] == '*' && all_flag->index++)
@@ -122,8 +122,12 @@ char	*ck_flag(const char *str, va_list arg, t_flag *all_flag)
 		if (str[all_flag->index] == '-' && all_flag->index++)
 			all_flag->flag_minus = 1;
 	}
-	// printf(" TEST %d %d TEST",all_flag->point_left,all_flag->point_right);
 	s = all_test(str, arg, all_flag);
+	if (!str)
+	{
+		// all_flag->error = 1;
+		return (NULL);
+	}	
 	s = print_str_flag(all_flag, s);
 	return (s);
 }

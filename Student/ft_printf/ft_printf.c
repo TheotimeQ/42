@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 14:44:05 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/20 17:42:51 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,19 @@ char	*my_strcat(char *dest, char *src)
 	size_t	index_src;
 	char	*new_str;
 
-	if (!dest && src)
-		return (src);
-	else if (!src && dest)
-		return (dest);
-	else if (!src && !dest)
+	if (!src && !dest)
 		return (NULL);
+	if (!src && dest)
+		return (dest);
+	if (src && !dest)
+		return (src);
 	new_str = malloc((ft_strlen(dest) + ft_strlen(src) + 1) * sizeof(char));
+	if (!new_str)
+	{
+		free(dest);
+		free(src);
+		return (NULL);
+	}
 	index_src = -1;
 	index_dest = -1;
 	while (dest[++index_dest])
@@ -61,6 +67,11 @@ char	*all_test(const char *str, va_list arg, t_flag *all_flag)
 		s = print_xx(arg, all_flag);
 	else if (str[all_flag->index] == '%')
 		s = print_pourc(all_flag);
+	if (!s)
+	{
+		// all_flag->error = 1;
+		return (NULL);
+	}	
 	return (s);
 }
 
@@ -69,10 +80,14 @@ int	ft_printf(const char *str, ...)
 	va_list		arg;
 	t_flag		all_flag;
 
+	if (write(1, 0, 0) != 0)
+		return (-1);
 	all_flag.index = 0;
 	all_flag.nb_caract = 0;
 	va_start(arg, str);
 	print_str(str, arg, &all_flag);
 	va_end(arg);
+	// if (all_flag.error == 1)
+	// 	return (-1);
 	return (all_flag.nb_caract);
 }

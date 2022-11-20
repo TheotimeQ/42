@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:10:16 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/20 09:45:10 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/20 15:34:25 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <stdint.h>
 
+# include <stdio.h>
+
 typedef struct s_list
 {
 	void			*content;
@@ -26,8 +28,8 @@ typedef struct s_list
 
 typedef struct s_gbc
 {
-	int				*malloc_error;
-	struct s_list	*gb_list;
+	int				malloc_error;
+	struct s_list	**gb_list;
 }	t_gbc;
 
 t_list	*ft_lstnew(void *content);
@@ -73,10 +75,22 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-t_gbc   *gbc_init();
-void 	gbc_add(void *ptr_malloc, t_gbc *gbc)
+
+t_gbc	*gbc_init(void);
+void	gbc_add(void *ptr_malloc, t_gbc *gbc);
 void	gbc_remove(t_gbc *gbc);
+void	gbc_show(t_gbc *gbc);
 void	gbc_all_clear(t_gbc *gbc);
+int		ft_malloc_atoi(char *str);
+void	ft_malloc_free_tab(void **tab);
+char	*ft_malloc_itoa(int n, t_gbc *gdb);
+char	*ft_malloc_join(char *s1, char *s2, t_gbc *gbc);
+void	*ft_malloc_memset(void *b, int c, size_t len);
+void	ft_malloc_print_tab(char **tab);
+char	**ft_malloc_split(char *s, char c, t_gbc *gbc);
+char	*ft_malloc_str(const char *s1, t_gbc *gbc);
+char	*ft_malloc_substr(char const *s, int start, size_t len, t_gbc *gbc);
 void	*ft_malloc(size_t count, size_t size, t_gbc *gdb, size_t add_gbc);
+void 	check_leaks(void);
 
 #endif

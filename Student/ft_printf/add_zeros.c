@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:49:44 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 15:37:09 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/20 17:14:32 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static char	*add_zeros(char *str, t_flag *all_flag, int sign)
 	char	*cat;
 	int		index;
 
+	if (str == NULL)
+	{
+		// all_flag->error = 1;
+		return (NULL);
+	}
 	index = ft_strlen(str);
 	if (all_flag->flag_point)
 	{
@@ -46,6 +51,11 @@ char	*put_0(char *str, t_flag *all_flag)
 	char	*cat;
 	int		sign;
 
+	if (str == NULL)
+	{
+		// all_flag->error = 1;
+		return (NULL);
+	}
 	sign = 0;
 	if (str && str[0] == '-')
 	{	

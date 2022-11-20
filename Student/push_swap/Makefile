@@ -13,7 +13,7 @@ SOURCE		 		= main.c push_swap.c stack.c stack_operation_a.c stack_operation_b.c 
 OBJECTS			    = $(SOURCE:%.c=%.o)
 
 #Avec bonus
-BONUS	 			= 
+BONUS	 			= checker_bonus.c
 OBJECTS_BONUS		= $(BONUS:%.c=%.o)
 
 #Pour les test

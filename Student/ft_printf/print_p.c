@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:40:08 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 15:44:36 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/19 14:39:46 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ char	*print_p(va_list arg, t_flag *all_flag)
 	addr = (long long int)p;
 	str = long_int_to_hex(addr);
 	str = clear_0(str);
-	cat_left = ft_strdup("0x");
+	if (all_flag->flag_hash == 0)
+	{
+		cat_left = ft_strdup("0x");
+		str = my_strcat(cat_left, str);
+	}
 	all_flag->point_right = 2;
-	str = my_strcat(cat_left, str);
 	return (str);
 }

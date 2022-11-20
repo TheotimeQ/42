@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:10:53 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 14:44:17 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/20 16:07:37 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 # include <stdio.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_flag
-{
+{	
+	int				is_null;
 	int				flag_hash;
 	int				flag_space;
 	int				flag_plus;
@@ -30,6 +32,7 @@ typedef struct s_flag
 	int				point_right;
 	int				nb_caract;
 	int				index;
+	int				error;
 
 }	t_flag;
 

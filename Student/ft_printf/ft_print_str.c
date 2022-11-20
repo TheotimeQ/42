@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:17:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/15 15:21:35 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/20 17:30:13 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static void	reset_flags(t_flag *all_flag)
 {
+	all_flag->is_null = 0;
 	all_flag->flag_hash = 0;
 	all_flag->flag_space = 0;
 	all_flag->flag_plus = 0;
@@ -23,6 +24,7 @@ static void	reset_flags(t_flag *all_flag)
 	all_flag->flag_point = 0;
 	all_flag->point_left = -1;
 	all_flag->point_right = -1;
+	all_flag->error = 0;
 }
 
 void	print_str(const char *str, va_list arg, t_flag *all_flag)
@@ -31,7 +33,7 @@ void	print_str(const char *str, va_list arg, t_flag *all_flag)
 
 	s = NULL;
 	while (str[all_flag->index])
-	{
+	{	
 		if (str[all_flag->index] != '%')
 		{
 			ft_putchar_fd(str[all_flag->index], 1);

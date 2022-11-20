@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 16:29:20 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/17 13:51:15 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/19 09:22:56 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/19 10:57:44 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-
 # include <stdio.h>
 
 char	*get_next_line(int fd);
 char	*save(char *str, char *buffer, int i);
+void	*ft_memset(void *b, int c, size_t len);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 2

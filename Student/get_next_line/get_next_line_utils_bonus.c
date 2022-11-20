@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 17:40:36 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/17 17:40:38 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/19 09:23:00 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/19 10:16:32 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*my_strncat(char *dest, char *src, size_t n)
 	return (new_str);
 }
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+static void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	int			index;
 	char		*from;

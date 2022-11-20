@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 17:40:44 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/17 17:40:45 by tquere           ###   ########.fr       */
+/*   Created: 2022/11/19 09:22:51 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/19 11:11:51 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static char	*loop_read(char *buffer, int fd, char *str)
 	int				i;
 
 	i = 0;
-	bytes = read (fd, buffer, BUFFER_SIZE);
-	if (!buffer[i])
+	bytes = read(fd, buffer, BUFFER_SIZE);
+	if (bytes == 0)
 		return (str);
 	while (buffer[i] && bytes > 0)
 	{	
@@ -30,6 +30,8 @@ static char	*loop_read(char *buffer, int fd, char *str)
 		{
 			str = save(str, buffer, i - 1);
 			bytes = read(fd, buffer, BUFFER_SIZE);
+			if (bytes < 0)
+				ft_memset(buffer, '\0', BUFFER_SIZE + 1);
 			i = 0;
 		}
 		if (!buffer[i])
@@ -45,8 +47,13 @@ char	*get_next_line(int fd)
 	char			*str;
 	int				i;
 
-	if (fd < 0 || fd > 4096 || BUFFER_SIZE < 1 || read(fd, buffer[fd], 0) == -1)
+	if (fd < 0 || fd > 4096 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (read(fd, buffer[fd], 0) == -1)
+	{
+		ft_memset(buffer[fd], '\0', BUFFER_SIZE + 1);
+		return (NULL);
+	}
 	str = NULL;
 	buffer[fd][BUFFER_SIZE] = '\0';
 	i = 0;
