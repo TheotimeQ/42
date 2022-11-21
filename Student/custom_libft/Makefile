@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
+#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/19 09:10:28 by tquere            #+#    #+#              #
-#    Updated: 2022/11/20 13:54:19 by tquere           ###   ########.fr        #
+#    Updated: 2022/11/21 13:36:52 by zelinsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,10 @@ SOURCE		 		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft
 OBJECTS			    = $(SOURCE:%.c=build/%.o)
 
 MY_GBC	 			= gbc_show.c gbc_add.c gbc_all_clear.c gbc_init.c gbc_remove.c 
-MY_MALLOC			= ft_malloc.c ft_malloc_free_tab.c ft_malloc_print_tab.c ft_malloc_atoi.c ft_malloc_itoa.c ft_malloc_join.c ft_malloc_split.c ft_malloc_str.c ft_malloc_strlen.c ft_malloc_substr.c
+MY_MALLOC			= ft_malloc.c ft_malloc_free_tab.c ft_malloc_print_tab.c ft_malloc_atoi.c ft_malloc_itoa.c ft_malloc_join.c ft_malloc_split.c ft_malloc_str.c ft_malloc_substr.c
 MY_LIBFT			= $(MY_GBC:%.c=build/%.o) $(MY_MALLOC:%.c=build/%.o)
 
 ALL_OBJECT			= ${OBJECTS} ${MY_LIBFT}
-
-SRC_TEST			= leak_checker/leak_checker.c
-OBJ_TEST			= leak_checker/leak_checker.o
 
 GCC					= gcc
 CFLAGS				= -Wall -Wextra -Werror
@@ -52,9 +49,9 @@ leak_checker/%.o:	leak_checker/%.c $(HEADER) Makefile
 $(NAME): 		${ALL_OBJECT} $(MY_LIBFT) $(HEADER) Makefile 
 				@${LIB} ${NAME} ${ALL_OBJECT}
 
-test:			$(ALL_OBJECT) ${OBJ_TEST} $(HEADER) Makefile
+test:			$(ALL_OBJECT) $(HEADER) Makefile
 				@echo "----Ready for sanitizing ? ----"
-				@$(GCC) $(SANITIZE) $(ALL_OBJECT) ${OBJ_TEST} -o $(TEST_OUTPUT)  
+				@$(GCC) $(SANITIZE) $(ALL_OBJECT) -o $(TEST_OUTPUT)  
 				@echo 'run ./$(TEST_OUTPUT) to test'
 
 clean:	

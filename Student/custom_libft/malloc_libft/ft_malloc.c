@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:19:09 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/20 12:24:16 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/21 16:57:28 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 void	*ft_malloc(size_t count, size_t size, t_gbc *gbc, size_t add_gbc)
 {
 	void	*mem;
+	// void	**ptr_mem;
 
 	if (size > 0 && count > SIZE_MAX / size)
 		return (NULL);
 	if (!gbc)
 		return (NULL);
 	mem = malloc(count * size);
+	// ptr_mem = &mem;
+	// printf("malloc str= %p\n", mem);
+	// printf("malloc &str %p\n\n", ptr_mem);
 	if (mem == NULL)
 	{
 		gbc->malloc_error = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:10:16 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/20 15:34:25 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/21 16:58:05 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,17 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct gb_list
+{
+	void			*content;
+	void			**ptr_content;
+	struct gb_list	*next;
+}	gb_list;
+
 typedef struct s_gbc
 {
 	int				malloc_error;
-	struct s_list	**gb_list;
+	gb_list			**gb_list;
 }	t_gbc;
 
 t_list	*ft_lstnew(void *content);
@@ -77,7 +84,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 t_gbc	*gbc_init(void);
-void	gbc_add(void *ptr_malloc, t_gbc *gbc);
+void	gbc_add(void *content, t_gbc *gbc);
 void	gbc_remove(t_gbc *gbc);
 void	gbc_show(t_gbc *gbc);
 void	gbc_all_clear(t_gbc *gbc);

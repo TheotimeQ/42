@@ -3,39 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   gbc_all_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:13:25 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/20 15:30:13 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/21 17:07:49 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static void	gbc_del(void *content)
+//Faire un fonction qui clear les liste avec un pointeur null
+
+static void	gbc_ft_lstclear(gb_list **lst)
 {
-	free(content);
-}
+	gb_list	*tmp;
+	gb_list *elem;
 
-static void	gbc_ft_lstdelone(t_list *lst, void (*del)(void*))
-{	
-	if (!lst || !del)
-		return ;
-	(*del)(lst->content);
-	free(lst);
-}
-
-static void	gbc_ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*tmp;
-
-	if (lst == NULL || del == NULL)
+	if (lst == NULL)
 		return ;
 	while (*lst != NULL)
 	{	
-		printf("P1 : %p ", (*lst));
 		tmp = (*lst)->next;
-		gbc_ft_lstdelone(*lst, del);
+		elem = *lst;
+		free(elem->content);
+		free(elem);
 		*lst = tmp;
 	}
 	lst = NULL;
@@ -43,6 +34,5 @@ static void	gbc_ft_lstclear(t_list **lst, void (*del)(void *))
 
 void	gbc_all_clear(t_gbc *gbc)
 {
-	gbc_ft_lstclear(gbc->gb_list, &gbc_del);
-	free(gbc);
+	gbc_ft_lstclear(gbc->gb_list);
 }
