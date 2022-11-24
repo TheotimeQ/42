@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:17:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 15:34:58 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:50:33 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	ft_putnbr_fd(int nb, int fd, t_flag *all_flag)
 	}
 	if (nb >= 10)
 	{
-		ft_putnbr(nb / 10, fd, all_flag);
-		ft_putnbr(nb % 10, fd, all_flag);
+		ft_putnbr_fd(nb / 10, fd, all_flag);
+		ft_putnbr_fd(nb % 10, fd, all_flag);
 	}
 	else
 		ft_putchar_fd(nb + '0', fd, all_flag);

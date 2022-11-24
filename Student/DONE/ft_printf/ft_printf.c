@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 15:48:35 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:49:26 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,10 @@ static void	print_str(const char *str, va_list arg, t_flag *all_flag)
 	while (str[all_flag->index])
 	{	
 		if (str[all_flag->index] != '%')
-		{
 			ft_putchar_fd(str[all_flag->index], 1, all_flag);
-			all_flag->nb_caract++;
-		}
 		else
 		{	
 			all_flag->index++;
-			all_flag->nb_caract = 0;
-			all_flag->error = 0;
 			all_test(str, arg, all_flag);
 			if (all_flag->error == 2)
 				return ;
