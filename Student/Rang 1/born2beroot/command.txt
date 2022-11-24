@@ -1,0 +1,4 @@
+https://papy-tux.legtux.org/doc1174/index.html
+
+Commandes utiles :
+	lsblk : pour voir les partition

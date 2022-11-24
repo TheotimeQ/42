@@ -1,0 +1,55 @@
+
+-----------------------------------
+			  RANG 1
+-----------------------------------
+
+born2beroot finir
+
+--------
+
+pritnf Test + rendre
+
+--------
+
+Get next line reparer et rerendre
+
+-----------------------------------
+			  RANG 2
+-----------------------------------
+
+fil de fer commencer
+
+--------
+
+pipex commencer
+
+--------
+
+Ameliorer algo push swap 
+Bonus Push Swap
+Makefile refaire
+
+-----------------------------------
+			  RANG 3
+-----------------------------------
+
+// sa(a);     //Swap les deux derniere valeur de a
+// pa(a,b);   //mets la derniere valeur de a dans b
+// ra(a);     //rotate a vers le haut 
+// rra(a);    //rotate a vers le bas
+
+// sb(b);     //Swap les deux derniere valeur de b
+// pb(a, b);  //mets la derniere valeur de b dans b
+// rb(b);     //rotate b vers le haut 
+// rrb(b);    //rotate b vers le bas
+
+//ss(a, b);   //sa + sb
+// rr(a, b);  //Rotate les deux piles vers le haut
+// rrr(a, b); //Rotate les deux piles vers le bas
+
+// pa(a, b);
+
+	
+
+
+
