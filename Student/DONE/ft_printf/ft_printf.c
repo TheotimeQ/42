@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 15:49:26 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:54:35 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static void	all_test(const char *str, va_list arg, t_flag *all_flag)
 	else if (str[all_flag->index] == 'p')
 		print_c(arg, all_flag);
 	else if (str[all_flag->index] == 'd')
-		print_c(arg, all_flag);
+		print_d(arg, all_flag);
 	else if (str[all_flag->index] == 'i')
-		print_c(arg, all_flag);
+		print_d(arg, all_flag);
 	else if (str[all_flag->index] == 'u')
-		print_c(arg, all_flag);
+		print_u(arg, all_flag);
 	else if (str[all_flag->index] == 'x')
-		print_c(arg, all_flag);
+		print_x(arg, all_flag);
 	else if (str[all_flag->index] == 'X')
-		print_c(arg, all_flag);
+		print_xx(arg, all_flag);
 	else if (str[all_flag->index] == '%')
 		print_pourc(all_flag);
 	else
@@ -73,12 +73,12 @@ int	ft_printf(const char *str, ...)
 	return (all_flag.nb_caract);
 }
 
-// #include	<stdio.h>
+#include	<stdio.h>
 
-// #define ARGS "test %d ", 10
+#define ARGS "test %d ", 10
 
-// int	main()
-// {
-// 	printf("| RETOUR : %d |\n", printf(ARGS));
-// 	printf("| RETOUR : %d |\n", printf(ARGS));
-// }
+int	main()
+{
+	printf("| RETOUR : %d |\n", printf(ARGS));
+	printf("| RETOUR : %d |\n", printf(ARGS));
+}

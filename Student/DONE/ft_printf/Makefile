@@ -6,7 +6,7 @@
 #    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 11:11:31 by tquere            #+#    #+#              #
-#    Updated: 2022/11/24 15:47:17 by tquere           ###   ########.fr        #
+#    Updated: 2022/11/24 15:54:49 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME				= libftprintf.a
 HEADER				= ft_printf.h
 
-SOURCE		 		= ft_printf.c ft_write_protect.c
+SOURCE		 		= ft_printf.c ft_write_protect.c print_c.c print_d.c print_u.c print_x.c
 OBJECTS			    = $(SOURCE:%.c=%.o)
 
 GCC					= gcc
@@ -31,6 +31,9 @@ all: 		$(NAME) $(HEADER) Makefile
 
 $(NAME):	$(HEADER) $(OBJECTS) Makefile
 			${LIB} ${NAME} ${OBJECTS} 
+
+test: 		$(OBJECTS) Makefile
+			@$(GCC) $(SANITIZE) $(OBJECTS) -o test 
 
 clean:
 			@${RM} $(OBJECTS) 

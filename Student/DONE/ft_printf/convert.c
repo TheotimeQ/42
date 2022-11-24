@@ -6,58 +6,11 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:57:12 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 15:33:22 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/24 16:02:04 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	size_t		index;
-	char		*str;
-
-	str = b;
-	index = 0;
-	while (index < len)
-	{
-		str[index] = (unsigned char)c;
-		index++;
-	}
-	return (b);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, 0, n);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	int				index;
-	char			*str;
-
-	if (s == NULL)
-		return (NULL);
-	if ((size_t)start > ft_strlen(s))
-	{
-		str = malloc(1);
-		if (str == NULL)
-			return (NULL);
-		str[0] = '\0';
-		return (str);
-	}
-	if (len > ft_strlen(s))
-		len = ft_strlen(s);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (str == NULL)
-		return (NULL);
-	index = start - 1;
-	while (++index - start < len)
-		str[index - start] = s[index];
-	str[index - start] = '\0';
-	return (str);
-}
 
 char	*long_int_to_hex(unsigned long int val)
 {
@@ -82,21 +35,32 @@ char	*long_int_to_hex(unsigned long int val)
 	return (str);
 }
 
-char	*clear_0(char *str)
+void	convert_print(long int nb_long, int len_base, char *base, int fd, t_flag *all_flag)
 {
-	int		index;
-	char	*new_str;
-
-	if (!str)
-		return (NULL);
-	index = 0;
-	while (str[index] && str[index] == '0' && index < (int)ft_strlen(str) - 1)
+	if (nb_long > 0)
 	{
-		index++;
+		convert_print(nb_long / len_base, len_base, base, fd, all_flag);
+		ft_putchar_fd(base[(nb_long % len_base)], 1, all_flag);
 	}
-	new_str = ft_substr(str, index, ft_strlen(str) - index);
-	free(str);
-	if (new_str == NULL)
-		return (NULL);
-	return (new_str);
+}
+
+void	ft_putnbr_base(int nbr, char *base, int fd, t_flag *all_flag)
+{
+	long int	nb_long;
+	int			len_base;
+
+	nb_long = nbr;
+	if (nbr < 0)
+	{
+		nb_long *= -1 ;
+		ft_putchar_fd('-', fd, all_flag);
+	}
+	if (nb_long == 0)
+	{
+		ft_putchar_fd(&base[0], fd, all_flag);
+	}
+	if (nb_long > 0)
+	{
+		convert_print(nb_long, len_base, base, fd, all_flag);
+	}
 }
