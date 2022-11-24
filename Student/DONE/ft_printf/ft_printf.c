@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 15:12:40 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:48:35 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static void	all_test(const char *str, va_list arg, t_flag *all_flag)
 	else if (str[all_flag->index] == 's')
 		print_s(arg, all_flag);
 	else if (str[all_flag->index] == 'p')
-		print_p(arg, all_flag);
+		print_c(arg, all_flag);
 	else if (str[all_flag->index] == 'd')
-		print_d(arg, all_flag);
+		print_c(arg, all_flag);
 	else if (str[all_flag->index] == 'i')
-		print_d(arg, all_flag);
+		print_c(arg, all_flag);
 	else if (str[all_flag->index] == 'u')
-		print_u(arg, all_flag);
+		print_c(arg, all_flag);
 	else if (str[all_flag->index] == 'x')
-		print_x(arg, all_flag);
+		print_c(arg, all_flag);
 	else if (str[all_flag->index] == 'X')
-		print_xx(arg, all_flag);
+		print_c(arg, all_flag);
 	else if (str[all_flag->index] == '%')
 		print_pourc(all_flag);
 	else
