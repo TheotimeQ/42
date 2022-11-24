@@ -6,12 +6,58 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:57:12 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/22 14:03:36 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:33:22 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "ft_printf.h"
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t		index;
+	char		*str;
+
+	str = b;
+	index = 0;
+	while (index < len)
+	{
+		str[index] = (unsigned char)c;
+		index++;
+	}
+	return (b);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, 0, n);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	int				index;
+	char			*str;
+
+	if (s == NULL)
+		return (NULL);
+	if ((size_t)start > ft_strlen(s))
+	{
+		str = malloc(1);
+		if (str == NULL)
+			return (NULL);
+		str[0] = '\0';
+		return (str);
+	}
+	if (len > ft_strlen(s))
+		len = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	index = start - 1;
+	while (++index - start < len)
+		str[index - start] = s[index];
+	str[index - start] = '\0';
+	return (str);
+}
 
 char	*long_int_to_hex(unsigned long int val)
 {
