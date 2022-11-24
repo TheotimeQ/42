@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:10:53 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 15:54:59 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:21:38 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ typedef struct s_flag
 
 }	t_flag;
 
-char		*long_int_to_hex(unsigned long int val);
-char		*clear_0(char *str);
+void		long_int_to_hex(unsigned long int val, int fd, t_flag *all_flag);
+void		long_int_to_hex_2(unsigned long int val, int fd, t_flag *all_flag);
+char		*ft_itoa(int n);
 
 size_t		ft_strlen(const char *s);
 void		ft_putchar_fd(char c, int fd, t_flag *all_flag);
 void		ft_putstr_fd(char *s, int fd, t_flag *all_flag);
 void		ft_putnbr_fd(int nb, int fd, t_flag *all_flag);
+void		ft_putnbr_base(int nbr, char *base, int fd, t_flag *all_flag);
 
 int			ft_printf(const char *str, ...);
 void		print_pourc(t_flag *all_flag);

@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 15:54:35 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:24:11 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	all_test(const char *str, va_list arg, t_flag *all_flag)
 	else if (str[all_flag->index] == 's')
 		print_s(arg, all_flag);
 	else if (str[all_flag->index] == 'p')
-		print_c(arg, all_flag);
+		print_p(arg, all_flag);
 	else if (str[all_flag->index] == 'd')
 		print_d(arg, all_flag);
 	else if (str[all_flag->index] == 'i')
@@ -71,14 +71,4 @@ int	ft_printf(const char *str, ...)
 	if (all_flag.error == 1)
 		return (-1);
 	return (all_flag.nb_caract);
-}
-
-#include	<stdio.h>
-
-#define ARGS "test %d ", 10
-
-int	main()
-{
-	printf("| RETOUR : %d |\n", printf(ARGS));
-	printf("| RETOUR : %d |\n", printf(ARGS));
 }

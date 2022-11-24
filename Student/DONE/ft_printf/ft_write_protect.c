@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:17:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 15:50:33 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/24 16:30:15 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_putstr_fd(char *str, int fd, t_flag *all_flag)
 		all_flag->error = 1;
 		return ;
 	}
-	write(fd, &str, len);
+	write(fd, str, len);
 	all_flag->nb_caract += len;
 }
 
