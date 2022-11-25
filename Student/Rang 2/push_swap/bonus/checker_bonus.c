@@ -8,7 +8,6 @@
 // truction suivie par un ’\n’. Une fois toutes les instructions lues, le programme va
 // les exécuter sur la pile d’entiers passée en paramètre.
 // 11
-// Push_swap Parce que Swap_push, c’est moins naturel
 // •Si à la suite de l’exécution la pile a est bien triée et la pile b est vide, alors le
 // programme doit afficher "OK" suivi par un ’\n’ sur la sortie standard.
 // •Sinon, il doit afficher "KO" suivi par un ’\n’ sur la sortie standard.
