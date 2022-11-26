@@ -6,11 +6,11 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:22:51 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/26 17:04:00 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/25 10:28:37 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "push_swap_bonus.h"
 
 static char	*loop_read(char *buffer, int fd, char *str)
 {	
@@ -61,7 +61,7 @@ char	*get_next_line(int fd)
 	{	
 		while (buffer[fd][i] && buffer[fd][i] != '\n')
 			i++;
-		if (buffer[fd][i] == '\n' || (!buffer[fd][i] && i < BUFFER_SIZE))
+		if (buffer[fd][i] == '\n' || (!buffer[i] && i < BUFFER_SIZE))
 			return (save(str, buffer[fd], i));
 		else
 			str = save(str, buffer[fd], i);

@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 10:55:20 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/24 17:57:02 by tquere           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "push_swap_bonus.h"
 
 static void free_stack(t_stack *a, t_stack *b)
 {
@@ -146,7 +133,7 @@ int	main(int argc, char **argv)
 		free_stack(a, b);
 		return (1);
 	}
-	resolve_push_swap(a, b);
+	listen_stdin(a, b);
 	free_stack(a, b);
 	return (0);
 }

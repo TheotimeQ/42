@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   resolve_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:58:51 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 18:01:05 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/25 10:06:37 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
 
 void	get_min(t_stack *a, t_data *data)
 {

@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_operation_b.c                                :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 12:46:44 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/25 10:06:53 by zelinsta         ###   ########.fr       */
+/*   Created: 2022/11/24 17:56:52 by tquere            #+#    #+#             */
+/*   Updated: 2022/11/25 10:27:51 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
-void	sb(t_stack *a)
+void	print_list(t_stack *a, t_stack *b)
 {
-	swap_stack(a);
-	ft_putstr_fd("sb\n", 1);
-}
+	int	i;
 
-void	pb(t_stack *a, t_stack *b)
-{
-	if (a->index > 0)
+	printf("\n|a    b\n|\n");
+	i = a->index - 1;
+	if (a->index < b->index)
+		i = b->index - 1;
+	while (i >= 0)
 	{
-		push_stack(b, a->data[a->index - 1]);
-		pop_stack(a);
-		ft_putstr_fd("pb\n", 1);
+		if (i < a->index)
+			printf("|%d    ", a->data[i]);
+		else
+			printf("|     ");
+		if (i < b->index)
+			printf("%d    ", b->data[i]);
+		printf("\n");
+		i--;
 	}
-}
-
-void	rb(t_stack *b)
-{
-	rotate_stack(1, b);
-	ft_putstr_fd("rb\n", 1);
-}
-
-void	rrb(t_stack *b)
-{
-	rotate_stack(-1, b);
-	ft_putstr_fd("rrb\n", 1);
+	printf("\n");
 }

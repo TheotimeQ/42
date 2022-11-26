@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 17:24:11 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/26 17:34:57 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,34 @@
 
 static void	all_test(const char *str, va_list arg, t_flag *all_flag)
 {	
+	int fd;
+
+	fd = all_flag->fd;
 	if (str[all_flag->index] == 'c')
-		print_c(arg, all_flag);
+		ft_putchar_fd(va_arg(arg, int), fd, all_flag);
 	else if (str[all_flag->index] == 's')
-		print_s(arg, all_flag);
+		ft_putstr_fd(va_arg(arg, char *), fd, all_flag);
 	else if (str[all_flag->index] == 'p')
-		print_p(arg, all_flag);
-	else if (str[all_flag->index] == 'd')
-		print_d(arg, all_flag);
-	else if (str[all_flag->index] == 'i')
-		print_d(arg, all_flag);
+	{
+		ft_putstr_fd("0x", fd, all_flag);
+		ft_putnbr_base(va_arg(arg, long long int),"0123456789abcdef", fd, all_flag);
+	}
+	else if (str[all_flag->index] == 'd'|| str[all_flag->index] == 'i')
+		ft_putnbr_fd(va_arg(arg, long int), fd, all_flag);
 	else if (str[all_flag->index] == 'u')
-		print_u(arg, all_flag);
+		ft_putnbr_fd(va_arg(arg, unsigned int), fd, all_flag);
 	else if (str[all_flag->index] == 'x')
-		print_x(arg, all_flag);
+		ft_putnbr_base(va_arg(arg, unsigned int),"0123456789abcdef", fd, all_flag);
 	else if (str[all_flag->index] == 'X')
-		print_xx(arg, all_flag);
-	else if (str[all_flag->index] == '%')
-		print_pourc(all_flag);
+		ft_putnbr_base(va_arg(arg, unsigned int),"0123456789ABCDEF", fd, all_flag);
+	if (str[all_flag->index] == '%')
+		ft_putchar_fd('%', fd, all_flag);
 	else
 		all_flag->error = 2;
 }
 
 static void	print_str(const char *str, va_list arg, t_flag *all_flag)
 {	
-	char	*s;
-
-	s = NULL;
 	while (str[all_flag->index])
 	{	
 		if (str[all_flag->index] != '%')
@@ -72,3 +73,23 @@ int	ft_printf(const char *str, ...)
 		return (-1);
 	return (all_flag.nb_caract);
 }
+
+#include <stdio.h>
+
+// #define ARGS "%c",'a'
+// #define ARGS "%s","COUCOU MAMAN"
+// #define ARGS "%p",(void *)21354
+// #define ARGS "%d",1237895
+// #define ARGS "%i",125875
+// #define ARGS "%u",(unsigned int)124878
+// #define ARGS "%x",1258
+// #define ARGS "%X",459786
+// #define ARGS "%q"
+
+
+// int main()
+// {
+// 	printf("| %d |\n",ft_printf(ARGS));
+// 	printf("| %d |\n",printf(ARGS));
+
+// }

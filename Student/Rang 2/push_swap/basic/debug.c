@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:56:52 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/24 17:56:53 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/25 10:06:44 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
 
 void	print_list(t_stack *a, t_stack *b)
 {

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack_operation_a.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:47:52 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/19 09:54:50 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/25 10:06:50 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
 
 void	sa(t_stack *a)
 {

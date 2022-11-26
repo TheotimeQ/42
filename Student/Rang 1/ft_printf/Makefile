@@ -3,24 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
+#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 11:11:31 by tquere            #+#    #+#              #
-#    Updated: 2022/11/24 17:06:08 by tquere           ###   ########.fr        #
+#    Updated: 2022/11/26 17:33:35 by zelinsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY:     		all $(NAME) lib clean fclean re
+.PHONY:     		all $(NAME) test clean fclean re
 
 NAME				= libftprintf.a
 HEADER				= ft_printf.h
 
-SOURCE		 		= ft_printf.c ft_write_protect.c print_c.c print_d.c print_u.c print_x.c convert.c ft_itoa.c
+SOURCE		 		= ft_printf.c ft_write_protect.c
 OBJECTS			    = $(SOURCE:%.c=%.o)
 
 GCC					= gcc
 CFLAGS				= -Wall -Wextra -Werror
-SANITIZE			= $(CFLAGS) -g -fsanitize=address
+SANITIZE			= $(CFLAGS) #-g -fsanitize=address
 
 RM 					= rm -rf
 LIB 				= ar -crs

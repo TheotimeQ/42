@@ -6,11 +6,11 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:51:50 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/25 10:07:02 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/25 10:26:55 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	rotate_stack(int direction, t_stack *s)
 {
