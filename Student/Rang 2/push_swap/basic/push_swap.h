@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 08:31:47 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/25 10:27:24 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:43:31 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_pile
 	int	index;
 }	t_stack;
 
+int			init_stack(t_stack *a, t_stack *b, int argc, char **argv);
+
 void		get_min(t_stack *a, t_data *data);
 void		push_all_b(t_stack *a, t_stack *b);
 void		get_rot_dir(t_stack *a, t_data *data);
@@ -45,6 +47,7 @@ void		push_stack(t_stack *s, int value);
 int			pop_stack(t_stack *s);
 void		swap_stack(t_stack *s);
 void		clear_stack(t_stack *s);
+void		free_stack(t_stack *a, t_stack *b);
 
 void		sa(t_stack *a);
 void		pa(t_stack *a, t_stack *b);

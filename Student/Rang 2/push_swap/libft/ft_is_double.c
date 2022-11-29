@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_double.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:49:05 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/25 08:17:22 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:47:58 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_is_double(int *tab, int size)
+int	ft_is_double(int *tab, int size)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
+	i = 0;
 	while (i < size)
-	{	
-        j = i + 1;
-        while (j < size)
-        {	
-            if (tab[i] == tab[j])
-                return (1);
-            j++;
-        }
-        i++;
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			if (tab[i] == tab[j])
+				return (1);
+			j++;
+		}
+		i++;
 	}
-    return (0);
+	return (0);
 }

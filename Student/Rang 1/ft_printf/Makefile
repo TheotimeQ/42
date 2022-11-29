@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
+#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 11:11:31 by tquere            #+#    #+#              #
-#    Updated: 2022/11/26 17:33:35 by zelinsta         ###   ########.fr        #
+#    Updated: 2022/11/29 09:14:12 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,14 @@
 NAME				= libftprintf.a
 HEADER				= ft_printf.h
 
-SOURCE		 		= ft_printf.c ft_write_protect.c
+SOURCE		 		= ft_printf.c ft_write_protect.c ft_put_base_long.c
 OBJECTS			    = $(SOURCE:%.c=%.o)
 
 GCC					= gcc
 CFLAGS				= -Wall -Wextra -Werror
-SANITIZE			= $(CFLAGS) #-g -fsanitize=address
+SANITIZE			= $(CFLAGS) -g -fsanitize=address
 
-RM 					= rm -rf
-LIB 				= ar -crs
+LIB					= ar rc
 
 all: 		$(NAME) $(HEADER) Makefile
 

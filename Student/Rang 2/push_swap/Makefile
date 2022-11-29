@@ -8,13 +8,13 @@ BUILD_DIR				= build/
 	
 #Sans bonus	
 DIR						= basic/
-SRC			 			= debug.c push_swap.c stack.c stack_operation_a.c stack_operation_b.c stack_operation_both.c resolve_utils.c resolve.c
+SRC			 			= debug.c args_utils.c push_swap.c stack.c stack_operation_a.c stack_operation_b.c stack_operation_both.c resolve_utils.c resolve.c
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 HEADER					= .
 	
 #Avec bonus	
 DIR_BONUS				= bonus/
-SRC_BONUS				= debug.c checker_main_bonus.c checker_check_bonus.c get_next_line_bonus.c get_next_line_utils_bonus.c stack.c stack_operation_a.c stack_operation_b.c stack_operation_both.c resolve_utils.c resolve.c
+SRC_BONUS				= debug.c checker_main_bonus.c checker_check_bonus.c get_next_line_bonus.c resolve_utils_bonus.c get_next_line_utils_bonus.c stack_bonus.c stack_operation_a_bonus.c stack_operation_b_bonus.c stack_operation_both_bonus.c
 OBJECTS_BONUS			= $(SRC_BONUS:%.c=$(BUILD_DIR)%.o)
 HEADER_BONUS			= bonus/
 	
@@ -42,7 +42,7 @@ $(BUILD_DIR)%.o:		$(DIR_BONUS)%.c $(HEADER_BONUS)
 $(NAME): 				$(OBJECTS)
 						@$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT)  
 
-bonus: 					$(OBJECTS_BONUS)
+bonus: 					lib $(OBJECTS_BONUS) $(HEADER)
 						@$(GCC) $(SANITIZE) $(OBJECTS_BONUS) -o $(NAME_BONUS) $(LIB_DIR)$(LIBFT) 
 
 lib:

@@ -1,6 +1,6 @@
 #include "push_swap_bonus.h"
 
-static void    check_input(char *str)//, t_stack *a, t_stack *b)
+static int    check_input(char *str)//, t_stack *a, t_stack *b)
 {
     printf("%s",str);
 
@@ -26,7 +26,9 @@ static void    check_input(char *str)//, t_stack *a, t_stack *b)
         printf("rr");
     else if (ft_strncmp(str,"rrr",4) == 0)
         printf("rrr");
-    // SINON BREAK
+    else
+        return (1);
+    return (0);
 }
 
 void listen_stdin(t_stack *a, t_stack *b)
@@ -47,8 +49,13 @@ void listen_stdin(t_stack *a, t_stack *b)
         if (str[i] == '\n' || i == 4)
         {   
             str[4] = '\0';
-            check_input(str); //, a, b) == 0)
-                // break;
+            if (check_input(str) == 1) //, a, b) == 0)
+            {
+                write(1, "Error\n", 7);
+                free(str);
+                free_stack(a, b);
+                return;
+            }
             i = -1;
         }
         i++;

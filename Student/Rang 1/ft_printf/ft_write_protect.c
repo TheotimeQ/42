@@ -3,94 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write_protect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:17:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/26 17:23:35 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/27 15:59:49 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	index;
-
-	index = 0;
-	while (s[index])
-		index++;
-	return (index);
-}
-
-void	ft_putchar_fd(char c, int fd, t_flag *all_flag)
+void	ft_putchar_fd(char c, t_flag *all_flag)
 {	
-	if (write(1, 0, 0) != 0)
+	if (write(all_flag->fd, 0, 0) != 0)
 	{
 		all_flag->error = 1;
 		return ;
 	}
-	write(fd, &c, 1);
+	write(all_flag->fd, &c, 1);
 	all_flag->nb_caract += 1;
 }
 
-void	ft_putstr_fd(char *str, int fd, t_flag *all_flag)
+void	ft_putstr_fd(char *str, t_flag *all_flag)
 {
 	size_t		len;
 
 	if (!str)
+	{
+		write(all_flag->fd, "(null)", 6);
+		all_flag->nb_caract += 6;
 		return ;
+	}
 	len = ft_strlen(str);
-	if (write(1, 0, 0) != 0)
+	if (write(all_flag->fd, 0, 0) != 0)
 	{
 		all_flag->error = 1;
 		return ;
 	}
-	write(fd, str, len);
+	write(all_flag->fd, str, len);
 	all_flag->nb_caract += len;
 }
 
-void	ft_putnbr_fd(int nb, int fd, t_flag *all_flag)
+void	ft_putnbr_fd(long long int nb, t_flag *all_flag)
 {
 	if (nb < 0)
 	{
 		nb = -nb;
+		ft_putchar_fd('-', all_flag);
 	}
 	if (nb >= 10)
 	{
-		ft_putnbr_fd(nb / 10, fd, all_flag);
-		ft_putnbr_fd(nb % 10, fd, all_flag);
+		ft_putnbr_fd(nb / 10, all_flag);
+		ft_putnbr_fd(nb % 10, all_flag);
 	}
 	else
-		ft_putchar_fd(nb + '0', fd, all_flag);
+		ft_putchar_fd(nb + '0', all_flag);
 }
 
-static void	convert_print(long int nb_long, int len_base, char *base, int fd, t_flag *all_flag)
+static void	c_print(unsigned int nb, int len_base, char *base, t_flag *all_flag)
 {
-	if (nb_long > 0)
+	if (nb > 0)
 	{
-		convert_print(nb_long / len_base, len_base, base, fd, all_flag);
-		ft_putchar_fd(base[(nb_long % len_base)], fd, all_flag);
+		c_print(nb / len_base, len_base, base, all_flag);
+		ft_putchar_fd(base[(nb % len_base)], all_flag);
 	}
 }
 
-void	ft_putnbr_base(int nbr, char *base,int fd, t_flag *all_flag)
+void	ft_putnbr_base(unsigned int nb_long, char *base, t_flag *all_flag)
 {
-	long int	nb_long;
 	int			len_base;
 
 	len_base = ft_strlen(base);
-	nb_long = nbr;
-	if (nbr < 0)
+	if (nb_long < 0)
 	{
 		nb_long *= -1 ;
-		ft_putchar_fd('-', fd, all_flag);
+		ft_putchar_fd('-', all_flag);
 	}
 	if (nb_long == 0)
 	{
-		write(1, &base[0], 1);
+		write(all_flag->fd, &base[0], 1);
+		all_flag->nb_caract += 1;
 	}
 	if (nb_long > 0)
 	{
-		convert_print(nb_long, len_base, base, fd, all_flag);
+		c_print(nb_long, len_base, base, all_flag);
 	}
 }
