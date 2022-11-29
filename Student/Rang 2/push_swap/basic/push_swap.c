@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:55:20 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/29 18:44:07 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/29 19:08:55 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (1);
-	data->nb_test = 5;
+	data->nb_test = 1;
 	data->print = 0;
 	if (argc == 1)
 	{
