@@ -6,13 +6,13 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:38:44 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/27 16:43:34 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/29 12:19:24 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	check_nb(char *nb)
+static size_t	check_nb(char *nb)
 {
 	if (ft_isnum(nb) == 0)
 		return (1);
@@ -21,9 +21,9 @@ static int	check_nb(char *nb)
 	return (0);
 }
 
-static int	get_nb_args(int argc, char **argv)
+static size_t	get_nb_args(int argc, char **argv)
 {
-	int	i;
+	size_t	i;
 
 	if (argc == 2)
 	{
@@ -40,7 +40,7 @@ static int	get_nb_args(int argc, char **argv)
 
 static void	get_from_str(t_stack *a, t_stack *b, char **argv, int nb_value)
 {
-	int	i;
+	size_t	i;
 
 	argv = ft_split(argv[1], ' ');
 	i = nb_value - 1;
@@ -60,7 +60,7 @@ static void	get_from_str(t_stack *a, t_stack *b, char **argv, int nb_value)
 
 static void	get_from_list(t_stack *a, t_stack *b, char **argv, int nb_value)
 {
-	int	i;
+	size_t	i;
 
 	i = nb_value - 1;
 	while (i > 0)
@@ -76,9 +76,9 @@ static void	get_from_list(t_stack *a, t_stack *b, char **argv, int nb_value)
 	}
 }
 
-int	init_stack(t_stack *a, t_stack *b, int argc, char **argv)
+size_t	init_stack(t_stack *a, t_stack *b, int argc, char **argv)
 {
-	int	nb_value;
+	size_t	nb_value;
 
 	nb_value = get_nb_args(argc, argv);
 	b->index = 0;

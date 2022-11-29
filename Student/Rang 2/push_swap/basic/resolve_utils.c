@@ -3,69 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   resolve_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:58:51 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/25 10:06:37 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:26:06 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get_min(t_stack *a, t_data *data)
-{
-	int	index;
-
-	index = 0;
-	if (a->index == 0)
-		return ;
-	data->min = a->data[0];
-	data->min_index = 0;
-	while (index < a->index)
-	{
-		if (a->data[index] < data->min)
-		{
-			data->min_index = index;
-			data->min = a->data[index];
-		}
-		index++;
-	}
-}
-
-void	push_all_b(t_stack *a, t_stack *b)
+void	push_all_b(t_stack *a, t_stack *b, t_data *data)
 {
 	while (b->index)
-		pa(a, b);
-}
-
-void	get_rot_dir(t_stack *a, t_data *data)
-{
-	if (data->min_index > a->index / 2)
 	{
-		data->dir_rot = 1;
-		data->nb_rot = a->index - data->min_index - 1;
-	}
-	else
-	{
-		data->dir_rot = -1;
-		data->nb_rot = data->min_index + 1;
+		pa(a, b, data);
+		data->nb_moove++;
 	}
 }
 
-void	rot_min_to_top(t_stack *a, t_data *data)
+void	rot_a(t_stack *a, t_data *data)
+{	
+	while (data->nb_rot--)
+	{
+		if (data->dir_rot == 1)
+		{
+			ra(a, data);
+			data->nb_moove++;
+		}
+		else
+		{
+			rra(a, data);
+			data->nb_moove++;
+		}
+	}
+}
+
+void	rot_b(t_stack *b, t_data *data)
 {
 	while (data->nb_rot--)
 	{
 		if (data->dir_rot == 1)
-			ra(a);
+		{
+			rb(b, data);
+			data->nb_moove++;
+		}
 		else
-			rra(a);
+		{
+			rrb(b, data);
+			data->nb_moove++;
+		}
 	}
 }
 
-int	is_sorted(int comp, t_stack *stack)
+size_t	is_sorted(int comp, t_stack *stack)
 {
-	int	index;
+	size_t	index;
 
 	index = stack->index - 1;
 	if (stack->index <= 0)

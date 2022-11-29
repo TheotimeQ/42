@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:58:51 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/27 16:28:53 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/29 13:52:39 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ void	get_min(t_stack *a, t_data *data)
 	}
 }
 
-void	push_all_b(t_stack *a, t_stack *b)
+void	push_all_b(t_stack *a, t_stack *b, t_data *data)
 {
 	while (b->index)
+	{
 		pa(a, b);
+
+	}
 }
 
 void	get_rot_dir(t_stack *a, t_data *data)

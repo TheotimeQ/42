@@ -6,98 +6,273 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:56:21 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/27 17:16:07 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/29 18:53:37 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	resolve_push_swap(t_stack *a, t_stack *b)
+void	get_max(t_stack *a, t_data *data)
 {
-	t_data	*data;
+	size_t	index;
 
-	data = malloc(sizeof(t_data));
-	if (data == NULL)
-		return ;	
-
-	//tester avec differemt nombre de chunk
-	//on stock les resultats
-
-	//On coupe en plusieur chunk 
-	cut_chunck(data);
-
-	repeat while a no vide
-
-		//On scan
-		scan_from_bot(data, a); //Return 0 si on trouve rien dans la stack qui appartient au chuck
-		scam_from_top(data, a); //Return 0 si on trouve rien dans la stack qui appartient au chuck
-
-		//Si un des deux retour 0 
-			//on change de chuck ( nb_chunk++ ) 
-
-		//Sinon
-			//On bouge en a
-			moov_chossen_one(data, a, b);
-			//On bouge sur b
-			comp_to_b_and_push(data, a, b);
-			//Sort b
-			//On mets l'element ajouté a la bonne place
-			sort_b(data, b);
-
-	// quand a est vide on push b dedans
-	
-	//On compare les resultats des test 
-
-	//On refait le test avec la bonne valeur 
-
-
-
-	// print_list(a, b);
-	// while (!is_sorted(-1, a) && a->index > 0)
-	// {
-	// 	if (a->data[a->index - 1] > b->data[b->index - 1]
-	// 		&& a->index > 0 && b->index > 0 && is_sorted(-1, a))
-	// 		break ;
-	// 	get_min(a, data);
-	// 	get_rot_dir(a, data);
-	// 	rot_min_to_top(a, data);
-	// 	pb(a, b);
-	// }
-	// push_all_b(a, b);
-	// print_list(a, b);
-	// free(data);
+	index = 0;
+	if (a->index == 0)
+		return ;
+	data->max = a->data[0];
+	while (index < a->index)
+	{
+		if (a->data[index] > data->max)
+			data->max = a->data[index];
+		index++;
+	}
 }
 
-//SOLUTION :
+void	get_min(t_stack *a, t_data *data)
+{
+	size_t	index;
 
-// On decoupe la range en chunk :
+	index = 0;
+	if (a->index == 0)
+	{
+		data->min_index = 0;
+		return ;
+	}
+	data->min = a->data[0];
+	while (index < a->index)
+	{
+		if (a->data[index] < data->min)
+		{
+			data->min = a->data[index];
+			data->min_index = index;
+		}
+		index++;
+	}
+}
 
-// Chunk 1 is MIN–(MAX - MIN / X * 1)
+static size_t	cut_chunk(t_data *data, t_stack *a)
+{	
+	size_t	i;
 
-// Chunk 2 is (MAX - MIN / X * 1)–(MAX - MIN / X * 2)
+	get_min(a, data);
+	get_max(a, data);
+	data->chunk = malloc((data->nb_chunk + 2) * sizeof(int));
+	if (data->chunk == NULL)
+		return (1);
+	i = 0;
+	printf("| min:%d max:%d |", data->min, data->max);
+	printf("\n");
+	while (i <= data->nb_chunk)
+	{
+		(data->chunk)[i] = data->min + i
+			* (data->max - data->min) / data->nb_chunk;
+		printf("| %d ", (data->chunk)[i]);
+		i++;
+	}
+	printf("|\n");
+	return (0);
+}
 
-// Chunk 3 is (MAX - MIN / X * 2)–(MAX - MIN / X * 3)
+static size_t	create_test(t_data *data)
+{
+	data->test_result = malloc((data->nb_test) * sizeof(int));
+	if (data->test_result == NULL)
+		return (1);
+	return (0);
+}
 
-// Chunk 4 is (MAX - MIN / X * 3)–(MAX - MIN / X * 4)
 
-// Chunk 5 is (MAX - MIN / X * 4)–MAX
 
-// Step 1: Scan Stack A from the top to confirm if one of the numbers from Chunk 1 exist inside of it. 
-// Let's call that number hold_first.
+//VERIFIER LES SCAN
 
-// Step 2: Scan Stack A again from the bottom and see if a different number from Chunk 1 exists in that list. 
-// I’ll call that number hold_second.
+static size_t	scan_from_top(t_stack *a, t_data *data)
+{
+	size_t	index;
 
-// Step 3: Compare how many moves it would take to get hold_first and hold_second to the top
+	index = a->index - 1;
+	while (index > 0)
+	{
+		if ((data->chunk)[data->current_chunk - 1] <= a->data[index]
+			&& a->data[index] <= (data->chunk)[data->current_chunk])
+		{
+			data->top_key = a->data[index];
+			data->top_key_index = index;
+			return (0);
+		}
+		index--;
+	}
+	return (1);
+}
 
-// Step 4: So the correct number is now on to top of Stack A. 
-// But there are two things we need to check for before we push the number over to Stack B. 
-// You have to check if the number you’re pushing is either bigger or smaller than all the other numbers in Stack B. 
-// Since we’re not just pushing the smallest number one at a time. 
+static size_t	scan_from_bot(t_stack *a, t_data *data)
+{
+	size_t	index;
 
-// Step 5: Repeat steps 1–4 until all the numbers in Chunk 1 no longer in Stack A.
+	index = 0;
+	while (index < a->index)
+	{
+		if ((data->chunk)[data->current_chunk - 1] <= a->data[index]
+			&& a->data[index] <= (data->chunk)[data->current_chunk])
+		{
+			data->bot_key = a->data[index];
+			data->bot_key_index = index;
+			return (0);
+		}
+		index++;
+	}
+	return (1);
+}
 
-// Step 6: Repeat steps 1–4 for the rest of the chunks so they are 
-// handled in the same way and all of Stack A is inside of Stack B.
 
-//Quand a est vide , push b dedans
+
+
+
+
+
+
+static void	chosse_key(t_stack *a, t_data *data)
+{	
+	if (data->bot_key_index + 1 < (a->index - data->top_key_index) - 1)
+	{
+		data->key = data->bot_key;
+		data->key_index = data->bot_key_index;
+		data->dir_rot = -1;
+		data->nb_rot = data->bot_key_index + 1;
+	}
+	else
+	{
+		data->key = data->top_key;
+		data->key_index = data->top_key_index;
+		data->dir_rot = 1;
+		data->nb_rot = (a->index - data->top_key_index) - 1;
+	}
+}
+
+void	get_rot_dir(t_stack *b, t_data *data)
+{	
+	if (b->index == 0)
+	{
+		data->dir_rot = 1;
+		data->nb_rot = 0 ;
+		return ;
+	}
+	if (data->index_to_place_key > b->index / 2)
+	{
+		data->dir_rot = 1;
+		data->nb_rot = b->index - data->index_to_place_key;
+	}
+	else
+	{
+		data->dir_rot = -1;
+		data->nb_rot = data->index_to_place_key;
+	}
+}
+
+void	get_rot_min(t_stack *a, t_data *data)
+{	
+	if (a->index == 0)
+	{
+		data->dir_rot = 1;
+		data->nb_rot = 0 ;
+		return ;
+	}
+	if (data->min_index > a->index / 2)
+	{
+		data->dir_rot = 1;
+		data->nb_rot = a->index - data->min_index - 1;
+	}
+	else
+	{
+		data->dir_rot = -1;
+		data->nb_rot = data->min_index + 1;
+	}
+}
+
+static void	find_insert_index(t_stack *b, t_data *data)
+{	
+	size_t	i;
+
+	if (b->index == 0)
+	{
+		data->index_to_place_key = 0;
+		return ;
+	}
+	i = 0;
+	while (i + 1 < b->index)
+	{
+		if (b->data[i] < data->key && data->key < b->data[i + 1])
+			break ;
+		i++;
+	}
+	data->index_to_place_key = i + 1;
+}
+
+static void	insert_key(t_stack *b, t_data *data)
+{	
+	find_insert_index(b, data);
+	get_rot_dir(b, data);
+	rot_b(b, data);
+}
+
+static void	min_to_top(t_stack *a, t_data *data)
+{
+	get_min(a, data);
+	get_rot_min(a, data);
+	rot_a(a, data);
+}
+
+void	resolve_one_test(t_stack *a, t_stack *b, t_data *data)
+{	
+	data->current_chunk = 0;					
+	while (a->index >= 0 && data->current_chunk + 1 <= data->nb_chunk)
+	{
+		if (scan_from_top(a, data) || scan_from_bot(a, data))
+			data->current_chunk += 1;
+		else
+		{
+			chosse_key(a, data);
+			rot_a(a, data);
+			insert_key(b, data);
+			pb(a, b, data);
+			// print_list(a, b);
+			data->nb_moove++;
+		}
+	}
+	push_all_b(a, b, data);
+	min_to_top(a, data);
+	print_list(a, b);
+}
+
+void	resolve_push_swap(t_stack *a, t_stack *b, t_data *data)
+{
+	size_t	current_test;
+
+	data->chunk = NULL;
+	data->nb_chunk = 1;
+	if (create_test(data))
+		return ;
+	current_test = 0;
+	while (current_test < data->nb_test)
+	{	
+		data->nb_chunk = current_test + 1;
+		if(cut_chunk(data, a))
+			return ;
+		// print_list(a, b);
+		data->nb_moove = 0;
+		resolve_one_test(a, b, data);
+		
+		printf("NB_CHUNK:%zu, MOOVE:%zu\n",data->nb_chunk,data->nb_moove);
+		(data->test_result)[current_test] = data->nb_moove;
+		current_test++;
+	}
+	//Choisir le nombre total de test a faire en fonction de la taille de la liste
+
+	//Choisir le nombre de chunk a faire en foncion de la taille de la liste
+
+	//On refait le test avec la bonne valeur de nb chunk
+	return ;
+}
+
+
+
+// make && ./push_swap 2602 1769 2803 1254 2681 393 1546

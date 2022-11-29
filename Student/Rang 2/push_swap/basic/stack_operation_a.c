@@ -3,39 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   stack_operation_a.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:47:52 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/25 10:06:50 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:30:44 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_stack *a)
+void	sa(t_stack *a, t_data *data)
 {
 	swap_stack(a);
-	ft_putstr_fd("sa\n", 1);
+	if (data->print)
+		ft_putstr_fd("sa\n", 1);
 }
 
-void	pa(t_stack *a, t_stack *b)
+void	pa(t_stack *a, t_stack *b, t_data *data)
 {
 	if (b->index > 0)
 	{
 		push_stack(a, b->data[b->index - 1]);
 		pop_stack(b);
-		ft_putstr_fd("pa\n", 1);
+		if (data->print)
+			ft_putstr_fd("pa\n", 1);
 	}
 }
 
-void	ra(t_stack *a)
+void	ra(t_stack *a, t_data *data)
 {	
 	rotate_stack(1, a);
-	ft_putstr_fd("ra\n", 1);
+	if (data->print)
+		ft_putstr_fd("ra\n", 1);
 }
 
-void	rra(t_stack *a)
+void	rra(t_stack *a, t_data *data)
 {	
 	rotate_stack(-1, a);
-	ft_putstr_fd("rra\n", 1);
+	if (data->print)
+		ft_putstr_fd("rra\n", 1);
 }

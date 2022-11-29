@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/29 09:18:50 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/29 09:32:34 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	all_test(const char *str, va_list arg, t_flag *all_flag)
 		ft_putnbr_base(va_arg(arg, unsigned int), hhex, all_flag);
 	else if (str[all_flag->index] == '%')
 		ft_putchar_fd('%', all_flag);
-	else
+	else if (str[all_flag->index])
 		ft_putchar_fd(str[all_flag->index], all_flag);
 }
 
@@ -61,10 +61,9 @@ static void	print_str(const char *str, va_list arg, t_flag *all_flag)
 		{	
 			all_flag->index++;
 			all_test(str, arg, all_flag);
-			if (all_flag->error == 2)
-				return ;
 		}
-		all_flag->index++;
+		if (str[all_flag->index])
+			all_flag->index++;
 	}
 }
 

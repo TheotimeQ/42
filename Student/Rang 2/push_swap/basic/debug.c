@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:56:52 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/25 10:06:44 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:07:04 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	print_list(t_stack *a, t_stack *b)
 		i = b->index - 1;
 	while (i >= 0)
 	{
-		if (i < a->index)
+		if (i < (int)a->index)
 			printf("|%d    ", a->data[i]);
 		else
 			printf("|     ");
-		if (i < b->index)
+		if (i < (int)b->index)
 			printf("%d    ", b->data[i]);
 		printf("\n");
 		i--;

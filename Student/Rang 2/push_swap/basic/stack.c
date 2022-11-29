@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:51:50 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/25 10:07:02 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:20:11 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	rotate_stack(int direction, t_stack *s)
 {
-	int	tmp;
-	int	index;
+	int		tmp;
+	size_t	index;
 
 	if (direction == 1)
 	{
