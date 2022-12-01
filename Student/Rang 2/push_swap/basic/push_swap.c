@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:55:20 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/29 19:08:55 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/01 12:06:57 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_stack(t_stack *a, t_stack *b)
+void	free_stack(t_stack *a)
 {	
 	if (a != NULL)
 	{	
@@ -20,41 +20,30 @@ void	free_stack(t_stack *a, t_stack *b)
 			free(a->data);
 		free(a);
 	}
-	if (b != NULL)
-	{	
-		if (b->data != NULL)
-			free(b->data);
-		free(b);
-	}
 }
 
-static void	free_data(t_data *data)
-{
-	if (data)
-	{
-		if (data->chunk)
-			free(data->chunk);
-		free(data);
-	}
-}
-
-static size_t	check_error(int argc, char **argv, t_stack *a, t_stack *b)
+static int	check_error(int argc, char **argv, t_data *data)
 {	
-	size_t		nb_value;
+	int		nb_value;
 
-	nb_value = init_stack(a, b, argc, argv);
+	nb_value = init_stack(data->a, data->b, argc, argv);
 	if (nb_value < 0)
-	{
-		free_stack(a, b);
-		exit(1);
-	}
-	if (ft_is_double(a->data, nb_value))
+		leave(data);
+	if (ft_is_double((data->a)->data, nb_value))
 	{
 		ft_putstr_fd("Error\n", 2);
-		free_stack(a, b);
-		exit(1);
+		leave(data);
 	}
 	return (0);
+}
+
+void	leave(t_data *data)
+{
+	free_stack(data->a);
+	free_stack(data->b);
+	free(data->chunk);
+	free(data);
+	exit(0);
 }
 
 int	main(int argc, char **argv)
@@ -63,29 +52,27 @@ int	main(int argc, char **argv)
 	t_stack		*b;
 	t_data		*data;
 
+	if (argc <= 1)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (1);
+	}
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (1);
-	data->nb_test = 1;
-	data->print = 0;
-	if (argc == 1)
-	{
-		ft_putstr_fd("Error\n", 2);
-		free_data(data);
-		return (1);
-	}
 	a = malloc(sizeof(t_stack));
 	b = malloc(sizeof(t_stack));
 	if (a == NULL || b == NULL)
-	{	
-		free_stack(a, b);
-		free_data(data);
-		return (1);
-	}
-	if (check_error(argc, argv, a, b))
-		return (1);
+		leave(data);
+	data->a = a;
+	data->b = b;
+	data->nb_test = NB_TEST;
+	data->chunk = malloc((data->nb_test + 1) * sizeof(int));
+	if(!data->chunk)
+		leave(data);
+	if (check_error(argc, argv, data))
+		leave(data);
 	resolve_push_swap(a, b, data);
-	free_stack(a, b);
-	free_data(data);
+	leave(data);
 	return (0);
 }

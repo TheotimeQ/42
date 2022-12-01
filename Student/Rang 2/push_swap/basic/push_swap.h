@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 08:31:47 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/11/29 18:27:13 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/01 12:07:11 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,61 +19,101 @@
 
 # include <stdio.h>
 
-typedef struct s_data
-{	
-	size_t		print;
 
-	int			*chunk;
-	size_t		nb_chunk;
-	size_t		current_chunk;
+#define NB_TEST 50
 
-	int			bot_key;
-	size_t		bot_key_index;
-
-	int			top_key;
-	size_t		top_key_index;
-
-	size_t		index_to_place_key;
-
-	int			key;
-	size_t		key_index;
-	int			dir_rot;
-	int			nb_rot;
-
-	int			*test_result;
-	size_t		nb_test;
-
-	int			max;
-	int			min;
-	id_t		min_index;
-
-	size_t		nb_moove;
-
-}	t_data;
-
+//Stack Structure
 typedef struct s_pile
 {
 	int		*data;
-	size_t	index;
+	int		index;
 }	t_stack;
 
-size_t		init_stack(t_stack *a, t_stack *b, int argc, char **argv);
+//All data
+typedef struct s_data
+{	
+	t_stack		*a;
+	t_stack		*b;
+	
+	int			print;
 
-void		resolve_push_swap(t_stack *a, t_stack *b, t_data *data);
+	int			*chunk;
+	int			nb_chunk;
+	int			current_chunk;
 
+	int			bot_key;
+	int			bot_key_index;
+
+	int			top_key;
+	int			top_key_index;
+
+	int			index_to_place_key;
+
+	int			key;
+	int			key_index;
+	int			dir_rot;
+	int			nb_rot;
+
+	int			min_moove;
+	int			nb_chunk_choosed;
+	int			nb_test;
+
+	int			max;
+	int			max_index;
+
+	int			min;
+	int			min_index;
+
+	int			nb_moove;
+
+}	t_data;
+
+//Chunk
+void		chosse_key(t_stack *a, t_data *data);
+int	    	cut_chunk(t_data *data, t_stack *a);
+int	    	scan_from_top(t_stack *a, t_data *data);
+int	    	scan_from_bot(t_stack *a, t_data *data);
+
+//Min Max
 void		get_min(t_stack *a, t_data *data);
-void		push_all_b(t_stack *a, t_stack *b, t_data *data);
+void		get_max(t_stack *a, t_data *data);
+
+//Rot Dir
 void		get_rot_dir(t_stack *b, t_data *data);
+void		get_rot_min(t_stack *a, t_data *data);
+
+//Resolve_Chunk
+void		find_insert_index(t_stack *b, t_data *data);
+void		insert_key(t_stack *b, t_data *data);
+void		min_to_top(t_stack *a, t_data *data);
+void		resolve_one_test(t_stack *a, t_stack *b, t_data *data);
+
+//Main
+void		resolve_push_swap(t_stack *a, t_stack *b, t_data *data);
+void		leave(t_data *data);
+
+//Args Utils
+int		 	init_stack(t_stack *a, t_stack *b, int argc, char **argv);
+
+//Resolve Utils
+void		push_all_b(t_stack *a, t_stack *b, t_data *data);
 void		rot_a(t_stack *a, t_data *data);
 void		rot_b(t_stack *a, t_data *data);
-size_t		is_sorted(int comp, t_stack *stack);
+int			is_sorted(int comp, t_stack *stack);
 
+//Stack Copy
+t_stack		*copy_a(t_stack *a);
+void		data_cpy(t_stack *a,t_stack *cpy);
+
+//Stack operations
 void		rotate_stack(int direction, t_stack *s);
 void		push_stack(t_stack *s, int value);
 int			pop_stack(t_stack *s);
 void		swap_stack(t_stack *s);
 void		clear_stack(t_stack *s);
-void		free_stack(t_stack *a, t_stack *b);
+void		free_stack(t_stack *a);
+void		free_data(t_data *data);
+void		free_one_stack(t_stack *a);
 
 void		sa(t_stack *a, t_data *data);
 void		pa(t_stack *a, t_stack *b, t_data *data);

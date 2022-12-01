@@ -8,7 +8,7 @@ BUILD_DIR				= build/
 	
 #Sans bonus	
 DIR						= basic/
-SRC			 			= debug.c args_utils.c push_swap.c stack.c stack_operation_a.c stack_operation_b.c stack_operation_both.c resolve_utils.c resolve.c
+SRC			 			= debug.c args_utils.c push_swap.c stack.c stack_operation_a.c stack_operation_b.c stack_operation_both.c resolve_utils.c resolve.c chunk.c min_max.c resolve_chunk.c rot_dir.c stack_cpy.c
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 HEADER					= .
 	
@@ -34,10 +34,10 @@ CLEAR					= clear
 all: 					lib $(NAME) $(HEADER) Makefile
 
 $(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER) 
-						$(GCC) $(CFLAGS) -I$(HEADER) -I$(LIB_DIR) -c $< -o $@
+						@$(GCC) $(CFLAGS) -I$(HEADER) -I$(LIB_DIR) -c $< -o $@
 
 $(BUILD_DIR)%.o:		$(DIR_BONUS)%.c $(HEADER_BONUS) 
-						$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(LIB_DIR) -c $< -o $@
+						@$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(LIB_DIR) -c $< -o $@
 
 $(NAME): 				$(OBJECTS)
 						@$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT)  

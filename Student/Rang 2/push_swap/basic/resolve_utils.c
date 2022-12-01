@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resolve_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:58:51 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/29 18:26:06 by tquere           ###   ########.fr       */
+/*   Updated: 2022/11/30 08:25:32 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	rot_b(t_stack *b, t_data *data)
 	}
 }
 
-size_t	is_sorted(int comp, t_stack *stack)
+int	is_sorted(int comp, t_stack *stack)
 {
-	size_t	index;
+	int	index;
 
 	index = stack->index - 1;
 	if (stack->index <= 0)
