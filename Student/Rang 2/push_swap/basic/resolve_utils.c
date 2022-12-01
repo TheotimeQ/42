@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:58:51 by tquere            #+#    #+#             */
-/*   Updated: 2022/11/30 08:25:32 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:22:46 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	push_all_b(t_stack *a, t_stack *b, t_data *data)
 
 void	rot_a(t_stack *a, t_data *data)
 {	
-	while (data->nb_rot--)
+	while (data->nb_rot_a--)
 	{
-		if (data->dir_rot == 1)
+		if (data->dir_rot_a == 1)
 		{
 			ra(a, data);
 			data->nb_moove++;
@@ -40,9 +40,9 @@ void	rot_a(t_stack *a, t_data *data)
 
 void	rot_b(t_stack *b, t_data *data)
 {
-	while (data->nb_rot--)
+	while (data->nb_rot_b--)
 	{
-		if (data->dir_rot == 1)
+		if (data->dir_rot_b == 1)
 		{
 			rb(b, data);
 			data->nb_moove++;

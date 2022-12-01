@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 08:31:47 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/01 12:07:11 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:30:09 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ typedef struct s_data
 
 	int			key;
 	int			key_index;
-	int			dir_rot;
-	int			nb_rot;
+	int			dir_rot_a;
+	int			nb_rot_a;
+	int			dir_rot_b;
+	int			nb_rot_b;
 
 	int			min_moove;
 	int			nb_chunk_choosed;
@@ -79,7 +81,8 @@ void		get_min(t_stack *a, t_data *data);
 void		get_max(t_stack *a, t_data *data);
 
 //Rot Dir
-void		get_rot_dir(t_stack *b, t_data *data);
+void		get_rot_dir_a(t_stack *b, t_data *data);
+void		get_rot_dir_b(t_stack *b, t_data *data);
 void		get_rot_min(t_stack *a, t_data *data);
 
 //Resolve_Chunk

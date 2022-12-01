@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:00:33 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/01 12:11:49 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:59:37 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	find_insert_index(t_stack *b, t_data *data)
 void	insert_key(t_stack *b, t_data *data)
 {	
 	find_insert_index(b, data);		
-	get_rot_dir(b, data);
+	get_rot_dir_b(b, data);
 	
 }
 
@@ -59,9 +59,28 @@ void	min_to_top(t_stack *a, t_data *data)
 	rot_a(a, data);
 }
 
+void	rot_stack_opti(t_stack *a, t_stack *b, t_data *data)
+{
+	if (data->dir_rot_a == data->dir_rot_b)
+	{
+		while (data->nb_rot_b && data->nb_rot_a)
+		{
+			if (data->dir_rot_b == 1)
+				rr(a, b, data);
+			else
+				rrr(a, b, data);
+			data->nb_moove++;
+			data->nb_rot_a--;
+			data->nb_rot_b--;
+		}
+	}
+	rot_a(a, data);
+	rot_b(b, data);
+}
+
 void	resolve_one_test(t_stack *a, t_stack *b, t_data *data)
 {	
-	// print_list(a, b);
+	print_list(a, b);
 	data->current_chunk = 0;				
 	while (a->index >= 0 && data->current_chunk <= data->nb_chunk)
 	{	
@@ -70,16 +89,19 @@ void	resolve_one_test(t_stack *a, t_stack *b, t_data *data)
 		else
 		{	
 			chosse_key(a, data);
-			rot_a(a, data);
-			// print_list(a, b);
 			insert_key(b, data);
-			rot_b(b, data);
-
-			//Si compos rot
+			rot_stack_opti(a, b, data);
 
 			// printf("Key :%d , inbsert in :%d",data->key, data->index_to_place_key);
+			
+			//on ne push pas a si a sorted et > au reste
+			get_min(a, data);
+			get_max(b, data);
+			if (is_sorted(-1, a) && data->min > data->max)
+				break;
 			pb(a, b, data);
 			data->nb_moove++;
+			// print_list(a, b);
 		}
 	}
 	push_all_b(a, b, data);
@@ -87,3 +109,4 @@ void	resolve_one_test(t_stack *a, t_stack *b, t_data *data)
 	min_to_top(a, data);
 	// print_list(a, b);
 }
+// make && ./push_swap 9 -2 0 6 7

@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:53:45 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/01 12:06:41 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:26:17 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ void	chosse_key(t_stack *a, t_data *data)
 	{
 		data->key = data->bot_key;
 		data->key_index = data->bot_key_index;
-		data->dir_rot = -1;
-		data->nb_rot = data->bot_key_index + 1;
+		data->dir_rot_a = -1;
+		data->nb_rot_a = data->bot_key_index + 1;
 	}
 	else
 	{
 		data->key = data->top_key;
 		data->key_index = data->top_key_index;
-		data->dir_rot = 1;
-		data->nb_rot = (a->index - data->top_key_index) - 1;
+		data->dir_rot_a = 1;
+		data->nb_rot_a = (a->index - data->top_key_index) - 1;
 	}
 }

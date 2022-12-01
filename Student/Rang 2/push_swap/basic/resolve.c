@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:56:21 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/01 12:10:56 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:45:43 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	resolve_push_swap(t_stack *a, t_stack *b, t_data *data)
 // make && ./push_swap 9 -2 8 -4 1
 
 
-
+//avoid pa pa pb pb
 
 
 
