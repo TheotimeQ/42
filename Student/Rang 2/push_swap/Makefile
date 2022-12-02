@@ -8,7 +8,7 @@ BUILD_DIR				= build/
 	
 #Sans bonus	
 DIR						= basic/
-SRC			 			= debug.c args_utils.c push_swap.c stack.c stack_operation_a.c stack_operation_b.c stack_operation_both.c resolve_utils.c resolve.c chunk.c min_max.c resolve_chunk.c rot_dir.c stack_cpy.c
+SRC			 			= debug.c args_utils.c push_swap.c stack.c stack_operation_a.c stack_operation_b.c stack_operation_both.c resolve_utils.c resolve.c chunk.c min_max.c resolve_chunk.c rot_dir.c stack_cpy.c test_min_to_top.c
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 HEADER					= .
 	

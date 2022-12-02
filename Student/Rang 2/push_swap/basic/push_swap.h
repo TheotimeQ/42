@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 08:31:47 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/01 16:30:09 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:22:42 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ typedef struct s_data
 
 }	t_data;
 
+//Min to top
+void 		test_min_to_top(t_stack *a, t_data *data);
+
 //Chunk
 void		chosse_key(t_stack *a, t_data *data);
 int	    	cut_chunk(t_data *data, t_stack *a);
@@ -105,7 +108,7 @@ void		rot_b(t_stack *a, t_data *data);
 int			is_sorted(int comp, t_stack *stack);
 
 //Stack Copy
-t_stack		*copy_a(t_stack *a);
+t_stack		*copy_a(t_stack *a, t_data *data);
 void		data_cpy(t_stack *a,t_stack *cpy);
 
 //Stack operations
