@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:44 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 14:47:00 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/04 17:58:41 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <limits.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 typedef struct s_list
 {
@@ -35,6 +39,12 @@ typedef struct s_flag
 
 }	t_flag;
 
+//get_next_line
+char		*get_next_line(int fd);
+char		*save(char *str, char *buffer, int i);
+void		*ft_memset(void *b, int c, size_t len);
+
+//ft_printf
 void		ft_putchar_fd_printf(char c, t_flag *all_flag);
 void		ft_putstr_fd_printf(char *s, t_flag *all_flag);
 void		ft_putnbr_fd_printf(long long int nb, t_flag *all_flag);
@@ -42,6 +52,7 @@ void		ft_basprintf(unsigned int nb_long, char *base, t_flag *all_flag);
 void		ft_uprintf(unsigned long int nb_long, char *base, t_flag *all_flag);
 int			ft_printf(int fd, const char *str, ...);
 
+//libft
 t_list		*ft_lstnew(void *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
@@ -80,6 +91,8 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
+void		free_split(char **tab, int index);
+int			count_split(char **tab);
 char		*ft_itoa(int n);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void		ft_striteri(char *s, void (*f)(unsigned int, char *));

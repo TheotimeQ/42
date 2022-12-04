@@ -6,18 +6,31 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 16:11:23 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/04 17:41:20 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <fcntl.h>
+# include <unistd.h>
+# include <string.h>
+# include <errno.h>
+
 # include "../libft/libft.h"
 # include "../minilibx_macos/mlx.h"
 
+typedef struct s_map
+{
+	int		*map;
+	int		width;
+	int		height;
+}	t_map;
 
 #endif
+
+// https://github.com/loudur/fdf/blob/master/Makefile
 
 // strerror
 // perror
