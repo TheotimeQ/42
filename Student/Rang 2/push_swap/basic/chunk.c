@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   chunk.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 09:53:45 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/01 16:26:17 by zelinsta         ###   ########.fr       */
+/*   Created: 2022/12/03 09:38:03 by tquere            #+#    #+#             */
+/*   Updated: 2022/12/04 14:19:21 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	cut_chunk_egale(t_data *data)
+{	
+	int	i;
+	int	index;
+
+	if (data->chunk == NULL)
+		return (1);
+	i = 0;
+	while (i <= data->nb_chunk)
+	{	
+		index = i * (data->sorted_a->index - 1) / data->nb_chunk;
+		(data->chunk)[data->nb_chunk - i] = (data->sorted_a->data)[index];
+		i++;
+	}
+	return (0);
+}
 
 int	cut_chunk(t_data *data, t_stack *a)
 {	
@@ -21,15 +38,12 @@ int	cut_chunk(t_data *data, t_stack *a)
 	if (data->chunk == NULL)
 		return (1);
 	i = 0;
-	// printf("\n");
 	while (i <= data->nb_chunk)
 	{	
 		(data->chunk)[i] = data->min + i
 			* (data->max - data->min) / data->nb_chunk;
-		// printf("| %d ",(data->chunk)[i]);
 		i++;
 	}
-	// printf("\n");
 	return (0);
 }
 
@@ -39,9 +53,9 @@ int	scan_from_top(t_stack *a, t_data *data)
 
 	index = a->index - 1;
 	while (index >= 0)
-	{
-		if ((data->chunk)[data->current_chunk - 1] <= a->data[index]
-			&& a->data[index] <= (data->chunk)[data->current_chunk])
+	{	
+		if ((data->chunk)[data->current_chunk] <= a->data[index]
+			&& a->data[index] <= (data->chunk)[data->current_chunk + 1])
 		{
 			data->top_key = a->data[index];
 			data->top_key_index = index;
@@ -59,8 +73,8 @@ int	scan_from_bot(t_stack *a, t_data *data)
 	index = 0;
 	while (index < a->index)
 	{	
-		if ((data->chunk)[data->current_chunk - 1] <= a->data[index]
-			&& a->data[index] <= (data->chunk)[data->current_chunk])
+		if ((data->chunk)[data->current_chunk] <= a->data[index]
+			&& a->data[index] <= (data->chunk)[data->current_chunk + 1])
 		{
 			data->bot_key = a->data[index];
 			data->bot_key_index = index;

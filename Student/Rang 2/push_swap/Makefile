@@ -1,59 +1,57 @@
-.PHONY:     			all $(NAME) $(NAME_BONUS) bonus lib clear clean fclean re
-	
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/03 09:38:46 by tquere            #+#    #+#              #
+#    Updated: 2022/12/04 13:35:20 by tquere           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+.PHONY:     			all $(NAME) mkbuild lib clear clean fclean re
+
 NAME					= push_swap
-NAME_BONUS				= checker
 	
-#Build	
 BUILD_DIR				= build/
 	
-#Sans bonus	
 DIR						= basic/
-SRC			 			= debug.c args_utils.c push_swap.c stack.c stack_operation_a.c stack_operation_b.c stack_operation_both.c resolve_utils.c resolve.c chunk.c min_max.c resolve_chunk.c rot_dir.c stack_cpy.c test_min_to_top.c
+SRC			 			= args_utils.c push_swap.c stack.c stack_operation_a.c stack_operation_b.c stack_operation_both.c resolve_utils.c resolve.c chunk.c min_max.c resolve_chunk.c resolve_chunk_utils.c rot_dir.c stack_cpy.c test_min_to_top.c 
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
-HEADER					= .
+HEADER					= basic/
 	
-#Avec bonus	
-DIR_BONUS				= bonus/
-SRC_BONUS				= debug.c checker_main_bonus.c checker_check_bonus.c get_next_line_bonus.c resolve_utils_bonus.c get_next_line_utils_bonus.c stack_bonus.c stack_operation_a_bonus.c stack_operation_b_bonus.c stack_operation_both_bonus.c
-OBJECTS_BONUS			= $(SRC_BONUS:%.c=$(BUILD_DIR)%.o)
-HEADER_BONUS			= bonus/
-	
-#Libft	
 LIBFT					= libft.a
 LIB_DIR					= libft/
 	
-#Option compilation	
 GCC						= gcc
 CFLAGS					= -Wall -Wextra -Werror
 SANITIZE				= $(CFLAGS) -g -fsanitize=address
 	
-#Autres commande	
 RM 						= rm -rf
 CLEAR					= clear
 
-all: 					lib $(NAME) $(HEADER) Makefile
+all: 					mkbuild lib $(NAME) $(HEADER)
+						
+mkbuild:
+						mkdir -p build
 
-$(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER) 
-						@$(GCC) $(CFLAGS) -I$(HEADER) -I$(LIB_DIR) -c $< -o $@
-
-$(BUILD_DIR)%.o:		$(DIR_BONUS)%.c $(HEADER_BONUS) 
-						@$(GCC) $(CFLAGS) -I$(HEADER_BONUS) -I$(LIB_DIR) -c $< -o $@
+$(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER)/push_swap.h
+						$(GCC) $(CFLAGS) -I$(HEADER) -I$(LIB_DIR) -c $< -o $@
 
 $(NAME): 				$(OBJECTS)
-						@$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT)  
-
-bonus: 					lib $(OBJECTS_BONUS) $(HEADER)
-						@$(GCC) $(SANITIZE) $(OBJECTS_BONUS) -o $(NAME_BONUS) $(LIB_DIR)$(LIBFT) 
+						$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT)  
 
 lib:
 						@make -C $(LIB_DIR)
 
-clean:
+clean:					
 						@${RM} $(OBJECTS_BONUS) $(OBJECTS)
 						@make clean -C $(LIB_DIR)
+						@${RM} $(BUILD_DIR)
 
 fclean:					clean
-						@${RM} ${NAME} $(NAME_BONUS)
+						@${RM} ${NAME}
 						@make fclean -C $(LIB_DIR)
 
 re:						fclean all

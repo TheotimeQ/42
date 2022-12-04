@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   min_max.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 09:53:54 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/01 09:53:57 by zelinsta         ###   ########.fr       */
+/*   Created: 2022/12/03 09:38:09 by tquere            #+#    #+#             */
+/*   Updated: 2022/12/03 16:12:11 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	get_max(t_stack *a, t_data *data)
 	int	index;
 
 	index = 0;
-	data->max = a->data[0];
-	data->max_index = index;
 	if (a->index == 0)
 		return ;
+	data->max = a->data[0];
+	data->max_index = index;
 	while (index < a->index)
 	{
 		if (a->data[index] > data->max)
@@ -37,10 +37,10 @@ void	get_min(t_stack *a, t_data *data)
 	int	index;
 
 	index = 0;
-	data->min = a->data[0];
-	data->min_index = 0;
 	if (a->index == 0)
 		return ;
+	data->min = a->data[0];
+	data->min_index = 0;
 	while (index < a->index)
 	{
 		if (a->data[index] < data->min)

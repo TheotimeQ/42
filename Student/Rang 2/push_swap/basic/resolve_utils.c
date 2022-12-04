@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resolve_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 17:58:51 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/02 08:32:48 by zelinsta         ###   ########.fr       */
+/*   Created: 2022/12/03 09:29:27 by tquere            #+#    #+#             */
+/*   Updated: 2022/12/03 17:05:18 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,23 @@ int	is_sorted(int comp, t_stack *stack)
 		index--;
 	}
 	return (1);
+}
+
+void	rot_stack_opti(t_stack *a, t_stack *b, t_data *data)
+{	
+	if (data->dir_rot_a == data->dir_rot_b)
+	{
+		while (data->nb_rot_b && data->nb_rot_a)
+		{
+			if (data->dir_rot_b == 1)
+				rr(a, b, data);
+			else
+				rrr(a, b, data);
+			data->nb_moove++;
+			data->nb_rot_a--;
+			data->nb_rot_b--;
+		}
+	}
+	rot_a(a, data);
+	rot_b(b, data);
 }

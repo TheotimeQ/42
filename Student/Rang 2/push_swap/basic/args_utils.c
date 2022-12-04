@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:38:44 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/01 11:32:52 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/04 13:38:11 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static int	check_nb(char *nb)
-{
+{	
 	if (ft_isnum(nb) == 0)
 		return (1);
 	if (ft_atoi(nb) < INT32_MIN || INT32_MAX < ft_atoi(nb))
@@ -40,7 +40,7 @@ static int	get_nb_args(int argc, char **argv)
 	return (nb_args);
 }
 
-static void	get_from_str(t_stack *a, char **argv, int nb_value)
+static int	get_from_str(t_stack *a, char **argv, int nb_value)
 {
 	int		i;
 
@@ -51,14 +51,15 @@ static void	get_from_str(t_stack *a, char **argv, int nb_value)
 		if (check_nb(argv[i]))
 		{
 			free_tab(argv, nb_value);
-			ft_putstr_fd("Error\n", 2);
+			return (-1);
 		}
 		push_stack(a, ft_atoi(argv[i--]));
 	}
 	free_tab(argv, nb_value);
+	return (nb_value + 1);
 }
 
-static void	get_from_list(t_stack *a, char **argv, int nb_value)
+static int	get_from_list(t_stack *a, char **argv, int nb_value)
 {
 	int	i;
 
@@ -66,30 +67,31 @@ static void	get_from_list(t_stack *a, char **argv, int nb_value)
 	while (i > 0)
 	{
 		if (check_nb(argv[i]))
-		{
-			free_tab(argv, nb_value);
-			ft_putstr_fd("Error\n", 2);
-		}
+			return (-1);
 		push_stack(a, ft_atoi(argv[i--]));
 	}
+	return (nb_value);
 }
 
-int	init_stack(t_stack *a, t_stack *b, int argc, char **argv)
+int	init_stack(t_data *data, int argc, char **argv)
 {
 	int	nb_value;
 
 	nb_value = get_nb_args(argc, argv);
-	b->index = 0;
-	a->index = 0;
-	a->data = malloc(sizeof(int) * nb_value);
-	if (a->data == NULL)
-		return (-1);
-	b->data = malloc(sizeof(int) * nb_value);
-	if (b->data == NULL)
-		return (-1);
+	data->b->index = 0;
+	data->a->index = 0;
+	data->a->data = malloc(sizeof(int) * nb_value);
+	if (data->a->data == NULL)
+		leave(data);
+	data->sorted_a->data = malloc(sizeof(int) * nb_value);
+	if (data->sorted_a->data == NULL)
+		leave(data);
+	data->b->data = malloc(sizeof(int) * nb_value);
+	if (data->b->data == NULL)
+		leave(data);
 	if (argc == 2)
-		get_from_str(a, argv, nb_value);
+		nb_value = get_from_str(data->a, argv, nb_value);
 	else
-		get_from_list(a, argv, nb_value);
+		nb_value = get_from_list(data->a, argv, nb_value);
 	return (nb_value);
 }

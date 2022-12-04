@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
+#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 13:23:47 by tquere            #+#    #+#              #
-#    Updated: 2022/11/25 08:50:16 by zelinsta         ###   ########.fr        #
+#    Updated: 2022/12/04 11:46:01 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,18 +26,18 @@ LIB 				= ar -crs
 
 RM 					= rm -rf
 
-all: 		$(NAME) Makefile
+all: 		$(NAME) 
 
-$(BUILD_DIR)%.o:		%.c $(HEADER) Makefile
+$(BUILD_DIR)%.o:		%.c $(HEADER) 
 						$(GCC) $(CFLAGS) -include $(HEADER) -c $< -o $@
 
-$(NAME): 				${OBJECTS} $(HEADER) Makefile 
-						@${LIB} ${NAME} ${OBJECTS}
+$(NAME): 				${OBJECTS} $(HEADER)  
+						${LIB} ${NAME} ${OBJECTS}
 
 clean:			
-						@${RM} ${OBJECTS} ${OBJECTS_BONUS}
+						${RM} ${OBJECTS} ${OBJECTS_BONUS}
 						
 fclean:					clean
-						@${RM} ${NAME}
+						${RM} ${NAME}
 
 re:						fclean all
