@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 14:20:03 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/04 16:57:09 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/libft.h"
-# define NB_TEST 30
-
-# include <stdio.h>
+# define NB_TEST 50
 
 typedef struct s_pile
 {
