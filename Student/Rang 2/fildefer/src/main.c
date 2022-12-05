@@ -3,101 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:36:54 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 18:02:17 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/05 22:23:58 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// void	init_map(void)
-// {
-// 	t_map	*map;
-
-// 	map = malloc()
-// }
-
-void	get_map_size(int fd)
-{
-	char 		*line;
-	char		**line_values;
-	int			width;
-	int			height;
-
-	line = get_next_line(fd);
-	//Supprime le \n si y en a un
-
-	line_values = ft_split(line, ' ');
-	width = count_split(line_values);
-	// free_split(line_values);
-	height = 1;
-	while(line != NULL)
-	{	
-		//Stock la ligne
-		free(line);
-		line = get_next_line(fd);
-		line_values = ft_split(line, ' ');
-		if (line != NULL && width != count_split(line_values))
-		{
-			ft_printf(2, "Map error : no constant width\n");
-			exit(1);
-		}
-		// free_split(line_values);
-		height++;
-	}
-	ft_printf(2, "Witdh:%d Height:%d",width, height);
-	free(line);
-}
-
-void	check_args(int argc, char **argv)
+int	update(t_fdf *fdf)
 {	
-	int	fd;
+	ft_printf(2, "\n\n--------------------------------------\n");
+	ft_printf(2, "x:%d y:%d min_z:%d max_z:%d\n\n",fdf->map->max_x, fdf->map->max_y, fdf->map->min_z, fdf->map->max_z);
+	printf("cam_x:%.2f cam_y:%.2f cam_z:%.2f fov:%.2f\n\n",fdf->cam->x, fdf->cam->y, fdf->cam->z, fdf->cam->fov);
 	
-	if (argc != 2)
-	{
-		ft_printf(2, "Wrong use : ./fdf [filename.fdf]\n");
-		exit(1);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		ft_printf(2, "Error: %s \n",strerror(errno));
-		exit(0);
-	}
-	else 
-	{
-		get_map_size(fd);
-        close(fd);
-    }
+	//update 3D matrice
+	update_mat_3D(fdf);
+	
+	//Creer l'image basé sur les points
+	update_img(fdf);
 }
-
-
 
 int	main(int argc, char **argv)
 {	
-	//init data strcuture
+	t_fdf *fdf;
 
-
-	//Check Args
-	check_args(argc, argv);
-
-	//Init_Structure Map
-	// init_map();
-
-	//Parse la map
-
-	//Creer la windows
-
-	//Creer l'image
+	//Setup Env
+	fdf = init_fdf();
 	
-	// void	*init_ptr;
-	// void	*wind_ptr;
+	//Map parsing
+	check_args(fdf, argc, argv);
+	parse_map(fdf);
+	print_map(fdf);
 
-	// init_ptr = mlx_init();
-	// wind_ptr = mlx_new_window(init_ptr, 100, 100, "COUCOU LOUIS");
-	// mlx_loop (init_ptr);
+	//init mlx
+	init_mlx(fdf);
+
+	//Init mat 3D
+	malloc_matrice_3D(fdf);
+	init_mat_3D(fdf);
+
+	//init mat proj
+	malloc_matrice_proj(fdf);
+	init_mat_proj(fdf);
+
+	// fdf->cam->z_max = fdf->map->max_z;
+	// fdf->cam->z_min = fdf->map->min_z;
+
+	//Creer l'image à afficher
+	update(fdf);
+
+	//demare a loop mlx
+	start_mlx(fdf);
+
+	free_exit(fdf,0);
 }
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write_protect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:17:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 14:54:01 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/04 21:11:06 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,6 @@ void	ft_basprintf(unsigned int nb_long, char *base, t_flag *all_flag)
 	int			len_base;
 
 	len_base = ft_strlen(base);
-	if (nb_long < 0)
-	{
-		nb_long *= -1 ;
-		ft_putchar_fd_printf('-', all_flag);
-	}
 	if (nb_long == 0)
 	{
 		write(all_flag->fd, &base[0], 1);

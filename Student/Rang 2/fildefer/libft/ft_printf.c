@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:30:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 14:47:10 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/04 21:10:21 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ size_t	ft_strlen(const char *s)
 
 static void	all_test(const char *str, va_list arg, t_flag *all_flag)
 {	
-	int			fd;
 	char		*lhex;
 	char		*hhex;
 
 	lhex = "0123456789abcdef";
 	hhex = "0123456789ABCDEF";
-	fd = all_flag->fd;
 	if (str[all_flag->index] == 'c')
 		ft_putchar_fd_printf(va_arg(arg, int), all_flag);
 	else if (str[all_flag->index] == 's')
