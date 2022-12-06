@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 17:59:54 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 20:31:05 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 #  include "../minilibx_macos/mlx.h"
 # endif
 
-# define RES_X 1000
-# define RES_Y 1000
+# define RES_X 2000
+# define RES_Y 1500
 # define WIN_NAME "FDF TQUERE"
 
 // enum les key clavier
@@ -97,6 +97,13 @@ typedef struct s_fdf
 	int			res_y;
 
 	int			draw_witdh;
+	double		x_pos;
+	double		y_pos;
+	double		z_pos;
+	double		x_rot;
+	double		y_rot;
+	double		z_rot;
+
 
 }	t_fdf;
 
@@ -158,7 +165,7 @@ void		start_mlx(t_fdf *fdf);
 void		update_img(t_fdf *fdf);
 
 // draw
-void		draw_point(t_fdf *fdf, int x_pt, int y_pt);
-void		draw_ligne(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2);
+void		draw_point(t_fdf *fdf, int x_pt, int y_pt, int color);
+void		draw_ligne(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2, int color);
 
 #endif

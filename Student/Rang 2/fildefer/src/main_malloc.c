@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:11:13 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 17:38:10 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 19:59:19 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_cam(t_fdf *fdf)
 	fdf->cam->t_x = 0;
 	fdf->cam->t_y = 0;
 	fdf->cam->t_z = 0;
-	fdf->cam->r_x = 0;
+	fdf->cam->r_x = -3.14;
 	fdf->cam->r_y = 0;
 	fdf->cam->r_z = 0;
 	fdf->cam->fov = 2.27;

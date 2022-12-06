@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:08:49 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 17:15:17 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 13:10:28 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,3 @@ char	**ft_split(char const *s, char c)
 		tab[index_tab] = NULL;
 	return (tab);
 }
-
-// char	**ft_split(char const *s, char c)
-// {
-// 	char	**tab;
-// 	int		index_tab;
-
-// 	if (!s)
-// 		return (NULL);
-// 	tab = malloc(sizeof(char *) * (ft_strlen(s) + 1));
-// 	if (tab == NULL)
-// 		return (NULL);
-// 	index_tab = fill_tab(s, c, tab);
-// 	if (index_tab >= 0)
-// 		tab[index_tab] = NULL;
-// 	return (tab);
-// }
