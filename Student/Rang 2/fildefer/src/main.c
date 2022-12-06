@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:36:54 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 17:07:57 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 18:12:50 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,23 @@ int	update_mat_3D_proj(t_fdf *fdf)
 	printf("t_x:%.2f t_y:%.2f t_z:%.2f fov:%.2f\n\n", fdf->cam->t_x, fdf->cam->t_y, fdf->cam->t_z, fdf->cam->fov);
 	printf("r_x:%.2f r_y:%.2f r_z:%.2f \n\n", fdf->cam->r_x, fdf->cam->r_y, fdf->cam->r_z);
 
-	//update 3D matrice
+	translate(fdf);
+	ft_printf(1, "MAT 3D TRANS\n");
+	print_mat_3d(fdf, fdf->mat_3d);
+
+	get_mat_rot_x(fdf);
+	get_mat_rot_y(fdf);
+	get_mat_rot_z(fdf);
+	rotate(fdf);
+
+	ft_printf(1, "MAT ROT\n");
+	print_mat_rot(fdf, fdf->mat_rot_x);
+	print_mat_rot(fdf, fdf->mat_rot_y);
+	print_mat_rot(fdf, fdf->mat_rot_z);
+
+	ft_printf(1, "MAT 3D ROT\n");
+	print_mat_3d(fdf, fdf->mat_3d);
+
 	get_mat_proj(fdf);
 	apply_proj(fdf);
 
@@ -47,6 +63,9 @@ int	main(int argc, char **argv)
 	parse_map(fdf);
 	print_map(fdf);
 
+	fdf->cam->t_x = -fdf->map->max_x / 2;
+	fdf->cam->t_y = -fdf->map->max_y / 2;
+
 	//init mlx
 	init_mlx(fdf);
 
@@ -59,13 +78,11 @@ int	main(int argc, char **argv)
 	malloc_matrice_proj(fdf);
 	init_mat_proj(fdf);
 
-	// //init mat tran
-	// malloc_matrice_tran(fdf);
-	// init_mat_tran(fdf);
-
-	// //init mat rot
-	// malloc_matrice_rot(fdf);
-	// init_mat_rot(fdf);
+	// init mat rot
+	malloc_matrice_rot(fdf);
+	init_mat_rot(fdf, fdf->mat_rot_x);
+	init_mat_rot(fdf, fdf->mat_rot_y);
+	init_mat_rot(fdf, fdf->mat_rot_z);
 
 	//init mat 3D proj
 	fdf->mat_3d_proj = new_matrice_3d(fdf);

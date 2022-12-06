@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:55:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 15:48:23 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:59:35 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,26 @@ void	print_mat_proj(t_fdf *fdf)
 		while (x < 4)
 		{
 			printf("%.2f | ", fdf->mat_proj[y * 4 + x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+	ft_printf(1, "\n");
+}
+
+void	print_mat_rot(t_fdf *fdf, double *mat)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < 3)
+	{
+		x = 0;
+		while (x < 3)
+		{
+			printf("%.2f | ", mat[y * 3 + x]);
 			x++;
 		}
 		printf("\n");

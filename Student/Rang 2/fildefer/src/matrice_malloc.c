@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:16:28 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 14:10:08 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:39:43 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,24 @@ void	malloc_matrice_proj(t_fdf *fdf)
 	}
 }
 
+void	malloc_matrice_rot(t_fdf *fdf)
+{
+	fdf->mat_rot_x = malloc(sizeof(double) * 3 * 3);
+	if (fdf->mat_rot_x == NULL)
+	{
+		ft_printf(2, "Error: malloc matrice rot x\n");
+		free_exit(fdf, 1);
+	}
+	fdf->mat_rot_y = malloc(sizeof(double) * 3 * 3);
+	if (fdf->mat_rot_y == NULL)
+	{
+		ft_printf(2, "Error: malloc matrice rot y\n");
+		free_exit(fdf, 1);
+	}
+	fdf->mat_rot_z = malloc(sizeof(double) * 3 * 3);
+	if (fdf->mat_rot_z == NULL)
+	{
+		ft_printf(2, "Error: malloc matrice rot z\n");
+		free_exit(fdf, 1);
+	}
+}

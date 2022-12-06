@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:22:22 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 15:53:47 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:35:25 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,3 @@ void	get_value_mat_3d(t_fdf *fdf)
 		y++;
 	}
 }
-
-			// else
-			// {
-			// 	fdf->mat_3d[y * fdf->map->max_x + x]->x = x;
-			// 	fdf->mat_3d[y * fdf->map->max_x + x]->y = y;
-			// 	fdf->mat_3d[y * fdf->map->max_x + x]->z = z;
-			// 	fdf->mat_3d[y * fdf->map->max_x + x]->w = 1;
-			// }

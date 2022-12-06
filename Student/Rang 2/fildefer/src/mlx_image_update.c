@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:29:53 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 16:47:00 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:49:25 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	fill_img(t_fdf *fdf)
 }
 
 void	update_img(t_fdf *fdf)
-{
+{	
 	if (fdf->img != NULL)
 		mlx_destroy_image(fdf->mlx, fdf->img);
 	mlx_clear_window(fdf->mlx, fdf->win);

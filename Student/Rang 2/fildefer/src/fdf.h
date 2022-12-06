@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 17:18:32 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:59:54 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ typedef struct s_fdf
 
 	t_point_3d	**mat_3d;
 	double		*mat_proj;
-	double		*mat_rot;
+	double		*mat_rot_x;
+	double		*mat_rot_y;
+	double		*mat_rot_z;
 	double		*mat_trans;
 	t_point_3d	**mat_3d_proj;
 
@@ -105,6 +107,7 @@ int			update(t_fdf *fdf);
 void		print_map(t_fdf *fdf);
 void		print_mat_3d(t_fdf *fdf, t_point_3d **mat);
 void		print_mat_proj(t_fdf *fdf);
+void		print_mat_rot(t_fdf *fdf, double *mat);
 
 // malloc
 t_fdf		*init_fdf(void);
@@ -143,8 +146,11 @@ double		proj_product_w(t_fdf *fdf, t_point_3d *point_3d);
 // matrice translate
 void		translate(t_fdf *fdf);
 
-// matrice translate
+// matrice rotate
+void		malloc_matrice_rot(t_fdf *fdf);
+void		init_mat_rot(t_fdf *fdf, double *mat_rot);
 void		rotate(t_fdf *fdf);
+t_point_3d	*rot_point(t_fdf *fdf, t_point_3d *point_3d, double *mat_rot);
 
 // mlx
 void		init_mlx(t_fdf *fdf);

@@ -6,28 +6,55 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:39:41 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 17:12:20 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 18:12:43 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static t_point_3d	*rotate_x(t_fdf *fdf, t_point_3d *point_3d)
+void	init_mat_rot(t_fdf *fdf, double *mat_rot)
 {
+	int	x;
+	int	y;
 
-	return (point_3d);
+	y = 0;
+	while (y < 3)
+	{
+		x = 0;
+		while (x < 3)
+		{
+			mat_rot[y * 3 + x] = 0;
+			x++;
+		}
+		y++;
+	}
 }
 
-static t_point_3d	*rotate_y(t_fdf *fdf, t_point_3d *point_3d)
+void	get_mat_rot_x(t_fdf *fdf)
 {
-
-	return (point_3d);
+	fdf->mat_rot_x[0 * 3 + 0] = 1;
+	fdf->mat_rot_x[1 * 3 + 1] = cos(fdf->cam->r_x);
+	fdf->mat_rot_x[1 * 3 + 2] = -sin(fdf->cam->r_x);
+	fdf->mat_rot_x[2 * 3 + 1] = sin(fdf->cam->r_x);
+	fdf->mat_rot_x[2 * 3 + 2] = cos(fdf->cam->r_x);
 }
 
-static t_point_3d	*rotate_z(t_fdf *fdf, t_point_3d *point_3d)
+void	get_mat_rot_y(t_fdf *fdf)
 {
+	fdf->mat_rot_y[0 * 3 + 0] = cos(fdf->cam->r_y);
+	fdf->mat_rot_y[0 * 3 + 2] = sin(fdf->cam->r_y);
+	fdf->mat_rot_y[1 * 3 + 1] = 1;
+	fdf->mat_rot_y[2 * 3 + 0] = -sin(fdf->cam->r_y);
+	fdf->mat_rot_y[2 * 3 + 2] = cos(fdf->cam->r_y);
+}
 
-	return (point_3d);
+void	get_mat_rot_z(t_fdf *fdf)
+{
+	fdf->mat_rot_z[0 * 3 + 0] = cos(fdf->cam->r_z);
+	fdf->mat_rot_z[0 * 3 + 1] = -sin(fdf->cam->r_z);
+	fdf->mat_rot_z[1 * 3 + 0] = sin(fdf->cam->r_z);
+	fdf->mat_rot_z[1 * 3 + 1] = cos(fdf->cam->r_z);
+	fdf->mat_rot_z[2 * 3 + 2] = 1;
 }
 
 void	rotate(t_fdf *fdf)
@@ -45,9 +72,10 @@ void	rotate(t_fdf *fdf)
 			point_3d = fdf->mat_3d[y * fdf->map->max_x + x];
 			if (point_3d)
 			{	
-				point_3d = rotate_x(fdf, point_3d);
-				point_3d = rotate_y(fdf, point_3d);
-				point_3d = rotate_z(fdf, point_3d);
+				point_3d = rot_point(fdf, point_3d, fdf->mat_rot_x);
+				point_3d = rot_point(fdf, point_3d, fdf->mat_rot_y);
+				point_3d = rot_point(fdf, point_3d, fdf->mat_rot_z);
+				fdf->mat_3d[y * fdf->map->max_x + x] = point_3d;
 			}
 			x++;
 		}

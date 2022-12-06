@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:24:48 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 17:12:59 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:57:14 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ static int	set_hook(int keycode, t_fdf *fdf)
 	key_rotation(keycode, fdf);
 	key_move(keycode, fdf);
 	key_zoom(keycode, fdf);
-	translate(fdf);
-	rotate(fdf);
+
 	update_mat_3D_proj(fdf);
 	update_img(fdf);
 	return (0);

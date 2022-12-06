@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:11:13 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 17:08:05 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:38:10 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	free_exit(t_fdf *fdf, int error_code)
 	if (fdf->img != NULL)
 		mlx_destroy_image(fdf->mlx, fdf->img);
 	free(fdf->mat_proj);
+	free(fdf->mat_rot_x);
+	free(fdf->mat_rot_y);
+	free(fdf->mat_rot_z);
 	if (fdf->mat_3d)
 		free_matrice_3d(fdf, fdf->mat_3d);
 	free(fdf->mat_3d);
@@ -83,7 +86,9 @@ t_fdf	*init_fdf(void)
 	fdf->mat_3d = NULL;
 	fdf->mat_proj = NULL;
 	fdf->mat_trans = NULL;
-	fdf->mat_rot = NULL;
+	fdf->mat_rot_x = NULL;
+	fdf->mat_rot_y = NULL;
+	fdf->mat_rot_z = NULL;
 	fdf->res_x = RES_X;
 	fdf->res_y = RES_Y;
 	fdf->ratio = RES_X / RES_Y;
