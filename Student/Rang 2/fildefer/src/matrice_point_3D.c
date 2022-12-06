@@ -1,83 +1,79 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrice_point_3D.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/06 13:22:22 by tquere            #+#    #+#             */
+/*   Updated: 2022/12/06 15:53:47 by tquere           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-static t_point_3D  *new_point_3D(t_fdf *fdf, double x, double y,double z, double w)
+t_point_3d	*new_point_3d(t_fdf *fdf, double x, double y, double z)
 {
-    t_point_3D *point_3D;
+	t_point_3d	*point_3d;
 
-    point_3D = malloc(sizeof(t_point_3D));
-    if (point_3D == NULL)
+	point_3d = malloc(sizeof(t_point_3d));
+	if (point_3d == NULL)
 	{
-		ft_printf(2, "Error: malloc point_3D\n");
-		free_exit(fdf,1);
+		ft_printf(2, "Error: malloc point_3d\n");
+		free_exit(fdf, 1);
 	}
-    point_3D->x = x;
-    point_3D->y = y;
-    point_3D->z = z;
-    point_3D->w = w;
-    return (point_3D);
+	point_3d->x = x;
+	point_3d->y = y;
+	point_3d->z = z;
+	point_3d->w = 0;
+	return (point_3d);
 }
 
-void init_mat_3D(t_fdf *fdf)
+void	init_mat_3d(t_fdf *fdf, t_point_3d	**mat)
 {
-    int     x;
-    int     y;
+	int		x;
+	int		y;
 
-    y = 0;
-    while (y < fdf->map->max_y)
-    {   
-        x = 0;
-        while (x < fdf->map->max_x)
-        {   
-            fdf->mat_3D[y * fdf->map->max_x + x] = NULL;
-            x++;
-        }    
-        y++;
-    }
+	y = 0;
+	while (y < fdf->map->max_y)
+	{
+		x = 0;
+		while (x < fdf->map->max_x)
+		{
+			mat[y * fdf->map->max_x + x] = NULL;
+			x++;
+		}
+		y++;
+	}
 }
 
-static void get_value_mat_3D(t_fdf *fdf)
+void	get_value_mat_3d(t_fdf *fdf)
 {
-    t_point_3D      *point_3D;
-    int             x;
-    int             y;
-    int             z;
+	t_point_3d	*point_3d;
+	int			x;
+	int			y;
+	int			z;
 
-    y = 0;
-    while (y < fdf->map->max_y)
-    {   
-        x = 0;
-        while (x < fdf->map->max_x)
-        {   
-            z = fdf->map->values[y * fdf->map->max_x + x];
-            if (fdf->mat_3D[y * fdf->map->max_x + x] == NULL)
-            {
-                point_3D = new_point_3D(fdf, x, y, z, 1);
-                fdf->mat_3D[y * fdf->map->max_x + x] = point_3D;
-            }
-            else
-            {
-                fdf->mat_3D[y * fdf->map->max_x + x]->x = x;
-                fdf->mat_3D[y * fdf->map->max_x + x]->y = y;
-                fdf->mat_3D[y * fdf->map->max_x + x]->z = z;
-                fdf->mat_3D[y * fdf->map->max_x + x]->w = 1;
-            }
-            x++;
-        }    
-        y++;
-    }
+	y = 0;
+	while (y < fdf->map->max_y)
+	{
+		x = 0;
+		while (x < fdf->map->max_x)
+		{	
+			z = fdf->map->values[y * fdf->map->max_x + x];
+			point_3d = new_point_3d(fdf, x, y, z);
+			point_3d->w = 1;
+			fdf->mat_3d[y * fdf->map->max_x + x] = point_3d;
+			x++;
+		}
+		y++;
+	}
 }
 
-void update_mat_3D(t_fdf *fdf)
-{
-    get_value_mat_3D(fdf);
-    get_mat_proj(fdf);
-
-	print_mat_3D(fdf);
-	print_mat_proj(fdf);
-
-    apply_proj(fdf);
-    print_mat_3D(fdf);
-
-    scale_to_res(fdf);
-    print_mat_3D(fdf);
-}
+			// else
+			// {
+			// 	fdf->mat_3d[y * fdf->map->max_x + x]->x = x;
+			// 	fdf->mat_3d[y * fdf->map->max_x + x]->y = y;
+			// 	fdf->mat_3d[y * fdf->map->max_x + x]->z = z;
+			// 	fdf->mat_3d[y * fdf->map->max_x + x]->w = 1;
+			// }

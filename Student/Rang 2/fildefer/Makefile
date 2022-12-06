@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
+#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/05 19:58:41 by zelinsta         ###   ########.fr        #
+#    Updated: 2022/12/06 17:13:43 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADER_DIR				= src/
 HEADER_FILE				= fdf.h
 
 DIR						= src/
-SRC			 			= debug.c main.c main_malloc.c main_args.c map_error.c map_parsing.c matrice_point_3D.c matrice_malloc.c matrice_projection.c mlx_init.c mlx_image_update.c
+SRC			 			= debug.c main.c main_malloc.c main_args.c map_error.c map_parsing.c matrice_point_3d.c matrice_malloc.c matrice_projection.c mlx_init.c mlx_image_update.c matrice_product.c matrice_scale.c matrice_translation.c matrice_translation_create.c matrice_rotation.c mlx_draw_point.c 
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
 LIBFT					= libft.a
@@ -36,12 +36,12 @@ CLEAR					= clear
 
 MINILIB					= libmlx.a
 
-# MINILIB_DIR				= minilibx_macos/
-# MAC						= OpenGL AppKit 
-# MAC						:= $(addprefix -framework , $(MAC))
+MINILIB_DIR				= minilibx_macos/
+MAC						= OpenGL AppKit 
+MAC						:= $(addprefix -framework , $(MAC))
 
-MINILIB_DIR				= minilibx_linux/
-LINUX					= -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz 
+# MINILIB_DIR				= minilibx_linux/
+# LINUX					= -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz 
 
 all: 					clear mkbuild lib minilibx $(NAME) $(HEADER_DIR)
 						
