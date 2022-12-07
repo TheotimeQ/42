@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:11:13 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 18:35:45 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:46:01 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ void	free_exit(t_fdf *fdf, int error_code)
 
 	//free matrice rot
 	free_matrice(fdf->mat_rot);
-
-	//free vector
-	free(fdf->u_x);
-	free(fdf->u_y);
-	free(fdf->u_z);
 
 	//free objet map
 	if (fdf->map)
@@ -57,15 +52,9 @@ void	init_cam(t_fdf *fdf)
 		ft_printf(2, "Error: malloc cam\n");
 		free_exit(fdf, 1);
 	}
-	fdf->cam->t_x = 0;
-	fdf->cam->t_y = 0;
-	fdf->cam->t_z = 0;
-	fdf->cam->r_x = 0;
-	fdf->cam->r_y = 0;
-	fdf->cam->r_z = 00;
 	fdf->cam->fov = 0.1;
-	fdf->cam->z_min = -10;
-	fdf->cam->z_max = 10;
+	fdf->cam->z_min = 0;
+	fdf->cam->z_max = 30;
 }
 
 void	init_map(t_fdf *fdf)
@@ -106,9 +95,12 @@ t_fdf	*init_fdf(void)
 	fdf->res_y = RES_Y;
 	fdf->ratio = RES_X / RES_Y;
 	fdf->draw_witdh = DRAW_WITDH;
-	fdf->u_x = NULL;
-	fdf->u_y = NULL;
-	fdf->u_z = NULL;
+	fdf->t_x = 0;
+	fdf->t_y = 0;
+	fdf->t_z = 0;
+	fdf->r_x = 0;
+	fdf->r_y = 0;
+	fdf->r_z = 0;
 	init_map(fdf);
 	init_cam(fdf);
 	return (fdf);

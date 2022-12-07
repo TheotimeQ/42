@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:24:48 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 18:50:49 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:22:43 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,45 +16,45 @@ static void	key_rotation(int keycode, t_fdf *fdf)
 {	
 	double	inc; 
 
-	inc = 0.01;
+	inc = INC_ROT;
 	if (keycode == Key_W)
-		fdf->cam->r_x += inc;
+		fdf->r_x += inc;
 	if (keycode == Key_S)
-		fdf->cam->r_x -= inc;
+		fdf->r_x -= inc;
 	if (keycode == Key_D)
-		fdf->cam->r_y += inc;
+		fdf->r_y += inc;
 	if (keycode == Key_A)
-		fdf->cam->r_y -= inc;
+		fdf->r_y -= inc;
 	if (keycode == Key_J)
-		fdf->cam->r_z += inc;
+		fdf->r_z += inc;
 	if (keycode == Key_U)
-		fdf->cam->r_z -= inc;
+		fdf->r_z -= inc;
 }
 
 static void	key_move(int keycode, t_fdf *fdf)
 {
 	double	inc; 
 
-	inc = 0.25;
+	inc = INC_TRANS;
 	if (keycode == Key_Right)
-		fdf->cam->t_x += inc;
+		fdf->t_x += inc;
 	if (keycode == Key_Left)
-		fdf->cam->t_x -= inc;
+		fdf->t_x -= inc;
 	if (keycode == Key_Up)
-		fdf->cam->t_y -= inc;
+		fdf->t_y -= inc;
 	if (keycode == Key_Down)
-		fdf->cam->t_y += inc;
+		fdf->t_y += inc;
 	if (keycode == Key_I)
-		fdf->cam->t_z += inc;
+		fdf->t_z += inc;
 	if (keycode == Key_K)
-		fdf->cam->t_z -= inc;
+		fdf->t_z -= inc;
 }
 
 static void	key_zoom(int keycode, t_fdf *fdf)
 {
 	double	inc; 
 
-	inc = 0.12;
+	inc = INC_ROT;
 	if (keycode == Key_Minus)
 		fdf->cam->fov -= inc;
 	if (keycode == Key_Plus)
@@ -76,12 +76,6 @@ static int	set_hook(int keycode, t_fdf *fdf)
 	key_rotation(keycode, fdf);
 	key_move(keycode, fdf);
 	key_zoom(keycode, fdf);
-	fdf->x_pos += fdf->cam->t_x;
-	fdf->y_pos += fdf->cam->t_y;
-	fdf->z_pos += fdf->cam->t_z;
-	fdf->x_rot += fdf->cam->r_x;
-	fdf->y_rot += fdf->cam->r_y;
-	fdf->z_rot += fdf->cam->r_z;
 	update(fdf);
 	return (0);
 }

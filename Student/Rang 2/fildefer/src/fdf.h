@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 18:36:28 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:53:30 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define RES_X 1000
 # define RES_Y 1000
 # define DRAW_WITDH 2
+# define INC_TRANS 0.8
+# define INC_ROT 0.2
 # define WIN_NAME "FDF TQUERE"
 
 // Point 3D
@@ -70,12 +72,6 @@ typedef struct s_map
 // Cam object
 typedef struct s_cam
 {
-	double		t_x;
-	double		t_y;
-	double		t_z;
-	double		r_x;
-	double		r_y;
-	double		r_z;
 	double		fov;
 	double		z_min;
 	double		z_max;
@@ -102,16 +98,13 @@ typedef struct s_fdf
 	int			res_y;
 
 	int			draw_witdh;
-	double		x_pos;
-	double		y_pos;
-	double		z_pos;
-	double		x_rot;
-	double		y_rot;
-	double		z_rot;
-
-	t_point_3d	*u_x;
-	t_point_3d	*u_y;
-	t_point_3d	*u_z;
+	
+	double		t_x;
+	double		t_y;
+	double		t_z;
+	double		r_x;
+	double		r_y;
+	double		r_z;
 
 }	t_fdf;
 
@@ -148,9 +141,11 @@ void		get_mat_3D(t_fdf *fdf);
 
 // matrice_proj
 void		get_mat_proj(t_fdf *fdf);
+void    	cpy_point_3d(t_fdf *fdf, int x, int y);
 void		project(t_fdf *fdf, int x, int y);
 
 // matrice translate
+void		center_map(t_fdf *fdf, int x, int y);
 void		translate(t_fdf *fdf, int x, int y);
 
 // matrice rotation

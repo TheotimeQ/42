@@ -6,7 +6,7 @@
 #    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/07 16:59:19 by zelinsta         ###   ########.fr        #
+#    Updated: 2022/12/07 22:24:10 by zelinsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADER_DIR				= src/
 HEADER_FILE				= fdf.h
 
 DIR						= src/
-SRC			 			= debug.c main.c main_malloc.c main_args.c map_error.c map_parsing.c matrice_point_3d.c matrice_malloc.c matrice_projection.c mlx_init.c mlx_image_update.c matrice_scale.c matrice_translation.c matrice_rotation.c matrice_rotation_vector.c matrice_rotation_prod.c draw_point.c 
+SRC			 			= debug.c main.c main_malloc.c main_args.c map_error.c map_parsing.c matrice_point_3d.c matrice_malloc.c matrice_projection.c mlx_init.c mlx_image_update.c matrice_scale.c matrice_translation.c matrice_rotation.c matrice_rotation_prod.c draw_point.c 
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
 LIBFT					= libft.a

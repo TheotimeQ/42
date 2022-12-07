@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:33:14 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 18:03:46 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:33:51 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,45 +73,43 @@ void	get_mat_proj(t_fdf *fdf)
 	}
 }
 
-	// t_point_3d	*point_3d;
-    // int         size_x;
+void    cpy_point_3d(t_fdf *fdf, int x, int y)
+{   
+    t_point_3d	    *point;
+    t_point_3d	    *point_proj;
+    int             size_x;
+    
+    size_x = fdf->mat_3d_proj->size_x;
+    point = fdf->mat_3d->array[y * size_x + x];
+    point_proj = fdf->mat_3d_proj->array[y * size_x + x];
 
-    // size_x = fdf->mat_3d->size_x;
-	// point_3d = fdf->mat_3d->array[y * size_x + x];
-    // if (point_3d == NULL)
-    //     return ;
-    // if (point_3d == NULL)
-    //     point_3d = new_point_3d(fdf, 0, 0, 0);
-    // point_3d = rot_point(fdf, point_3d, fdf->mat_rot);
-    // fdf->mat_3d->array[y * size_x + x] = point_3d;
+    //NAZE
+    if (point_proj != NULL);
+        free(point_proj);
+    point_proj = new_point_3d(fdf, 0, 0, 0);
+    
+    point_proj->x = point->x;
+    point_proj->y = point->y;
+    point_proj->z = point->z;
+    point_proj->w = point->w;
+    fdf->mat_3d_proj->array[y * size_x + x] = point_proj;
+}
     
 void	project(t_fdf *fdf, int x, int y)
 {
-	t_point_3d	*point_3d;
-    t_matrice	*mat_proj;
-	t_point_3d	*point_3d_proj;
-    int         size_x;
+    t_point_3d	    *point;
+    int             size_x;
+    t_matrice       *mat_proj;
 
     mat_proj = fdf->mat_proj;
     size_x = fdf->mat_3d_proj->size_x;
-	point_3d = fdf->mat_3d->array[y * size_x + x];
-    point_3d_proj = fdf->mat_3d_proj->array[y * size_x + x];
-    if (point_3d == NULL)
-    {
-        free(point_3d_proj);
-        fdf->mat_3d_proj->array[y * size_x + x] = NULL;
+	point = fdf->mat_3d_proj->array[y * size_x + x];
+    if (point == NULL)
         return ;
-    }
 
-    //NUL mais fixe...
-    if (point_3d_proj != NULL);
-        free(point_3d_proj);
-
-    point_3d_proj = new_point_3d(fdf, 0, 0, 0);
-
-    point_3d_proj->x = mat_proj->array[0]->x * point_3d->x;
-    point_3d_proj->y = mat_proj->array[5]->x * point_3d->y;
-    point_3d_proj->z = mat_proj->array[10]->x * point_3d->z + mat_proj->array[11]->x * point_3d->z;
-    point_3d_proj->w = mat_proj->array[14]->x * point_3d->z;
-    fdf->mat_3d_proj->array[y * size_x + x] = point_3d_proj;
+    point->x = mat_proj->array[0]->x * point->x;
+    point->y = mat_proj->array[5]->x * point->y;
+    point->z = mat_proj->array[10]->x * point->z + mat_proj->array[11]->x * point->z;
+    point->w = mat_proj->array[14]->x * point->z;
+    fdf->mat_3d_proj->array[y * size_x + x] = point;
 }

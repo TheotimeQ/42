@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:29:53 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 18:13:52 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:23:36 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,37 @@ void	fill_img(t_fdf *fdf)
 		y++;
 	}
 
-	// t_point_3d	*point_1;
-	// t_point_3d	*point_2;
+	t_point_3d	*point_1;
+	t_point_3d	*point_2;
 
-	// y = 0;
-	// color = 0x909090;
-	// while (y < fdf->map->max_y)
-	// {
-	// 	x = 0;
-	// 	while (x < fdf->map->max_x - 1)
-	// 	{
-	// 		point_1 = fdf->mat_3d_proj->array[y * fdf->map->max_x + x];
-	// 		point_2 = fdf->mat_3d_proj->array[y * fdf->map->max_x + x + 1];
-	// 		draw_ligne(fdf, point_1, point_2, color);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
+	y = 0;
+	color = 0x909090;
+	while (y < fdf->map->max_y)
+	{
+		x = 0;
+		while (x < fdf->map->max_x - 1)
+		{
+			point_1 = fdf->mat_3d_proj->array[y * fdf->map->max_x + x];
+			point_2 = fdf->mat_3d_proj->array[y * fdf->map->max_x + x + 1];
+			draw_ligne(fdf, point_1, point_2, color);
+			x++;
+		}
+		y++;
+	}
 
-	// y = 0;
-	// while (y < fdf->map->max_y - 1)
-	// {
-	// 	x = 0;
-	// 	while (x < fdf->map->max_x)
-	// 	{
-	// 		point_1 = fdf->mat_3d_proj->array[y * fdf->map->max_x + x];
-	// 		point_2 = fdf->mat_3d_proj->array[(y + 1) * fdf->map->max_x + x];
-	// 		draw_ligne(fdf, point_1, point_2, color);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
+	y = 0;
+	while (y < fdf->map->max_y - 1)
+	{
+		x = 0;
+		while (x < fdf->map->max_x)
+		{
+			point_1 = fdf->mat_3d_proj->array[y * fdf->map->max_x + x];
+			point_2 = fdf->mat_3d_proj->array[(y + 1) * fdf->map->max_x + x];
+			draw_ligne(fdf, point_1, point_2, color);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	update_img(t_fdf *fdf)

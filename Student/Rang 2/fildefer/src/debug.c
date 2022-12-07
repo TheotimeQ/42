@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:55:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 18:48:21 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:35:49 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,5 @@ void	print_matrice(t_matrice *matrice)
 		printf("\n");
 		y++;
 	}
-	printf("\n");
-}
-
-void	print_u_vector(t_fdf *fdf)
-{	
-	if (fdf->u_x != NULL)
-		printf("u_x: %.1f %.1f %.1f %.3f\n", fdf->u_x->x, fdf->u_x->y, fdf->u_x->z, sqrt(fdf->u_x->x + fdf->u_x->y + fdf->u_x->z));
-	else
-		printf("u_x: NULL\n");
-	if (fdf->u_y != NULL)
-		printf("u_y: %.1f %.1f %.1f %.3f\n", fdf->u_y->x, fdf->u_y->y, fdf->u_y->z, sqrt(fdf->u_y->x + fdf->u_y->y + fdf->u_y->z));
-	else
-		printf("u_y: NULL\n");
-	if (fdf->u_z != NULL)
-		printf("u_z: %.1f %.1f %.1f %.3f\n", fdf->u_z->x, fdf->u_z->y, fdf->u_z->z, sqrt(fdf->u_z->x + fdf->u_z->y + fdf->u_z->z));
-	else
-		printf("u_z: NULL\n");
 	printf("\n");
 }

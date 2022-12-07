@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:06:11 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 16:58:28 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/08 00:11:15 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_point_3d	*rot_pro_y(t_point_3d *pt, t_matrice *rot)
 {	
 	t_point_3d tmp_point;
 	
-	tmp_point.x = rot->array[0]->y * pt->y + rot->array[1]->y * pt->y + rot->array[2]->y * pt->z;
+	tmp_point.x = rot->array[0]->y * pt->x + rot->array[1]->y * pt->y + rot->array[2]->y * pt->z;
 	tmp_point.y = rot->array[3]->y * pt->x + rot->array[4]->y * pt->y + rot->array[5]->y * pt->z;
 	tmp_point.z = rot->array[6]->y * pt->x + rot->array[7]->y * pt->y + rot->array[8]->y * pt->z;
 	pt->x = tmp_point.x;
@@ -53,11 +53,11 @@ static t_point_3d	*rot_pro_z(t_point_3d *pt, t_matrice *rot)
 
 t_point_3d	*rot_point(t_fdf *fdf, t_point_3d *point_3d, t_matrice *matrice_rot)
 {	
-	if (fdf->cam->r_x != 0)
+	if (fdf->r_x != 0)
 		point_3d = rot_pro_x(point_3d, matrice_rot);
-	if (fdf->cam->r_y != 0)
+	if (fdf->r_y != 0)
 		point_3d= rot_pro_y(point_3d, matrice_rot);
-	if (fdf->cam->r_z != 0)
+	if (fdf->r_z != 0)
 		point_3d = rot_pro_z(point_3d, matrice_rot);
 	return (point_3d);
 }

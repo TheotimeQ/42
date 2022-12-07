@@ -6,35 +6,63 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:39:41 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 17:20:14 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:27:58 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static double get_rot_value(t_fdf *fdf, int x, int y, t_point_3d *vector)
+static double get_rot_value_x(t_fdf *fdf, int x, int y)
 {   
     double value;
     
     value = 0;
     if (y == 0 && x == 0)
-        value = vector->x * vector->x + (1 - vector->x * vector->x) * cos(vector->w);
-    else if (y == 0 && x == 1)
-        value = vector->x * vector->y * (1 - cos(vector->w)) - vector->z * sin(vector->w);
-    else if (y == 0 && x == 2)
-        value = vector->x * vector->z * (1 - cos(vector->w)) + vector->y * sin(vector->w);
-    else if (y == 1 && x == 0)
-        value = vector->x * vector->y * (1 - cos(vector->w)) + vector->z * sin(vector->w);
+        value = 1;
     else if (y == 1 && x == 1)
-        value = vector->y * vector->y + (1 - vector->y * vector->y) * cos(vector->w);
+        value = cos(fdf->r_x);
     else if (y == 1 && x == 2)
-        value = vector->y * vector->z * (1 - cos(vector->w)) - vector->x * sin(vector->w);
-    else if (y == 2 && x == 0)
-        value = vector->x * vector->z * (1 - cos(vector->w)) - vector->y * sin(vector->w);
+        value = -sin(fdf->r_x);
     else if (y == 2 && x == 1)
-        value = vector->y * vector->z * (1 - cos(vector->w)) + vector->x * sin(vector->w);
+        value = sin(fdf->r_x);
     else if (y == 2 && x == 2)
-        value = vector->z * vector->z + (1 - vector->z * vector->z) * cos(vector->w);
+        value = cos(fdf->r_x);
+    return (value);
+}
+
+static double get_rot_value_y(t_fdf *fdf, int x, int y)
+{   
+    double value;
+    
+    value = 0;
+    if (y == 0 && x == 0)
+        value = cos(fdf->r_y);
+    else if (y == 0 && x == 2)
+        value = sin(fdf->r_y);
+    else if (y == 1 && x == 1)
+        value = 1;
+    else if (y == 2 && x == 0)
+        value = -sin(fdf->r_y);
+    else if (y == 2 && x == 2)
+        value = cos(fdf->r_y);
+    return (value);
+}
+
+static double get_rot_value_z(t_fdf *fdf, int x, int y)
+{   
+    double value;
+    
+    value = 0;
+    if (y == 0 && x == 0)
+        value = cos(fdf->r_z);
+    else if (y == 0 && x == 1)
+        value = -sin(fdf->r_z);
+    else if (y == 1 && x == 0)
+        value = sin(fdf->r_z);
+    else if (y == 1 && x == 1)
+        value = cos(fdf->r_z);
+    else if (y == 2 && x == 2)
+        value = 1;
     return (value);
 }
 
@@ -53,9 +81,9 @@ void	get_mat_rot(t_fdf *fdf)
 		{   
             if (fdf->mat_rot->array[y * sz_x + x] == NULL)
                 fdf->mat_rot->array[y * sz_x + x] = new_point_3d(fdf, 0, 0, 0);
-            fdf->mat_rot->array[y * sz_x + x]->x = get_rot_value(fdf, x, y, fdf->u_x);
-            fdf->mat_rot->array[y * sz_x + x]->y = get_rot_value(fdf, x, y, fdf->u_y);
-            fdf->mat_rot->array[y * sz_x + x]->z = get_rot_value(fdf, x, y, fdf->u_z);
+            fdf->mat_rot->array[y * sz_x + x]->x = get_rot_value_x(fdf, x, y);
+            fdf->mat_rot->array[y * sz_x + x]->y = get_rot_value_y(fdf, x, y);
+            fdf->mat_rot->array[y * sz_x + x]->z = get_rot_value_z(fdf, x, y);
             x++;
 		}
 		y++;
@@ -64,15 +92,13 @@ void	get_mat_rot(t_fdf *fdf)
 
 void	rotate(t_fdf *fdf, int x, int y)
 {
-	t_point_3d	*point_3d;
+	t_point_3d	*point;
     int         size_x;
 
-    size_x = fdf->mat_3d->size_x;
-	point_3d = fdf->mat_3d->array[y * size_x + x];
-    if (point_3d == NULL)
+    size_x = fdf->mat_3d_proj->size_x;
+	point = fdf->mat_3d_proj->array[y * size_x + x];
+    if (point == NULL)
         return ;
-    if (point_3d == NULL)
-        point_3d = new_point_3d(fdf, 0, 0, 0);
-    point_3d = rot_point(fdf, point_3d, fdf->mat_rot);
-    fdf->mat_3d->array[y * size_x + x] = point_3d;
+    point = rot_point(fdf, point, fdf->mat_rot);
+    fdf->mat_3d_proj->array[y * size_x + x] = point;
 }
