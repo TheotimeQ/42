@@ -3,34 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   matrice_scale.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:38:31 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 20:29:42 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/07 17:56:38 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	scale_to_res(t_fdf *fdf)
-{
-	int			x;
-	int			y;
-	t_point_3d	*point;
+void	scale(t_fdf *fdf, int x, int y)
+{   
+	t_point_3d	*point_3d_proj;
 
-	y = 0;
-	while (y < fdf->map->max_y)
-	{
-		x = 0;
-		while (x < fdf->map->max_x)
-		{	
-			point = fdf->mat_3d_proj[y * fdf->map->max_x + x];
-			point->x = (((point->x / point->w) + 1) / 2 ) * fdf->res_x;
-			point->y = (((point->y / point->w) + 1) / 2 ) * fdf->res_y;
-			point->z = point->z / point->w;
-			x++;
-		}
-		y++;
-	}
+	point_3d_proj = fdf->mat_3d_proj->array[y * fdf->mat_3d_proj->size_x + x];
+    if (point_3d_proj != NULL)
+    {
+        point_3d_proj->x = (((point_3d_proj->x / point_3d_proj->w) + 1) / 2 ) * fdf->res_x;
+        point_3d_proj->y = (((point_3d_proj->y / point_3d_proj->w) + 1) / 2 ) * fdf->res_y;
+        point_3d_proj->z = point_3d_proj->z / point_3d_proj->w;
+    }
 }
 

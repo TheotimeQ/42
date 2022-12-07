@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:00:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 13:54:29 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/07 11:23:17 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ static void	get_value_in_map(t_fdf *fdf, int fd)
 		y++;
 	}
 	free(line);
+}
+
+static void	malloc_map_value(t_fdf *fdf)
+{
+	fdf->map->values = malloc(sizeof(int) * fdf->map->max_y * fdf->map->max_x);
+	if (fdf == NULL)
+	{
+		ft_printf(2, "Error: malloc map values\n");
+		free_exit(fdf, 1);
+	}
 }
 
 void	parse_map(t_fdf *fdf)

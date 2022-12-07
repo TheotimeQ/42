@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 20:31:05 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/07 18:36:28 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@
 #  include "../minilibx_macos/mlx.h"
 # endif
 
-# define RES_X 2000
-# define RES_Y 1500
+# define RES_X 1000
+# define RES_Y 1000
+# define DRAW_WITDH 2
 # define WIN_NAME "FDF TQUERE"
-
-// enum les key clavier
 
 // Point 3D
 typedef struct s_point_3d
@@ -46,6 +45,15 @@ typedef struct s_point_3d
 	double		w;
 
 }	t_point_3d;
+
+// Matrice 
+typedef struct s_matrice
+{
+	t_point_3d	**array;
+	int			size_x;
+	int			size_y;
+
+}	t_matrice;
 
 // Map
 typedef struct s_map
@@ -84,13 +92,10 @@ typedef struct s_fdf
 	void		*win;
 	void		*img;
 
-	t_point_3d	**mat_3d;
-	double		*mat_proj;
-	double		*mat_rot_x;
-	double		*mat_rot_y;
-	double		*mat_rot_z;
-	double		*mat_trans;
-	t_point_3d	**mat_3d_proj;
+	t_matrice	*mat_3d;
+	t_matrice	*mat_3d_proj;
+	t_matrice	*mat_proj;
+	t_matrice	*mat_rot;
 
 	double		ratio;
 	int			res_x;
@@ -104,22 +109,23 @@ typedef struct s_fdf
 	double		y_rot;
 	double		z_rot;
 
+	t_point_3d	*u_x;
+	t_point_3d	*u_y;
+	t_point_3d	*u_z;
 
 }	t_fdf;
 
 // main
-int			update(t_fdf *fdf);
+void		update(t_fdf *fdf);
 
 // debug
 void		print_map(t_fdf *fdf);
-void		print_mat_3d(t_fdf *fdf, t_point_3d **mat);
-void		print_mat_proj(t_fdf *fdf);
-void		print_mat_rot(t_fdf *fdf, double *mat);
+void		print_matrice(t_matrice *matrice);
+void		print_u_vector(t_fdf *fdf);
 
 // malloc
 t_fdf		*init_fdf(void);
 void		free_exit(t_fdf *fdf, int error_code);
-void		malloc_map_value(t_fdf *fdf);
 
 // map_error
 void		get_map_size(t_fdf *fdf, int fd);
@@ -130,34 +136,31 @@ void		check_args(t_fdf *fdf, int argc, char **argv);
 // parse map
 void		parse_map(t_fdf *fdf);
 
-// matrice points
-t_point_3d	**new_matrice_3d(t_fdf *fdf);
+// point 3D
 t_point_3d	*new_point_3d(t_fdf *fdf, double x, double y, double z);
-void		free_matrice_3d(t_fdf *fdf, t_point_3d **mat);
-void		init_mat_3d(t_fdf *fdf, t_point_3d **mat);
-void		get_value_mat_3d(t_fdf *fdf);
+
+// matrice
+t_matrice	*new_matrice(t_fdf *fdf, int size_x, int size_y);
+void		free_matrice(t_matrice *matrice);
+
+// matrice 3D
+void		get_mat_3D(t_fdf *fdf);
 
 // matrice_proj
-void		malloc_matrice_proj(t_fdf *fdf);
-void		init_mat_proj(t_fdf *fdf);
 void		get_mat_proj(t_fdf *fdf);
-void		apply_proj(t_fdf *fdf);
-void		scale_to_res(t_fdf *fdf);
-
-// matrice product
-double		proj_product_x(t_fdf *fdf, t_point_3d *point_3d);
-double		proj_product_y(t_fdf *fdf, t_point_3d *point_3d);
-double		proj_product_z(t_fdf *fdf, t_point_3d *point_3d);
-double		proj_product_w(t_fdf *fdf, t_point_3d *point_3d);
+void		project(t_fdf *fdf, int x, int y);
 
 // matrice translate
-void		translate(t_fdf *fdf);
+void		translate(t_fdf *fdf, int x, int y);
 
-// matrice rotate
-void		malloc_matrice_rot(t_fdf *fdf);
-void		init_mat_rot(t_fdf *fdf, double *mat_rot);
-void		rotate(t_fdf *fdf);
-t_point_3d	*rot_point(t_fdf *fdf, t_point_3d *point_3d, double *mat_rot);
+// matrice rotation
+t_point_3d	*rot_point(t_fdf *fdf, t_point_3d *point_3d, t_matrice *matrice_rot);
+void    	get_rotate_vector(t_fdf *fdf);
+void		get_mat_rot(t_fdf *fdf);
+void		rotate(t_fdf *fdf, int x, int y);
+
+// matrice scale
+void		scale(t_fdf *fdf, int x, int y);
 
 // mlx
 void		init_mlx(t_fdf *fdf);

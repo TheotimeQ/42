@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_keys.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:29:52 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 13:56:14 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/07 17:32:50 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 enum e_key
 {
-	Key_A		= 97,
+	Key_A		= 113,
 	Key_B		= 98,
 	Key_C		= 99,
 	Key_D		= 100,
@@ -39,7 +39,7 @@ enum e_key
 	Key_T		= 116,
 	Key_U		= 117,
 	Key_V		= 118,
-	Key_W		= 119,
+	Key_W		= 122,
 	Key_X		= 120,
 	Key_Y		= 121,
 	Key_Z		= 122,
@@ -59,6 +59,7 @@ enum e_key
 	Key_7		= 232,
 	Key_8		= 95,
 	Key_9		= 231,
+	Key_Escape	= 65307,
 };
 # else
 

@@ -3,74 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   matrice_malloc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:16:28 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 17:39:43 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/07 16:53:06 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point_3d	**new_matrice_3d(t_fdf *fdf)
-{	
-	t_point_3d	**mat;
+void	free_matrice(t_matrice *matrice)
+{
+	int	x;
+	int	y;
 
-	mat = malloc(sizeof(t_point_3d *) * fdf->map->max_x * fdf->map->max_y);
-	if (mat == NULL)
+	if (matrice == NULL)
+		return ;
+	if (matrice->array == NULL)
+		free(matrice);
+	y = 0;
+	while (y < matrice->size_y)
 	{
-		ft_printf(2, "Error: malloc matrice points 3D\n");
-		free_exit(fdf, 1);
+		x = 0;
+		while (x < matrice->size_x)
+		{
+			free(matrice->array[y * matrice->size_x + x]);
+			x++;
+		}
+		y++;
 	}
-	return (mat);
+	free(matrice->array);
+	free(matrice);
 }
 
-void	free_matrice_3d(t_fdf *fdf, t_point_3d **mat)
+static void	init_mat(t_matrice *matrice)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (y < fdf->map->max_y)
+	while (y < matrice->size_y)
 	{
 		x = 0;
-		while (x < fdf->map->max_x)
+		while (x < matrice->size_x)
 		{
-			free(mat[y * fdf->map->max_x + x]);
+			matrice->array[y * matrice->size_x + x] = NULL;
 			x++;
 		}
 		y++;
 	}
 }
 
-void	malloc_matrice_proj(t_fdf *fdf)
-{
-	fdf->mat_proj = malloc(sizeof(double) * 4 * 4);
-	if (fdf->mat_proj == NULL)
-	{
-		ft_printf(2, "Error: malloc matrice proj\n");
-		free_exit(fdf, 1);
-	}
-}
+t_matrice	*new_matrice(t_fdf *fdf, int size_x, int size_y)
+{	
+	t_matrice *matrice;
 
-void	malloc_matrice_rot(t_fdf *fdf)
-{
-	fdf->mat_rot_x = malloc(sizeof(double) * 3 * 3);
-	if (fdf->mat_rot_x == NULL)
+	matrice = malloc(sizeof(t_point_3d *) * size_x * size_y);
+	if (matrice == NULL)
 	{
-		ft_printf(2, "Error: malloc matrice rot x\n");
+		ft_printf(2, "Error: malloc new_matrice\n");
 		free_exit(fdf, 1);
 	}
-	fdf->mat_rot_y = malloc(sizeof(double) * 3 * 3);
-	if (fdf->mat_rot_y == NULL)
+	matrice->size_x = size_x;
+	matrice->size_y = size_y;
+	matrice->array = malloc(sizeof(t_point_3d *) * size_x * size_y);
+	if (matrice->array == NULL)
 	{
-		ft_printf(2, "Error: malloc matrice rot y\n");
+		ft_printf(2, "Error: malloc matrice array\n");
 		free_exit(fdf, 1);
 	}
-	fdf->mat_rot_z = malloc(sizeof(double) * 3 * 3);
-	if (fdf->mat_rot_z == NULL)
-	{
-		ft_printf(2, "Error: malloc matrice rot z\n");
-		free_exit(fdf, 1);
-	}
+	init_mat(matrice);
+	return (matrice);
 }

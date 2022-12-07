@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_point.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:24:06 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 20:30:44 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/07 16:58:36 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_ligne(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2, int color)
 	int			x;
 	int			y;
 	double		coef_dir;
-	t_point_3d	*tmp;
+	// t_point_3d	*tmp;
 
 	// if (pt_2->x < pt_1->x)
 	// {
