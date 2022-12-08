@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:24:48 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 23:22:43 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/08 08:14:01 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	key_zoom(int keycode, t_fdf *fdf)
 	if (fdf->cam->fov > 3.14)
 		fdf->cam->fov = 3.14;
 	if (fdf->cam->fov < 0)
-		fdf->cam->fov = 0;
+		fdf->cam->fov = 0.05;
 }
 
 static int	set_hook(int keycode, t_fdf *fdf)

@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:24:06 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 16:58:36 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:51:54 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,66 @@ void	draw_ligne(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2, int color)
 {
 	int			x;
 	int			y;
-	double		coef_dir;
-	// t_point_3d	*tmp;
+	double 		dx;
+	double 		dy;
+	int			sign;
 
-	// if (pt_2->x < pt_1->x)
-	// {
-	// 	tmp = pt_1;
-	// 	pt_1 = pt_2;
-	// 	pt_2 = pt_1;
-	// }
-
-	//Si dif x > dif
-	if ((pt_2->x - pt_1->x) > (pt_2->y - pt_1->y))
+	dx = pt_2->x - pt_1->x;
+	dy = pt_2->y - pt_1->y;
+	// Horizontale
+	if (dx * dx > dy * dy)
 	{	
-		coef_dir = (pt_2->y - pt_1->y) / (pt_2->x - pt_1->x);
-		x = pt_1->x;
-		while (x < pt_2->x)
-		{	
-			y = pt_1->y + coef_dir * (x - pt_1->x);
-			if (!(x > fdf->res_x || y > fdf->res_y || x < 0 || y < 0))
-				draw_point(fdf, x, y, color);
-			x++;
+		if (pt_1->x < pt_2->x)
+		{
+			x = pt_1->x;
+			while (x < pt_2->x)
+			{	
+				y = pt_1->y + (dy / dx) * (x - pt_1->x);
+				if (!(x > fdf->res_x || y > fdf->res_y || x < 0 || y < 0))
+					draw_point(fdf, x, y, 0xFF0000);
+					//Rouge
+				x++;
+			}
+		}
+		else
+		{
+			x = pt_1->x;
+			while (x > pt_2->x)
+			{	
+				y = pt_1->y + (dy / dx) * (x - pt_1->x);
+				if (!(x > fdf->res_x || y > fdf->res_y || x < 0 || y < 0))
+					draw_point(fdf, x, y, 0xFF0000);
+					//Rouge
+				x--;
+			}
 		}
 	}
+	//Vertical
 	else
 	{	
-		coef_dir = (pt_2->x - pt_1->x) / (pt_2->y - pt_1->y);
-		y = pt_1->y;
-		while (y < pt_2->y)
+		if (pt_1->y < pt_2->y)
 		{
-			x = pt_1->x + coef_dir * (y - pt_1->y);
-			if (!(x > fdf->res_x || y > fdf->res_y || x < 0 || y < 0))
-				draw_point(fdf, x, y, color);
-			y++;
+			y = pt_1->y;
+			while (y < pt_2->y)
+			{	
+				x = pt_1->x + (dx / dy) * (y - pt_1->y);
+				if (!(x > fdf->res_x || y > fdf->res_y || x < 0 || y < 0))
+					draw_point(fdf, x, y, 0x6A00FF);
+					//Bleu
+				y++;
+			}
+		}
+		else
+		{
+			y = pt_1->y;
+			while (y > pt_2->y)
+			{	
+				x = pt_1->x + (dx / dy) * (y - pt_1->y);
+				if (!(x > fdf->res_x || y > fdf->res_y || x < 0 || y < 0))
+					draw_point(fdf, x, y, 0x6A00FF);
+					//Bleu
+				y--;
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 23:53:30 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:47:05 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #  include "../minilibx_macos/mlx.h"
 # endif
 
-# define RES_X 1000
+# define RES_X 1500
 # define RES_Y 1000
 # define DRAW_WITDH 2
 # define INC_TRANS 0.8
