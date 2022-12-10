@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:00:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 11:23:17 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/09 09:17:42 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	stock_line(t_fdf *fdf, char *line, int y)
 		(fdf->map->values)[y * fdf->map->max_x + x] = atoi(line_values[x]);
 		x++;
 	}
+
+	//Probleme si value louche
 	while (x < fdf->map->max_x)
 	{
 		(fdf->map->values)[y * fdf->map->max_x + x] = 0;

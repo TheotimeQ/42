@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:33:14 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 23:33:51 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:07:52 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	project(t_fdf *fdf, int x, int y)
 	point = fdf->mat_3d_proj->array[y * size_x + x];
     if (point == NULL)
         return ;
-
     point->x = mat_proj->array[0]->x * point->x;
     point->y = mat_proj->array[5]->x * point->y;
     point->z = mat_proj->array[10]->x * point->z + mat_proj->array[11]->x * point->z;

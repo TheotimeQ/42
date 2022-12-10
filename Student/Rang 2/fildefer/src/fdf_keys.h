@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:29:52 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 17:32:50 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/08 17:14:24 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ enum e_key
 	Key_8		= 95,
 	Key_9		= 231,
 	Key_Escape	= 65307,
+	Key_Space	= 32,
 };
 # else
 
@@ -108,6 +109,7 @@ enum e_key
 	Key_8		= 28,
 	Key_9		= 25,
 	Key_Escape	= 53,
+	Key_Space	= 65307,
 };
 
 # endif

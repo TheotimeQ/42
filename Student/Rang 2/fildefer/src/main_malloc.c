@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:11:13 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/08 09:51:26 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:40:58 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	init_cam(t_fdf *fdf)
 		ft_printf(2, "Error: malloc cam\n");
 		free_exit(fdf, 1);
 	}
-	fdf->cam->fov = 0.1;
-	fdf->cam->z_min = -30;
-	fdf->cam->z_max = 30;
+	fdf->cam->fov = 0.05;
+	fdf->cam->z_min = 0;
+	fdf->cam->z_max = 0;
 }
 
 void	init_map(t_fdf *fdf)
@@ -101,6 +101,8 @@ t_fdf	*init_fdf(void)
 	fdf->r_x = 0;
 	fdf->r_y = 0;
 	fdf->r_z = 0;
+	fdf->min_color = 6947071;
+	fdf->max_color = 16711680;
 	init_map(fdf);
 	init_cam(fdf);
 	return (fdf);

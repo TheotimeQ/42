@@ -6,47 +6,30 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:29:53 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 23:23:36 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:11:27 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	fill_img(t_fdf *fdf)
+static void		get_color(t_fdf *fdf, t_point_3d *point, int x, int y)
+{
+	int			color;
+	int 		alt;
+
+	alt = fdf->mat_3d->array[y * fdf->map->max_x + x]->z;
+	color = fdf->min_color + (fdf->max_color - fdf->min_color) * alt / fdf->map->max_z;
+	point->w = color;
+}
+
+static void	draw_on_img(t_fdf *fdf)
 {
 	int			x;
 	int			y;
-	double		x_point;
-	double		y_point;
-	int			color;
-	t_point_3d *point;
-
-
-	color = 0xFFFFFF;
-
-	y = 0;
-	while (y < fdf->map->max_y)
-	{
-		x = 0;
-		while (x < fdf->map->max_x)
-		{	
-			point = fdf->mat_3d_proj->array[y * fdf->map->max_x + x];
-			if (point)
-			{
-				x_point = point->x;
-				y_point = point->y;
-				draw_point(fdf, x_point, y_point, color);
-			}
-			x++;
-		}
-		y++;
-	}
-
 	t_point_3d	*point_1;
 	t_point_3d	*point_2;
-
+	
 	y = 0;
-	color = 0x909090;
 	while (y < fdf->map->max_y)
 	{
 		x = 0;
@@ -54,7 +37,9 @@ void	fill_img(t_fdf *fdf)
 		{
 			point_1 = fdf->mat_3d_proj->array[y * fdf->map->max_x + x];
 			point_2 = fdf->mat_3d_proj->array[y * fdf->map->max_x + x + 1];
-			draw_ligne(fdf, point_1, point_2, color);
+			get_color(fdf, point_1, x, y);
+			get_color(fdf, point_2, x, y);
+			draw_ligne(fdf, point_1, point_2);
 			x++;
 		}
 		y++;
@@ -68,7 +53,7 @@ void	fill_img(t_fdf *fdf)
 		{
 			point_1 = fdf->mat_3d_proj->array[y * fdf->map->max_x + x];
 			point_2 = fdf->mat_3d_proj->array[(y + 1) * fdf->map->max_x + x];
-			draw_ligne(fdf, point_1, point_2, color);
+			draw_ligne(fdf, point_1, point_2);
 			x++;
 		}
 		y++;
@@ -81,6 +66,6 @@ void	update_img(t_fdf *fdf)
 		mlx_destroy_image(fdf->mlx, fdf->img);
 	mlx_clear_window(fdf->mlx, fdf->win);
 	fdf->img = mlx_new_image(fdf->mlx, fdf->res_x, fdf->res_y);
-	fill_img(fdf);
+	draw_on_img(fdf);
 	// mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
 }

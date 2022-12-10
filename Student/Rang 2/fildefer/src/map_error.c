@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:52:47 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/06 13:53:49 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/09 09:21:45 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	is_value_error(t_fdf *fdf, char **values)
 {
-	int		index;
-	int		value;
+	int				index;
+	long int		value;
 
 	index = 0;
 	while (values[index])
@@ -23,7 +23,7 @@ static int	is_value_error(t_fdf *fdf, char **values)
 		if (ft_isnum(values[index]) == 0)
 			return (1);
 		value = ft_atoi(values[index]);
-		if (value < INT32_MIN || INT32_MAX < value)
+		if (value < INT_MIN || INT_MAX < value)
 			return (1);
 		if (value < fdf->map->min_z)
 			fdf->map->min_z = value;

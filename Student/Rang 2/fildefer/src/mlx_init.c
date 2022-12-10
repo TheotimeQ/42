@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:24:48 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/08 08:14:01 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:12:31 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ static void	key_move(int keycode, t_fdf *fdf)
 	if (keycode == Key_Down)
 		fdf->t_y += inc;
 	if (keycode == Key_I)
-		fdf->t_z += inc;
+		fdf->t_z += inc * 15;
 	if (keycode == Key_K)
-		fdf->t_z -= inc;
+		fdf->t_z -= inc * 15;
 }
 
 static void	key_zoom(int keycode, t_fdf *fdf)
 {
 	double	inc; 
 
-	inc = INC_ROT;
+	inc = INC_FOV;
 	if (keycode == Key_Minus)
 		fdf->cam->fov -= inc;
 	if (keycode == Key_Plus)
@@ -63,6 +63,8 @@ static void	key_zoom(int keycode, t_fdf *fdf)
 		fdf->cam->fov = 3.14;
 	if (fdf->cam->fov < 0)
 		fdf->cam->fov = 0.05;
+	if (keycode == Key_Space)
+		reset(fdf);
 }
 
 static int	set_hook(int keycode, t_fdf *fdf)

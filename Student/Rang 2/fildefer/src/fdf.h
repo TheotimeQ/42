@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/08 09:47:05 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:00:16 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@
 #  include "../minilibx_macos/mlx.h"
 # endif
 
-# define RES_X 1500
+# define RES_X 1000
 # define RES_Y 1000
 # define DRAW_WITDH 2
-# define INC_TRANS 0.8
-# define INC_ROT 0.2
+# define INC_TRANS 0.2
+# define INC_ROT 0.1
+# define INC_FOV 0.02
 # define WIN_NAME "FDF TQUERE"
 
 // Point 3D
@@ -106,10 +107,20 @@ typedef struct s_fdf
 	double		r_y;
 	double		r_z;
 
+	double		max_coord;
+
+	double		inc_z;
+	double		inc_fov;
+	double		inc_trans;
+
+	int			max_color;
+	int			min_color;
+
 }	t_fdf;
 
 // main
 void		update(t_fdf *fdf);
+void		reset(t_fdf *fdf);
 
 // debug
 void		print_map(t_fdf *fdf);
@@ -164,6 +175,6 @@ void		update_img(t_fdf *fdf);
 
 // draw
 void		draw_point(t_fdf *fdf, int x_pt, int y_pt, int color);
-void		draw_ligne(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2, int color);
+void		draw_ligne(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2);
 
 #endif
