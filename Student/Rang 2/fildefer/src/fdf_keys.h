@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_keys.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:29:52 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/08 17:14:24 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/10 11:42:01 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ enum e_key
 	Key_8		= 28,
 	Key_9		= 25,
 	Key_Escape	= 53,
-	Key_Space	= 65307,
+	Key_Space	= 49,
 };
 
 # endif

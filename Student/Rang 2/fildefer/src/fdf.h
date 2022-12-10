@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/09 12:00:16 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:23:39 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@
 #  include "../minilibx_macos/mlx.h"
 # endif
 
-# define RES_X 1000
-# define RES_Y 1000
-# define DRAW_WITDH 2
+# define RES_X 2000
+# define RES_Y 1500
 # define INC_TRANS 0.2
 # define INC_ROT 0.1
 # define INC_FOV 0.02
@@ -61,12 +60,11 @@ typedef struct s_matrice
 // Map
 typedef struct s_map
 {
-	int		*values;
-	int		max_x;
-	int		max_y;
-	int		min_z;
-	int		max_z;
-	char	*map_name;
+	int				max_x;
+	int				max_y;
+	int				min_z;
+	int				max_z;
+	char			*map_name;
 
 }	t_map;
 
@@ -99,7 +97,7 @@ typedef struct s_fdf
 	int			res_y;
 
 	int			draw_witdh;
-	
+
 	double		t_x;
 	double		t_y;
 	double		t_z;
@@ -118,14 +116,11 @@ typedef struct s_fdf
 
 }	t_fdf;
 
+void		print_infos(t_fdf *fdf);
+
 // main
 void		update(t_fdf *fdf);
 void		reset(t_fdf *fdf);
-
-// debug
-void		print_map(t_fdf *fdf);
-void		print_matrice(t_matrice *matrice);
-void		print_u_vector(t_fdf *fdf);
 
 // malloc
 t_fdf		*init_fdf(void);
@@ -152,7 +147,7 @@ void		get_mat_3D(t_fdf *fdf);
 
 // matrice_proj
 void		get_mat_proj(t_fdf *fdf);
-void    	cpy_point_3d(t_fdf *fdf, int x, int y);
+void		cpy_point_3d(t_fdf *fdf, int x, int y);
 void		project(t_fdf *fdf, int x, int y);
 
 // matrice translate
@@ -160,8 +155,9 @@ void		center_map(t_fdf *fdf, int x, int y);
 void		translate(t_fdf *fdf, int x, int y);
 
 // matrice rotation
-t_point_3d	*rot_point(t_fdf *fdf, t_point_3d *point_3d, t_matrice *matrice_rot);
-void    	get_rotate_vector(t_fdf *fdf);
+t_point_3d	*rot_point(t_fdf *fdf,
+				t_point_3d *point_3d, t_matrice *matrice_rot);
+void		get_rotate_vector(t_fdf *fdf);
 void		get_mat_rot(t_fdf *fdf);
 void		rotate(t_fdf *fdf, int x, int y);
 
@@ -174,7 +170,6 @@ void		start_mlx(t_fdf *fdf);
 void		update_img(t_fdf *fdf);
 
 // draw
-void		draw_point(t_fdf *fdf, int x_pt, int y_pt, int color);
 void		draw_ligne(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2);
 
 #endif

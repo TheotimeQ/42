@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrice_malloc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:16:28 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/07 16:53:06 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:57:34 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	init_mat(t_matrice *matrice)
 
 t_matrice	*new_matrice(t_fdf *fdf, int size_x, int size_y)
 {	
-	t_matrice *matrice;
+	t_matrice	*matrice;
 
 	matrice = malloc(sizeof(t_point_3d *) * size_x * size_y);
 	if (matrice == NULL)

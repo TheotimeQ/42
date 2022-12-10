@@ -6,13 +6,13 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:23:00 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 17:44:58 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/10 16:22:32 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*my_strncat(char *dest, char *src, size_t n)
+static char	*gnl_strncat(char *dest, char *src, size_t n)
 {
 	size_t	index_dest;
 	size_t	index_src;
@@ -50,7 +50,7 @@ char	*save(char *str, char *buffer, int i)
 			return (NULL);
 		str[0] = '\0';
 	}
-	str = my_strncat(str, buffer, i + 1);
+	str = gnl_strncat(str, buffer, i + 1);
 	if (str == NULL)
 		return (NULL);
 	ft_memmove(buffer, buffer + i + 1, BUFFER_SIZE - i - 1);

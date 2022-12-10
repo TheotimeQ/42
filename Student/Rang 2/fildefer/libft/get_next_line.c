@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:22:51 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 17:38:24 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/10 16:20:45 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*get_next_line(int fd)
 	{	
 		while (buffer[fd][i] && buffer[fd][i] != '\n')
 			i++;
-		if (buffer[fd][i] == '\n' || (!buffer[fd][i] && i < BUFFER_SIZE))
+		if (buffer[fd][i] == '\n' || (!buffer[i] && i < BUFFER_SIZE))
 			return (save(str, buffer[fd], i));
 		else
 			str = save(str, buffer[fd], i);

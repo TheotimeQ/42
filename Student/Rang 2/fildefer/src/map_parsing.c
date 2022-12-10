@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:00:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/09 09:17:42 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/10 17:18:31 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static void	stock_line(t_fdf *fdf, char *line, int y)
 {
-	int		x;
-	int		len_line;
-	char	**line_values;
-	int		nb_values;
+	int			x;
+	int			len_line;
+	char		**line_values;
+	int			nb_values;
+	t_point_3d	*point_3d;
 
 	x = 0;
 	len_line = ft_strlen(line);
@@ -26,15 +27,15 @@ static void	stock_line(t_fdf *fdf, char *line, int y)
 	line_values = ft_split(line, ' ');
 	nb_values = count_split(line_values);
 	while (x < nb_values)
-	{
-		(fdf->map->values)[y * fdf->map->max_x + x] = atoi(line_values[x]);
+	{	
+		point_3d = new_point_3d(fdf, x, y, atoi(line_values[x]));
+		point_3d->w = 1;
+		fdf->mat_3d->array[y * fdf->map->max_x + x] = point_3d;
 		x++;
 	}
-
-	//Probleme si value louche
 	while (x < fdf->map->max_x)
 	{
-		(fdf->map->values)[y * fdf->map->max_x + x] = 0;
+		fdf->mat_3d->array[y * fdf->map->max_x + x] = NULL;
 		x++;
 	}
 	free_split(line_values);
@@ -63,21 +64,10 @@ static void	get_value_in_map(t_fdf *fdf, int fd)
 	free(line);
 }
 
-static void	malloc_map_value(t_fdf *fdf)
-{
-	fdf->map->values = malloc(sizeof(int) * fdf->map->max_y * fdf->map->max_x);
-	if (fdf == NULL)
-	{
-		ft_printf(2, "Error: malloc map values\n");
-		free_exit(fdf, 1);
-	}
-}
-
 void	parse_map(t_fdf *fdf)
 {
 	int	fd;
 
-	malloc_map_value(fdf);
 	fd = open(fdf->map->map_name, O_RDONLY);
 	if (fd < 0)
 	{

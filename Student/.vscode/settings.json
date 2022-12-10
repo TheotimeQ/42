@@ -7,5 +7,6 @@
 		"fcntl.h": "c",
 		"complex": "c",
 		"regex": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

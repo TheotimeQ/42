@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:44 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/04 21:58:26 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:22:02 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 4098
 # endif
 
 typedef struct s_list
@@ -42,7 +42,7 @@ typedef struct s_flag
 //get_next_line
 char		*get_next_line(int fd);
 char		*save(char *str, char *buffer, int i);
-void		*ft_memset(void *b, int c, size_t len);
+// void		*gnl_memset(void *b, int c, size_t len)
 
 //ft_printf
 void		ft_putchar_fd_printf(char c, t_flag *all_flag);
