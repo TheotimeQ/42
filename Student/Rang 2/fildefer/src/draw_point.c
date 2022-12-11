@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:24:06 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/10 14:32:28 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/11 12:25:57 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,14 @@ static void	draw_hori(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2)
 {
 	int			x;
 	int			y;
-	double		dx;
-	double		dy;
 
-	dx = pt_2->x - pt_1->x;
-	dy = pt_2->y - pt_1->y;
 	if (pt_1->x < pt_2->x)
 	{
 		x = pt_1->x;
 		while (x < pt_2->x)
 		{	
-			y = pt_1->y + (dy / dx) * (x - pt_1->x);
+			y = pt_1->y + ((pt_2->y - pt_1->y)
+					/ (pt_2->x - pt_1->x)) * (x - pt_1->x);
 			draw_point(fdf, x, y, 0xFFFFFF);
 			x++;
 		}
@@ -43,7 +40,8 @@ static void	draw_hori(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2)
 		x = pt_1->x;
 		while (x > pt_2->x)
 		{	
-			y = pt_1->y + (dy / dx) * (x - pt_1->x);
+			y = pt_1->y + ((pt_2->y - pt_1->y)
+					/ (pt_2->x - pt_1->x)) * (x - pt_1->x);
 			draw_point(fdf, x, y, 0xFFFFFF);
 			x--;
 		}
@@ -54,17 +52,14 @@ static void	draw_verti(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2)
 {
 	int			x;
 	int			y;
-	double		dx;
-	double		dy;
 
-	dx = pt_2->x - pt_1->x;
-	dy = pt_2->y - pt_1->y;
 	if (pt_1->y < pt_2->y)
 	{
 		y = pt_1->y;
 		while (y < pt_2->y)
 		{
-			x = pt_1->x + (dx / dy) * (y - pt_1->y);
+			x = pt_1->x + ((pt_2->x - pt_1->x)
+					/ (pt_2->y - pt_1->y)) * (y - pt_1->y);
 			draw_point(fdf, x, y, 0xFFFFFF);
 			y++;
 		}
@@ -74,7 +69,8 @@ static void	draw_verti(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2)
 		y = pt_1->y;
 		while (y > pt_2->y)
 		{	
-			x = pt_1->x + (dx / dy) * (y - pt_1->y);
+			x = pt_1->x + ((pt_2->x - pt_1->x)
+					/ (pt_2->y - pt_1->y)) * (y - pt_1->y);
 			draw_point(fdf, x, y, 0xFFFFFF);
 			y--;
 		}

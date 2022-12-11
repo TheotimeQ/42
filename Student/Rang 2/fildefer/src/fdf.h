@@ -6,15 +6,12 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/10 16:23:39 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/11 13:29:15 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-
-//REMOVE
-# include <stdio.h>
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -38,7 +35,6 @@
 # define INC_FOV 0.02
 # define WIN_NAME "FDF TQUERE"
 
-// Point 3D
 typedef struct s_point_3d
 {
 	double		x;
@@ -48,7 +44,6 @@ typedef struct s_point_3d
 
 }	t_point_3d;
 
-// Matrice 
 typedef struct s_matrice
 {
 	t_point_3d	**array;
@@ -57,7 +52,6 @@ typedef struct s_matrice
 
 }	t_matrice;
 
-// Map
 typedef struct s_map
 {
 	int				max_x;
@@ -68,7 +62,6 @@ typedef struct s_map
 
 }	t_map;
 
-// Cam object
 typedef struct s_cam
 {
 	double		fov;
@@ -77,7 +70,6 @@ typedef struct s_cam
 
 }	t_cam;
 
-// Stock tous les objets
 typedef struct s_fdf
 {
 	t_map		*map;
@@ -116,60 +108,41 @@ typedef struct s_fdf
 
 }	t_fdf;
 
-void		print_infos(t_fdf *fdf);
-
-// main
 void		update(t_fdf *fdf);
 void		reset(t_fdf *fdf);
 
-// malloc
 t_fdf		*init_fdf(void);
 void		free_exit(t_fdf *fdf, int error_code);
 
-// map_error
 void		get_map_size(t_fdf *fdf, int fd);
-
-// args_check
 void		check_args(t_fdf *fdf, int argc, char **argv);
-
-// parse map
 void		parse_map(t_fdf *fdf);
 
-// point 3D
 t_point_3d	*new_point_3d(t_fdf *fdf, double x, double y, double z);
 
-// matrice
 t_matrice	*new_matrice(t_fdf *fdf, int size_x, int size_y);
 void		free_matrice(t_matrice *matrice);
-
-// matrice 3D
 void		get_mat_3D(t_fdf *fdf);
-
-// matrice_proj
 void		get_mat_proj(t_fdf *fdf);
 void		cpy_point_3d(t_fdf *fdf, int x, int y);
 void		project(t_fdf *fdf, int x, int y);
-
-// matrice translate
 void		center_map(t_fdf *fdf, int x, int y);
 void		translate(t_fdf *fdf, int x, int y);
 
-// matrice rotation
 t_point_3d	*rot_point(t_fdf *fdf,
 				t_point_3d *point_3d, t_matrice *matrice_rot);
 void		get_rotate_vector(t_fdf *fdf);
 void		get_mat_rot(t_fdf *fdf);
 void		rotate(t_fdf *fdf, int x, int y);
 
-// matrice scale
 void		scale(t_fdf *fdf, int x, int y);
 
-// mlx
 void		init_mlx(t_fdf *fdf);
 void		start_mlx(t_fdf *fdf);
 void		update_img(t_fdf *fdf);
+void		key_zoom(int keycode, t_fdf *fdf);
+void		key_move(int keycode, t_fdf *fdf);
 
-// draw
 void		draw_ligne(t_fdf *fdf, t_point_3d *pt_1, t_point_3d *pt_2);
 
 #endif
