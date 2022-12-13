@@ -6,7 +6,7 @@
 #    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/13 14:53:17 by tquere           ###   ########.fr        #
+#    Updated: 2022/12/13 17:42:23 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADER_DIR				= src/
 HEADER_FILE				= pipex.h
 
 DIR						= src/
-SRC			 			= main.c check_args.c fork_cmd.c pipes.c read_write_file.c
+SRC			 			= main.c fork_cmd.c pipes.c
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
 LIBFT					= libft.a
@@ -34,7 +34,7 @@ RM 						= rm -rf
 CLEAR					= clear
 
 $(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE)
-						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -I$(MINILIB_DIR) -I/usr/include -O3 -c $< -o $@
+						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -c $< -o $@
 
 all: 					clear mkbuild lib $(HEADER_DIR) $(NAME) 
 						

@@ -6,11 +6,32 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:36:54 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/13 17:02:14 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/13 17:41:08 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	check_args(t_env *e, int argc, char **argv)
+{
+	if (argc < 5)
+	{
+		ft_printf(2, "Wrong use : ./pipex file1 cmd1 cmd2 file2\n");
+		free_exit(e, 1);
+	}
+	e->fd_input = open(argv[1], O_RDONLY);
+	if (e->fd_input < 0)
+	{
+		ft_printf(2, "Error: %s \n", strerror(errno));
+		free_exit(e, 1);
+	}
+	e->fd_output = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (e->fd_output < 0)
+	{
+		ft_printf(2, "Error: %s \n", strerror(errno));
+		free_exit(e, 1);
+	}
+}
 
 void	free_exit(t_env *e, int error_code)
 {	
@@ -35,6 +56,7 @@ static t_env	*init_env(void)
 		exit(1);
 	}
 	e->pipes = NULL;
+	e->path = NULL;
 	return (e);
 }
 
@@ -47,97 +69,25 @@ static void	get_path(t_env *e, char *envp[])
 		free_exit(e, 1);
 }
 
-//     READ                             FIRST                           SECOND                       WRITE IN FILE     													
-//stdin | pipe0_ecriture - pipe0_lecture  | pipe1_ecriture - pipe1_lecture | pipe2_ecriture  pipe2_lecture | output |
-
 int	main(int argc, char **argv, char *envp[])
 {	
-	t_env	*e;
-	int		status;
+	t_env		*e;
+	int			status;
+	int			i;
 
 	e = init_env();
-	
 	check_args(e, argc, argv);
 	get_path(e, envp);
-
-	// printf("\n\npath : %s %s %s\n", e->path[0], e->path[1], e->path[2]);
-	
-	ft_printf(1, "\nnb_pipe : %d , fd_in : %d, fd_out : %d\n\n", argc - 4, e->fd_input, e->fd_output);
 	create_pipes(e, argc - 4);
 	fork_cmd(e, argc - 3, argv, envp);
-
 	close_pipes(e, argc - 4);
 	close(STDOUT_FILENO);
 	close(STDIN_FILENO);
-
-	// fd_to_fd(e, argc - 2, e->fd_input, STDIN_FILENO);
-	// fd_to_fd(e, argc - 2, e->pipes[(argc - 3) * 2 + 1], 2); //e->pipes[(argc - 3) * 2 + 1], e->fd_output);
-	
-	int i;
-
 	i = 0;
-	while(i < argc - 4)
+	while (i < argc - 4)
 	{
 		waitpid(-1, &status, 0);
 		i++;
 	}	
-	
 	exit(0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  1    2     3     4     5
-// NAME INPUT CMD1 CMD2 OUTPUT
-
-
-// t_env *init_env(void)
-// {
-// 	t_env	*e;
-
-// 	e = malloc(sizeof(e));
-// 	if (fdf == NULL)
-// 	{
-// 		ft_printf(2, "Error: malloc env\n");
-// 		free_exit(e, 1);
-// 	}
-// 	return (e);
-// }
-
-// open, close, read, write,
-// malloc, free, perror,
-// strerror, access, dup, dup2,
-// execve, exit, fork, pipe,
-// unlink, wait, waitpid
-
-// ./pipex file1 cmd1 cmd2 file2
-// •file1 et file2 sont des noms de fichier.
-// •cmd1 et cmd2 sont des commandes shell avec leurs paramètres.
-
-// Similaire à : < file1 cmd1 | cmd2 > file2
-
-// ./pipex infile "ls -l" "wc -l" outfile
-// < infile ls -l | wc -l > outfile
-
-//  ./pipex infile "grep a1" "wc -w" outfile
-//  < infile grep a1 | wc -w > outfile

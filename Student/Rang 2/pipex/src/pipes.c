@@ -6,11 +6,20 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 07:40:28 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/13 16:41:41 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/13 17:37:48 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	close_pipes(t_env *e, int nb_cmd)
+{
+	int	i;
+
+	i = 0;
+	while (i < nb_cmd * 2 + 2)
+		close(e->pipes[i++]);
+}
 
 void	create_pipes(t_env *e, int nb_pipe)
 {	
@@ -37,14 +46,4 @@ void	create_pipes(t_env *e, int nb_pipe)
 		id_pipe++;
 	}
 	e->pipes[nb_pipe * 2 + 1] = e->fd_output;
-
-	id_pipe = 0;
-	ft_printf(1,"| %d ", e->pipes[0]);
-	while (id_pipe < nb_pipe)
-	{
-		ft_printf(1,"| %d , %d ", e->pipes[id_pipe * 2 + 1], e->pipes[id_pipe * 2 + 2]);
-		id_pipe++;
-	}
-	ft_printf(1,"| %d |", e->pipes[nb_pipe * 2 + 1]);
-	ft_printf(1,"\n\n");
 }
