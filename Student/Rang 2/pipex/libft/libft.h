@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:22:44 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/10 16:22:02 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/13 07:02:05 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_flag
 //get_next_line
 char		*get_next_line(int fd);
 char		*save(char *str, char *buffer, int i);
-// void		*gnl_memset(void *b, int c, size_t len)
 
 //ft_printf
 void		ft_putchar_fd_printf(char c, t_flag *all_flag);

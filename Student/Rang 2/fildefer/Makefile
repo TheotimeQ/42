@@ -6,7 +6,7 @@
 #    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/11 13:29:47 by tquere           ###   ########.fr        #
+#    Updated: 2022/12/13 14:26:17 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIB_DIR					= libft/
 	
 GCC						= gcc
 CFLAGS					= -Wall -Wextra -Werror
-SANITIZE				= $(CFLAGS) -g3 -fsanitize=address
+SANITIZE				= #$(CFLAGS) -g3 -fsanitize=address
 
 RM 						= rm -rf
 CLEAR					= clear
