@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/16 11:38:34 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/17 15:29:46 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <pthread.h>
 
@@ -22,51 +22,49 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <limits.h>
+# include <sys/time.h>
 
 # include <stdio.h>
 
 typedef struct s_phil
 {	
 	int						alive;
-	int 					id;
-	pthread_mutex_t 		fork;
-	int 					nb_eat;
+	int						id;
+	int						nb_eat;
 	int						state;
 	long int				last_eat;
 	int						stop;
+	pthread_mutex_t			fork;
+	pthread_t				thread;
 }	t_phil;
 
 typedef struct s_env
 {	
-	long int 				nb_phil;
-	long int 				time_die;
+	struct timeval			current_time;
+	int						cur_id;
+	long int				nb_phil;
+	long int				time_die;
 	long int				time_eat;
 	long int				time_sleep;
 	long int				nb_eat;
-	int						pipe_msg;
 	t_phil					**all_phil;
 	pthread_mutex_t			print_mutex;
-	
-}	t_env;
 
+}	t_env;
 
 size_t		ft_strlen(const char *s);
 long int	ft_atoi(const char *str);
 
 void		check_args(t_env *e, int argc, char **argv);
 
-void    	free_philo(t_env *e);
-void    	create_philos(t_env *e);
+void		free_philo(t_env *e);
+void		create_philos(t_env *e);
 
-void    	print_mutex(t_env *e, char *str);
+void		print_mutex(t_env *e, char *str);
 void		free_exit(t_env *e, int error_code);
 
+void		stop_all_phil(t_env *e);
+void		check_eat_enough(t_env *e);
+void		check_died(t_env *e);
+
 #endif
-
-// memset, printf, malloc, free, write,
-// usleep, gettimeofday, pthread_create,
-
-
-// pthread_detach, pthread_join, pthread_mutex_init,
-// pthread_mutex_destroy, pthread_mutex_lock,
-// pthread_mutex_unlock

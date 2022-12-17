@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
+#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/15 12:25:51 by zelinsta         ###   ########.fr        #
+#    Updated: 2022/12/17 10:34:33 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADER_DIR				= src/
 HEADER_FILE				= philo.h
 
 DIR						= src/
-SRC			 			= main.c main_args.c annexe.c create_philo.c
+SRC			 			= main.c main_args.c annexe.c create_philo.c philo_check.c
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
 GCC						= gcc

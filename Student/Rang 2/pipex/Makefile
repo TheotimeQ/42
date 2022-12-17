@@ -6,7 +6,7 @@
 #    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/13 17:42:23 by tquere           ###   ########.fr        #
+#    Updated: 2022/12/17 13:07:59 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,9 +49,6 @@ $(NAME): 				$(OBJECTS) $(LIB_DIR)$(LIBFT)
 						
 lib:
 						@make -C $(LIB_DIR)
-
-minilibx:
-						@make -C $(MINILIB_DIR)
 						
 clean:					
 						@${RM} $(OBJECTS)
