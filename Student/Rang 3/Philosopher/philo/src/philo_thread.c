@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:10:55 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/20 19:02:38 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/20 19:05:15 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ void    *philo_thread(void *ph)
 
 	phil = (t_phil *)ph;
 	e = (t_env *)phil->e;
-	pthread_mutex_lock(&(phil->mutex_stop));
-	while (phil->stop == 0)
+	while (1)
 	{	
-		pthread_mutex_unlock(&(phil->mutex_stop));
 		check_alive(e, phil);
 		phil_eat(e, phil);
 		phil->last_eat = get_ms(e);
@@ -52,6 +50,5 @@ void    *philo_thread(void *ph)
 		check_alive(e, phil);
 		print_lock(phil->id, get_ms(e), "is thinking", e);
 	}
-	print_lock(phil->id, get_ms(e), "-----> ENDED", e);
 	return (NULL);
 }
