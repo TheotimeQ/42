@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   annexe.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:34:06 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/15 12:20:52 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:21:08 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ size_t	ft_strlen(const char *s)
 	while (s[index])
 		index++;
 	return (index);
+}
+
+char *ft_isnum(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == '-' || str[0] == '+')
+		i++;
+	while (str[i])
+	{	
+		if (!('0' <= str[i] && str[i] <= '9'))
+			return ("-1");
+		i++;
+	}
+	return (str);
 }
 
 long int	ft_atoi(const char *str)

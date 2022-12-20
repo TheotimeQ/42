@@ -6,11 +6,13 @@
 #    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/17 10:34:33 by tquere           ###   ########.fr        #
+#    Updated: 2022/12/20 17:48:05 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY:     			all $(NAME) clear mkbuild clear clean fclean re
+
+#-lpthread 
 
 NAME					= philo 
 
@@ -20,12 +22,15 @@ HEADER_DIR				= src/
 HEADER_FILE				= philo.h
 
 DIR						= src/
-SRC			 			= main.c main_args.c annexe.c create_philo.c philo_check.c
+SRC			 			= 	annexe.c \
+							main.c main_args.c \
+							philo_init.c philo_thread.c philo_check.c philo_utils.c \
+							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
 GCC						= gcc
-CFLAGS					= -Wall -Wextra -Werror
-SANITIZE				= $(CFLAGS) -g3 -fsanitize=address
+CFLAGS					= -Wall -Wextra -Werror 
+SANITIZE				= $(CFLAGS) -g3 -fsanitize=address 
 
 RM 						= rm -rf
 CLEAR					= clear
