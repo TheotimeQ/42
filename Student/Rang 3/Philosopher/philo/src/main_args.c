@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:05:37 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/17 11:13:52 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/20 11:07:47 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ long int	check_nb(t_env *e,long int nb)
 	return (nb);
 }
 
-t_phil	**init_all_phil(t_env *e)
+void	init_all_phil(t_env *e)
 {
-	t_phil	**all_phil;
+	t_phil				**all_phil;
+	pthread_mutex_t 	*all_fork;
 	int		id;
 
 	all_phil = malloc(sizeof(t_phil *) * e->nb_phil);
@@ -36,7 +37,14 @@ t_phil	**init_all_phil(t_env *e)
 	id = 0;
 	while (id < e->nb_phil)
 		all_phil[id++] = NULL;
-	return (all_phil);
+	all_fork = malloc(sizeof(pthread_mutex_t) * e->nb_phil);
+	if (all_fork == NULL)
+	{
+		printf("Error: malloc list fork\n"); // printf
+		free_exit(e, 1);
+	}
+	e->all_fork = all_fork;
+	e->all_phil = all_phil;
 }
 
 void	check_args(t_env *e, int argc, char **argv)
@@ -47,7 +55,7 @@ void	check_args(t_env *e, int argc, char **argv)
 		free_exit(e, 1);
 	}
 	e->nb_phil = check_nb(e, ft_atoi(argv[1]));
-	e->all_phil = init_all_phil(e);
+	init_all_phil(e);
 	e->time_die = check_nb(e, ft_atoi(argv[2]));
 	e->time_eat = check_nb(e, ft_atoi(argv[3]));
 	e->time_sleep = check_nb(e, ft_atoi(argv[4]));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 10:34:27 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/17 11:15:23 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/20 10:34:50 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	check_eat_enough(t_env *e)
 				return ;
 			id++;
 		}
+		stop_all_phil(e);
+		free_exit(e, 0);
 	}
-	stop_all_phil(e);
-	free_exit(e, 0);
 }
 
 void	check_died(t_env *e)

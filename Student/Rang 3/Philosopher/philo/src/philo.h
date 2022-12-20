@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/17 15:29:46 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/20 11:24:16 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,29 @@
 
 typedef struct s_phil
 {	
-	int						alive;
+	void					*e;
 	int						id;
+	int						alive;
+	long long int			last_eat;
 	int						nb_eat;
 	int						state;
-	long int				last_eat;
 	int						stop;
-	pthread_mutex_t			fork;
 	pthread_t				thread;
 }	t_phil;
 
 typedef struct s_env
 {	
-	struct timeval			current_time;
-	int						cur_id;
+	t_phil					**all_phil;
+	long int				start_ms;
 	long int				nb_phil;
 	long int				time_die;
 	long int				time_eat;
 	long int				time_sleep;
 	long int				nb_eat;
-	t_phil					**all_phil;
+	pthread_mutex_t			*all_fork;
 	pthread_mutex_t			print_mutex;
+
+	pthread_mutex_t			all_phil_mutex; //Protection pour
 
 }	t_env;
 
