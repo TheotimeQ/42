@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 14:05:19 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:09:49 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PHILO_H
 
 # include <pthread.h>
-
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -23,8 +22,6 @@
 # include <sys/wait.h>
 # include <limits.h>
 # include <sys/time.h>
-
-# include <stdio.h>
 
 typedef struct s_phil
 {	
@@ -42,7 +39,8 @@ typedef struct s_env
 	long int				time_eat;
 	long int				time_sleep;
 	long int				nb_eat;
-	pthread_mutex_t			*forks;
+	pthread_mutex_t			*forks_mutex;
+	int						*forks;
 	pthread_t				*thread;
 	int						*eats;
 	t_phil					**all_phil;
@@ -58,6 +56,7 @@ long int	check_nb(t_env *e, long int nb);
 size_t		ft_strlen(const char *s);
 char		*ft_isnum(char *str);
 long int	ft_atoi(const char *str);
+void		ft_putnbr(long long int nb);
 
 //Utils philo
 long int	get_ms(t_env *e);
@@ -81,10 +80,5 @@ void		*philo_thread(void *ph);
 void		print_mutex(t_env *e, char *str);
 void		free_exit(t_env *e, int error_code);
 void		free_philo(t_env *e);
-//Other
-// void		stop_all_phil(t_env *e);
-// void		check_eat_enough(t_env *e);
-// void		check_one_died(t_env *e);
-
 
 #endif

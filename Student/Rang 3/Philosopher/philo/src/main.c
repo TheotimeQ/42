@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:36:54 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 14:21:25 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:04:52 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	free_philo(t_env *e)
 void	free_exit(t_env *e, int error_code)
 {	
 	free_philo(e);
+	free(e->forks_mutex);
 	free(e->all_phil);
 	free(e->forks);
 	free(e->thread);

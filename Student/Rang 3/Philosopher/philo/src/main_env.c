@@ -6,27 +6,27 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:43:50 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 14:15:30 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:06:07 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_mutex_env(t_env *e)
+static void	init_mutex_env(t_env *e)
 {
 	if (pthread_mutex_init(&(e->print_mutex), NULL) != 0)
 	{	
-		write(2, "Error: init mutex print\n", 24);
+		write(2, "Error: mutex\n", 13);
 		free_exit(e, 1);
 	}
 	if (pthread_mutex_init(&(e->stop_mutex), NULL) != 0)
 	{	
-		write(2, "Error: init mutex stop\n", 23);
+		write(2, "Error: mutex\n", 13);
 		free_exit(e, 1);
 	}
 	if (pthread_mutex_init(&(e->mutex_eat), NULL) != 0)
 	{	
-		write(2, "Error: init mutex eat\n", 22);
+		write(2, "Error: mutex\n", 13);
 		free_exit(e, 1);
 	}
 }
@@ -35,21 +35,25 @@ static void	init_all_fork(t_env *e)
 {
 	int					id;
 
-	e->forks = malloc(sizeof(pthread_mutex_t) * e->nb_phil);
-	if (e->forks == NULL)
+	e->forks_mutex = malloc(sizeof(pthread_mutex_t) * e->nb_phil);
+	if (e->forks_mutex == NULL)
 	{
-		write(2, "Error: malloc list forks\n", 25);
+		write(2, "Error: malloc\n", 14);
 		free_exit(e, 1);
 	}
 	e->eats = malloc(sizeof(int) * e->nb_phil);
-	if (e->eats == NULL)
+	e->forks = malloc(sizeof(int) * e->nb_phil);
+	if (e->eats == NULL || e->forks == NULL)
 	{
-		write(2, "Error: malloc thread list\n", 26);
+		write(2, "Error: malloc\n", 14);
 		free_exit(e, 1);
 	}
 	id = 0;
 	while (id < e->nb_phil)
-		e->eats[id++] = 0;
+	{
+		e->eats[id] = 0;
+		e->forks[id++] = 1;
+	}
 }
 
 static void	init_all_phil(t_env *e)

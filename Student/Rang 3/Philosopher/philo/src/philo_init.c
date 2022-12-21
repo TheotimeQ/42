@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:10:17 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/21 14:20:14 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 14:53:04 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	create_forks(t_env *e)
 	id = 0;
 	while (id < e->nb_phil)
 	{	
-		if (pthread_mutex_init(&((e->forks)[id]), NULL) != 0)
+		if (pthread_mutex_init(&(e->forks_mutex[id]), NULL) != 0)
 		{	
 			write(2, "Error: init fork\n", 17);
 			free_exit(e, 1);

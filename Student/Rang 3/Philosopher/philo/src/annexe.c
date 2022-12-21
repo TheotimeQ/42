@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:34:06 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 10:49:40 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:14:09 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,20 @@ long int	ft_atoi(const char *str)
 	}
 	nb *= sign;
 	return (nb);
+}
+
+void	ft_putnbr(long long int nb)
+{	
+	char	c;
+
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
+	else
+	{
+		c = (nb + '0');
+		write(1, &c, 1);
+	}
 }

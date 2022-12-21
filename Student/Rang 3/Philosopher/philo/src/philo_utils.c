@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:10:50 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 14:07:55 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:15:46 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,6 @@ void	check_eat_enough(t_env *e)
 {
 	int		id;
 
-	// id = 0;
-	// while (id < e->nb_phil)
-	// {	
-	// 	pthread_mutex_lock(&(e->mutex_eat));
-	// 	printf(" %d |",e->eats[id]);
-	// 	pthread_mutex_unlock(&(e->mutex_eat));
-	// 	id++;
-	// }
-	// printf("\n");
-	
 	id = 0;
 	while (id < e->nb_phil)
 	{	
@@ -57,7 +47,12 @@ long int	get_ms(t_env *e)
 void	print_lock(int id, long int time, char *str, t_env *e)
 {
 	pthread_mutex_lock(&(e->print_mutex));
-	printf("%ld %d %s\n", time, id + 1, str); //printf 
+	ft_putnbr(time);
+	write(1, " ", 1);
+	ft_putnbr(id + 1);
+	write(1, " ", 1);
+	write(1, str, ft_strlen(str));
+	write(1, "\n", 1);
 	pthread_mutex_unlock(&(e->print_mutex));
 }
 
