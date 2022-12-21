@@ -6,11 +6,42 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:10:50 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/20 17:55:00 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 14:07:55 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	check_eat_enough(t_env *e)
+{
+	int		id;
+
+	// id = 0;
+	// while (id < e->nb_phil)
+	// {	
+	// 	pthread_mutex_lock(&(e->mutex_eat));
+	// 	printf(" %d |",e->eats[id]);
+	// 	pthread_mutex_unlock(&(e->mutex_eat));
+	// 	id++;
+	// }
+	// printf("\n");
+	
+	id = 0;
+	while (id < e->nb_phil)
+	{	
+		pthread_mutex_lock(&(e->mutex_eat));
+		if (e->eats[id] < e->nb_eat)
+		{
+			pthread_mutex_unlock(&(e->mutex_eat));
+			return ;
+		}
+		pthread_mutex_unlock(&(e->mutex_eat));
+		id++;
+	}
+	pthread_mutex_lock(&(e->stop_mutex));
+	e->stop = 1;
+	pthread_mutex_unlock(&(e->stop_mutex));
+}
 
 long int	get_ms(t_env *e)
 {	
@@ -30,18 +61,24 @@ void	print_lock(int id, long int time, char *str, t_env *e)
 	pthread_mutex_unlock(&(e->print_mutex));
 }
 
-void	check_alive(t_env *e, t_phil *phil)
-{
+int	check_alive(t_env *e, t_phil *phil)
+{	
+	pthread_mutex_lock(&(e->stop_mutex));
+	if (e->stop == 1)
+	{	
+		pthread_mutex_unlock(&(e->stop_mutex));
+		return (0);
+	}
+	pthread_mutex_unlock(&(e->stop_mutex));
 	if (get_ms(e) - phil->last_eat > e->time_die)
 	{
 		print_lock(phil->id, get_ms(e), "have died", e);
-		//mutex stop
-		//e->stop = 1
-		//mutex stop
-		exit(0);
+		pthread_mutex_lock(&(e->stop_mutex));
+		e->stop = 1;
+		pthread_mutex_unlock(&(e->stop_mutex));
+		return (0);
 	}
-	if (phil->stop == 1)
-		exit(0);
+	return (1);
 }
 
 void	sleep_stop_die(long int last, t_env *e, t_phil *phil)

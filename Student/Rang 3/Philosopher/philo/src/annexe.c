@@ -6,11 +6,21 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:34:06 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/20 17:21:08 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 10:49:40 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long int	check_nb(t_env *e, long int nb)
+{
+	if (nb < 0)
+	{
+		write(2, "Error : Wrong input\n", 20);
+		free_exit(e, 1);
+	}
+	return (nb);
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -24,7 +34,7 @@ size_t	ft_strlen(const char *s)
 	return (index);
 }
 
-char *ft_isnum(char *str)
+char	*ft_isnum(char *str)
 {
 	int	i;
 

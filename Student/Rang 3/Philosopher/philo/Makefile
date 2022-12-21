@@ -6,13 +6,13 @@
 #    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/20 17:48:05 by tquere           ###   ########.fr        #
+#    Updated: 2022/12/21 14:10:51 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY:     			all $(NAME) clear mkbuild clear clean fclean re
 
-#-lpthread 
+#
 
 NAME					= philo 
 
@@ -23,20 +23,21 @@ HEADER_FILE				= philo.h
 
 DIR						= src/
 SRC			 			= 	annexe.c \
-							main.c main_args.c \
-							philo_init.c philo_thread.c philo_check.c philo_utils.c \
+							main.c main_env.c\
+							philo_init.c philo_thread.c philo_utils.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
 GCC						= gcc
 CFLAGS					= -Wall -Wextra -Werror 
-SANITIZE				= $(CFLAGS) -g3 -fsanitize=address 
+SANITIZE				= #$(CFLAGS) -g3 -fsanitize=address 
 
 RM 						= rm -rf
 CLEAR					= clear
 
 $(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE)
-						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
+						@echo -n .
+						@$(GCC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
 
 all: 					clear mkbuild $(HEADER_DIR) $(NAME) 
 						
@@ -47,7 +48,8 @@ clear:
 						$(CLEAR)
 						
 $(NAME): 				$(OBJECTS)
-						$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME)
+						@echo "\n-- Done compiling ./$(NAME)--"
+						@$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) -lpthread 
 						
 clean:					
 						@${RM} $(OBJECTS)
