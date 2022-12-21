@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 15:09:49 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 18:19:39 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,15 @@
 # include <limits.h>
 # include <sys/time.h>
 
+# include <stdio.h>
+
 typedef struct s_phil
 {	
 	void					*e;
 	int						id;
 	long long int			last_eat;
+	int						stop;
+	pthread_mutex_t			stop_mutex;
 
 }	t_phil;
 
@@ -39,17 +43,23 @@ typedef struct s_env
 	long int				time_eat;
 	long int				time_sleep;
 	long int				nb_eat;
-	pthread_mutex_t			*forks_mutex;
-	int						*forks;
-	pthread_t				*thread;
+
 	int						*eats;
+	long int				*last_eats;
 	t_phil					**all_phil;
+	pthread_t				*thread;
+	pthread_mutex_t			*forks;
+
 	pthread_mutex_t			print_mutex;
-	pthread_mutex_t			stop_mutex;
-	int						stop;
-	pthread_mutex_t			mutex_eat;
+	pthread_mutex_t			eat_mutex;
+
 
 }	t_env;
+
+
+
+void		print_eat(t_env *e);
+
 
 //Libft
 long int	check_nb(t_env *e, long int nb);
@@ -63,14 +73,13 @@ long int	get_ms(t_env *e);
 void		print_lock(int id, long int time, char *str, t_env *e);
 int			check_alive(t_env *e, t_phil *phil);
 void		sleep_stop_die(long int last, t_env *e, t_phil *phil);
-void		check_eat_enough(t_env *e);
+int			check_eat_enough(t_env *e);
 
 //Main
 t_env		*init_env(void);
 void		check_args(t_env *e, int argc, char **argv);
 
 //Init philo
-void		create_forks(t_env *e);
 void		create_philos(t_env *e);
 
 //Thread philo

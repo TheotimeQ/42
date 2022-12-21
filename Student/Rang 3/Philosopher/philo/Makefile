@@ -6,13 +6,11 @@
 #    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/21 15:03:25 by tquere           ###   ########.fr        #
+#    Updated: 2022/12/21 18:35:19 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY:     			all $(NAME) clear mkbuild clear clean fclean re
-
-#
 
 NAME					= philo 
 
@@ -30,7 +28,7 @@ OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
 GCC						= gcc
 CFLAGS					= -Wall -Wextra -Werror 
-SANITIZE				= #$(CFLAGS) -g3 -fsanitize=address 
+# SANITIZE				= $(CFLAGS) -g3 -fsanitize=address 
 
 RM 						= rm -rf
 CLEAR					= clear
@@ -49,7 +47,7 @@ clear:
 						
 $(NAME): 				$(OBJECTS)
 						@echo "\n-- Done compiling ./$(NAME)--"
-						@$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) -lpthread 
+						@$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) 
 						
 clean:					
 						@${RM} $(OBJECTS)

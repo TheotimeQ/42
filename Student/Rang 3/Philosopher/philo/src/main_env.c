@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:43:50 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 15:06:07 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 18:34:01 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@ static void	init_mutex_env(t_env *e)
 		write(2, "Error: mutex\n", 13);
 		free_exit(e, 1);
 	}
-	if (pthread_mutex_init(&(e->stop_mutex), NULL) != 0)
-	{	
-		write(2, "Error: mutex\n", 13);
-		free_exit(e, 1);
-	}
-	if (pthread_mutex_init(&(e->mutex_eat), NULL) != 0)
+	if (pthread_mutex_init(&(e->eat_mutex), NULL) != 0)
 	{	
 		write(2, "Error: mutex\n", 13);
 		free_exit(e, 1);
@@ -33,26 +28,27 @@ static void	init_mutex_env(t_env *e)
 
 static void	init_all_fork(t_env *e)
 {
-	int					id;
+	int		id;
 
-	e->forks_mutex = malloc(sizeof(pthread_mutex_t) * e->nb_phil);
-	if (e->forks_mutex == NULL)
-	{
-		write(2, "Error: malloc\n", 14);
-		free_exit(e, 1);
-	}
+	e->forks = malloc(sizeof(pthread_mutex_t) * e->nb_phil);
 	e->eats = malloc(sizeof(int) * e->nb_phil);
-	e->forks = malloc(sizeof(int) * e->nb_phil);
-	if (e->eats == NULL || e->forks == NULL)
+	e->last_eats = malloc(sizeof(int) * e->nb_phil);
+	if (e->eats == NULL || e->last_eats == NULL || e->forks == NULL)
 	{
 		write(2, "Error: malloc\n", 14);
 		free_exit(e, 1);
 	}
 	id = 0;
 	while (id < e->nb_phil)
-	{
+	{	
+		if (pthread_mutex_init(&(e->forks[id]), NULL) != 0)
+		{	
+			write(2, "Error: init fork\n", 17);
+			free_exit(e, 1);
+		}
 		e->eats[id] = 0;
-		e->forks[id++] = 1;
+		e->last_eats[id] = 0;
+		id++;
 	}
 }
 
@@ -88,6 +84,7 @@ t_env	*init_env(void)
 		write(2, "Error: malloc env\n", 18);
 		exit(1);
 	}
+	e->last_eats = NULL;
 	e->eats = NULL;
 	e->thread = NULL;
 	e->forks = NULL;
@@ -97,8 +94,6 @@ t_env	*init_env(void)
 	e->time_die = -1;
 	e->time_eat = -1;
 	e->time_sleep = -1;
-	e->nb_eat = -1;
-	e->stop = 0;
 	gettimeofday(&current_time, NULL);
 	e->start_ms = current_time.tv_sec * 1000 + current_time.tv_usec / 1000;
 	init_mutex_env(e);

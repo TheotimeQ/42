@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:10:17 by zelinsta          #+#    #+#             */
-/*   Updated: 2022/12/21 14:53:04 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 18:19:57 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,22 @@ static t_phil	*init_one_philo(t_env *e, int id)
 {	
 	t_phil				*philo;
 
-	philo = malloc(sizeof(t_phil) * 1 + 5000);
+	philo = malloc(sizeof(t_phil) * 1);
 	if (philo == NULL)
 	{	
-		write(2, "Error: malloc philo\n", 20);
+		write(2, "Error: malloc\n", 13);
+		free_exit(e, 1);
+	}
+	if (pthread_mutex_init(&(philo->stop_mutex), NULL) != 0)
+	{	
+		write(2, "Error: mutex\n", 13);
 		free_exit(e, 1);
 	}
 	philo->e = (void *)e;
 	philo->id = id;
 	philo->last_eat = 0;
+	philo->stop = 0;
 	return (philo);
-}
-
-void	create_forks(t_env *e)
-{
-	int	id;
-
-	id = 0;
-	while (id < e->nb_phil)
-	{	
-		if (pthread_mutex_init(&(e->forks_mutex[id]), NULL) != 0)
-		{	
-			write(2, "Error: init fork\n", 17);
-			free_exit(e, 1);
-		}
-		id++;
-	}
 }
 
 void	create_philos(t_env *e)
@@ -58,7 +48,7 @@ void	create_philos(t_env *e)
 			write(2, "Error: init thread philo\n", 25);
 			free_exit(e, 1);
 		}	
-		usleep(200);
+		usleep(50);
 		id++;
 	}
 }
