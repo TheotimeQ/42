@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:36:54 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 18:35:57 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:59:32 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	free_exit(t_env *e, int error_code)
 {	
 	free_philo(e);
 	free(e->all_phil);
-	// free(e->last_eats);
-	// free(e->forks);
-	// free(e->thread);
+	free(e->last_eats);
+	free(e->forks);
+	free(e->thread);
 	free(e->eats);
 	free(e);
 	exit(error_code);
@@ -93,22 +93,10 @@ int	main(int argc, char **argv)
 	check_args(e, argc, argv);
 	create_philos(e);
 	while (check_die(e) == 0 && check_eat(e) == 0)
-		usleep(50);
+		usleep(10 * 1000);
 	id = 0;
 	while (id < e->nb_phil) 
-	{
-		pthread_mutex_lock(&(e->all_phil[id]->stop_mutex));
-		e->all_phil[id]->stop = 1;
-		pthread_mutex_unlock(&(e->all_phil[id]->stop_mutex));
-		id++;
-	}
-	id = 0;
-	while (id < e->nb_phil) 
-	{	
-		pthread_join(e->thread[id], NULL);
-		pthread_detach(e->thread[id]);
-		id++;
-	}
+		pthread_detach(e->thread[id++]);
 	free_exit(e, 0);
 }
 

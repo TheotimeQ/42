@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:10:50 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 18:05:33 by tquere           ###   ########.fr       */
+/*   Updated: 2022/12/21 22:02:23 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,6 @@ void	print_mutex(t_env *e, char *str)
 	pthread_mutex_lock(&(e->print_mutex));
 	write(1, str, ft_strlen(str));
 	pthread_mutex_unlock(&(e->print_mutex));
-}
-
-void	print_eat(t_env *e)
-{
-	int			id;
-
-	id = 0;
-	pthread_mutex_lock(&(e->eat_mutex));
-	pthread_mutex_lock(&(e->print_mutex));
-	printf("------------------------\n");
-	while (id < e->nb_phil)
-		printf(" %d |", e->eats[id++]);
-	printf("\n");
-	id = 0;
-	while (id < e->nb_phil)
-		printf(" %ld |", e->last_eats[id++]);
-	printf("\n");
-	pthread_mutex_unlock(&(e->print_mutex));
-	pthread_mutex_unlock(&(e->eat_mutex));
 }
 
 long int	get_ms(t_env *e)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
+#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/21 18:35:19 by tquere           ###   ########.fr        #
+#    Updated: 2022/12/21 22:02:53 by zelinsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,14 @@ HEADER_FILE				= philo.h
 
 DIR						= src/
 SRC			 			= 	annexe.c \
-							main.c main_env.c\
+							main.c main_args.c main_env.c\
 							philo_init.c philo_thread.c philo_utils.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
 GCC						= gcc
-CFLAGS					= -Wall -Wextra -Werror 
-# SANITIZE				= $(CFLAGS) -g3 -fsanitize=address 
+# CFLAGS				= -Wall -Wextra -Werror 
+SANITIZE				= $(CFLAGS) -g -fsanitize=address 
 
 RM 						= rm -rf
 CLEAR					= clear
