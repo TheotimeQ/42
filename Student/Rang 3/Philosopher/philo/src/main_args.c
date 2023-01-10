@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:43:50 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 21:05:36 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:01:36 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	init_all_phil(t_env *e)
 		write(2, "Error: malloc\n", 14);
 		free_exit(e, 1);
 	}
-    e->forks = malloc(sizeof(pthread_mutex_t) * e->nb_phil);
+	e->forks = malloc(sizeof(pthread_mutex_t) * e->nb_phil);
 	if (e->forks == NULL)
 	{
 		write(2, "Error: malloc\n", 14);
@@ -43,14 +43,9 @@ static void	init_all_fork(t_env *e)
 {
 	int		id;
 
-    e->eats = malloc(sizeof(int) * (e->nb_phil * 2));
-    if (e->eats == NULL)
-	{
-		write(2, "Error: malloc\n", 14);
-		free_exit(e, 1);
-	}
+	e->eats = malloc(sizeof(int) * (e->nb_phil * 2));
 	e->last_eats = malloc(sizeof(int) * (e->nb_phil * 2));
-	if (e->last_eats == NULL)
+	if (e->eats == NULL || e->last_eats == NULL)
 	{
 		write(2, "Error: malloc\n", 14);
 		free_exit(e, 1);
@@ -84,8 +79,8 @@ void	check_args(t_env *e, int argc, char **argv)
 	e->time_sleep = check_nb(e, ft_atoi(ft_isnum(argv[4])));
 	if (argc == 6)
 		e->nb_eat = check_nb(e, ft_atoi(ft_isnum(argv[5])));
-    if (e->nb_eat == 0)
-    {
+	if (e->nb_eat == 0)
+	{
 		write(2, "Error: wrong input\n", 19);
 		free_exit(e, 1);
 	}

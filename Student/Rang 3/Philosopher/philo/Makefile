@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
+#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2022/12/21 22:02:53 by zelinsta         ###   ########.fr        #
+#    Updated: 2022/12/22 09:59:03 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ SRC			 			= 	annexe.c \
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
 GCC						= gcc
-# CFLAGS				= -Wall -Wextra -Werror 
-SANITIZE				= $(CFLAGS) -g -fsanitize=address 
+CFLAGS					= -Wall -Wextra -Werror 
+SANITIZE				= $(CFLAGS) -g #-fsanitize=address 
 
 RM 						= rm -rf
 CLEAR					= clear

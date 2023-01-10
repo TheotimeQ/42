@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:36:54 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 21:59:32 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:00:58 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,9 @@ int	main(int argc, char **argv)
 	check_args(e, argc, argv);
 	create_philos(e);
 	while (check_die(e) == 0 && check_eat(e) == 0)
-		usleep(10 * 1000);
+		usleep(7 * 1000);
 	id = 0;
-	while (id < e->nb_phil) 
+	while (id < e->nb_phil)
 		pthread_detach(e->thread[id++]);
 	free_exit(e, 0);
 }
-
-//Free filo useless ?
-//Stopper les process
-//certain meurt alors qu'il ne devrait pas ( checker ./philo 4 410 200 200 10 ) 

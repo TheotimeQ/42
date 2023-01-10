@@ -6,11 +6,12 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 07:20:52 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/13 17:46:27 by tquere           ###   ########.fr       */
+/*   Updated: 2023/01/05 15:59:50 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdio.h>
 
 static char	*get_cmd_path(char **paths, char *cmd)
 {
@@ -42,6 +43,8 @@ static void	one_child(t_env *e, int id_cmd, char **argv, char *envp[])
 	close_pipes(e, e->nb_cmd - 1);
 	cmd_args = ft_split(argv[id_cmd + 2], ' ');
 	cmd_path = get_cmd_path(e->path, cmd_args[0]);
+	printf("args : %s \n",cmd_args);
+	printf("path : %s \n",cmd_path);
 	execve(cmd_path, cmd_args, envp);
 	ft_printf(2, "Error: command not found: %s\n", argv[id_cmd + 2]);
 	free_split(cmd_args);

@@ -6,13 +6,14 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/11 13:29:15 by tquere           ###   ########.fr       */
+/*   Updated: 2023/01/08 11:07:27 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <string.h>
@@ -107,6 +108,8 @@ typedef struct s_fdf
 	int			min_color;
 
 }	t_fdf;
+
+void		print_infos(t_fdf *fdf);
 
 void		update(t_fdf *fdf);
 void		reset(t_fdf *fdf);

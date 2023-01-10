@@ -6,7 +6,7 @@
 /*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:36:54 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/11 12:32:58 by tquere           ###   ########.fr       */
+/*   Updated: 2023/01/08 11:06:46 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	update(t_fdf *fdf)
 		}
 		y++;
 	}
+	print_infos(fdf);
 	update_img(fdf);
 }
 

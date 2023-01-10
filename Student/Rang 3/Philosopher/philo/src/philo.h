@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 09:38:26 by tquere            #+#    #+#             */
-/*   Updated: 2022/12/21 22:02:32 by zelinsta         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:02:57 by tquere           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <sys/wait.h>
 # include <limits.h>
 # include <sys/time.h>
-
-# include <stdio.h>
 
 typedef struct s_phil
 {	
@@ -53,10 +51,8 @@ typedef struct s_env
 
 }	t_env;
 
-void		print_eat(t_env *e);
-
 //Libft
-long int	check_nb(t_env *, long int nb);
+long int	check_nb(t_env *e, long int nb);
 size_t		ft_strlen(const char *s);
 char		*ft_isnum(char *str);
 long int	ft_atoi(const char *str);
