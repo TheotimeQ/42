@@ -3,45 +3,67 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
+#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/19 09:10:28 by tquere            #+#    #+#              #
-#    Updated: 2022/11/19 09:10:29 by tquere           ###   ########.fr        #
+#    Created: 2022/11/10 13:23:47 by tquere            #+#    #+#              #
+#    Updated: 2023/01/29 17:52:33 by zelinsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY:     		all $(NAME) bonus clean fclean re
+.PHONY:     			all $(NAME) spinner bonus clean fclean re
 
-NAME				= libft.a
-HEADER				= libft.h
+NAME				= 	libft.a
+HEADER				= 	libft.h
+	
+BUILD_DIR			= 	build/
+HEADER_DIR			= 	inc/
 
-SOURCE		 		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-OBJECTS			    = $(SOURCE:%.c=%.o)
+FT_GNL 				= 	get_next_line_utils get_next_line
+FT_IS 				= 	ft_is_double ft_isnum ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint
+FT_LS 				= 	ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter ft_lstmap
+FT_MEM 				= 	ft_memset ft_bzero ft_memcpy ft_memmove ft_memchr ft_memcmp ft_calloc
+FT_PRINTF 			= 	ft_printf ft_write_protect
+FT_PUT 				= 	ft_put_base_long ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd
+FT_STR 				= 	ft_strmapi ft_striteri ft_strjoin ft_strtrim ft_strcmp ft_strlen ft_strlcpy ft_strlcat ft_strchr ft_strrchr ft_strncmp ft_strnstr ft_strdup ft_substr
+FT_STRS 			= 	ft_split ft_free_tab ft_count_tab ft_sort_tab ft_print_tab
+FT_TO 				= 	ft_toupper ft_tolower ft_atoi ft_itoa
+         
+SOURCE 				= 	$(addsuffix .c, $(addprefix ft_gnl/, $(FT_GNL))) 		\
+						$(addsuffix .c, $(addprefix ft_is/, $(FT_IS))) 			\
+						$(addsuffix .c, $(addprefix ft_ls/, $(FT_LS))) 			\
+						$(addsuffix .c, $(addprefix ft_mem/, $(FT_MEM))) 		\
+						$(addsuffix .c, $(addprefix ft_printf/, $(FT_PRINTF))) 	\
+						$(addsuffix .c, $(addprefix ft_put/, $(FT_PUT))) 		\
+						$(addsuffix .c, $(addprefix ft_str/, $(FT_STR))) 		\
+						$(addsuffix .c, $(addprefix ft_strs/, $(FT_STRS))) 		\
+						$(addsuffix .c, $(addprefix ft_to/, $(FT_TO))) 			\
+						
+OBJECTS			    	= $(SOURCE:%.c=$(BUILD_DIR)%.o)
 
-BONUS	 			= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
-OBJECTS_BONUS		= $(BONUS:%.c=%.o)
+GCC						= gcc
+CFLAGS					= -Wall -Wextra -Werror 
+LIB 					= ar -crs
+RM 						= rm -rf
 
-GCC					= gcc
-CFLAGS				= -Wall -Wextra -Werror 
-LIB 				= ar -crs
+all: 					$(NAME) 
 
-RM 					= rm -rf
+$(BUILD_DIR)%.o:		%.c $(HEADER_DIR)$(HEADER)
+						@echo -n .
+						@mkdir -p $(@D)
+						@$(GCC) $(CFLAGS) -I$(HEADER_DIR)$(HEADER) -c $< -o $@
 
-all: 		$(NAME) Makefile
+$(NAME): 				${OBJECTS} $(HEADER_DIR)$(HEADER)
+						@${LIB} ${NAME} ${OBJECTS}
+						@echo "\033[32m\n-- Done compiling $(NAME)--\033[0m"
 
-%.o:		%.c $(HEADER) Makefile
-			$(GCC) $(CFLAGS) -include $(HEADER) -c $< -o $@
+clean:			
+						@${RM} ${OBJECTS} ${OBJECTS_BONUS}
+						
+fclean:					clean
+						@${RM} ${NAME}
+						@${RM} ${BUILD_DIR}
 
-$(NAME): 	${OBJECTS} $(HEADER) Makefile 
-			${LIB} ${NAME} ${OBJECTS}
+re:						fclean all
 
-bonus:		${OBJECTS_BONUS} ${OBJECTS} Makefile
-			${LIB} ${NAME} ${OBJECTS} ${OBJECTS_BONUS}
-
-clean:
-			${RM} ${OBJECTS} ${OBJECTS_BONUS}
-
-fclean:		clean
-			${RM} ${NAME}
-
-re:			fclean all
+					# echo -n $$i
+					# 
