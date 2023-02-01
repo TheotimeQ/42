@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
+#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/04 14:22:29 by tquere            #+#    #+#              #
-#    Updated: 2023/01/08 11:06:56 by tquere           ###   ########.fr        #
+#    Updated: 2023/01/31 12:10:19 by zelinsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,11 @@ CLEAR					= clear
 
 MINILIB					= libmlx.a
 
-MINILIB_DIR				= minilibx_macos/
-MAC						= -framework OpenGL -framework AppKit 
+# MINILIB_DIR				= minilibx_macos/
+# MAC						= -framework OpenGL -framework AppKit 
 
-# MINILIB_DIR			= minilibx_linux/
-# LINUX					= -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz 
+MINILIB_DIR				= minilibx_linux/
+LINUX					= -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm
 
 $(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE) $(HEADER_DIR)/$(HEADER_FILE_KEYS)
 						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -I$(MINILIB_DIR) -I/usr/include -O3 -c $< -o $@
