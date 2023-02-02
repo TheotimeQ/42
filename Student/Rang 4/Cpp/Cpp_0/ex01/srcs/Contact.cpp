@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact.cpp                                        :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:41:55 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/02/01 14:39:17 by zelinsta         ###   ########.fr       */
+/*   Updated: 2023/02/02 08:18:55 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/contact.hpp"
+#include "../incs/Contact.hpp"
 
 // Constructeur par défaut
 Contact::Contact()
