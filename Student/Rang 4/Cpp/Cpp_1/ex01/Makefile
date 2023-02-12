@@ -6,13 +6,13 @@
 #    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 16:24:04 by zelinsta          #+#    #+#              #
-#    Updated: 2023/02/03 10:04:32 by zelinsta         ###   ########.fr        #
+#    Updated: 2023/02/06 08:59:10 by zelinsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY:		fclean, all, clear, re
 
-NAME		=	phonebook
+NAME		=	Ex01
 
 CMP			=	c++
 INC_DIR		=	incs
@@ -20,10 +20,10 @@ FLG			=	-Wall -Wextra -Werror -std=c++98
 RM			=	rm -rf
 
 SRCS_DIR	=	srcs
-SRCS_FILE	=	main Phonebook Contact
+SRCS_FILE	=	main Zombie zombieHorde
 SRCS		=  $(addsuffix .cpp, $(addprefix $(SRCS_DIR)/, $(SRCS_FILE)))
 
-INC_FILE	= Contact Phonebook
+INC_FILE	= Zombie
 INC			= $(addsuffix .hpp, $(addprefix $(INC_DIR)/, $(INC_FILE)))
 
 

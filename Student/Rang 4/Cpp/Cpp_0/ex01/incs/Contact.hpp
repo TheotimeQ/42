@@ -6,7 +6,7 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:42:54 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/02/02 08:19:58 by zelinsta         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:56:46 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ class Contact
     public:
 
 		// Constructeur par défaut
-        Contact(); 
+        Contact();
 
 		// Constructeur de recopie
-        // Contact(const Contact&); 
+        Contact(const Contact&);
+
+		// Operator d'affectation
+        Contact &operator=(const Contact&);
 
 		// Destructeur
         ~Contact(); 
-
-		// Operator d'affectation
-        // Contact &operator=(const Contact&);
 
 		// Gets
 		std::string Get_First_Name() 	const;

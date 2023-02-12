@@ -1,47 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 15:40:52 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/01/30 15:47:45 by zelinsta         ###   ########.fr       */
+/*   Created: 2023/02/06 09:11:47 by zelinsta          #+#    #+#             */
+/*   Updated: 2023/02/06 09:19:18 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#include "../incs/Weapon.hpp"
 
-
-
-
-#endif
-
-
-//Coplien
-// https://cpp.developpez.com/cours/cppavance/
-
-
-class Phonebook
+Weapon::Weapon()
 {
-public:
 
-	// Constructors & Destructor
-	Phonebook();
-	~Phonebook();
+}
 
-	// Getters
-	Contact getContact(int index) const;
-	int		getCount() const;
+Weapon::Weapon(const std::string& type) : type(type)
+{
+	std::cout << this->type << ": weapon created" << std::endl;
+}
 
-	// Setters
-	void set_contact(Contact contact);
+Weapon::~Weapon()
+{
+	std::cout << this->type << ": weapon destroyed" << std::endl;
+}
 
-private:
+const std::string& Weapon::getType() const
+{
+	return this->type;
+}
 
-	static int		_count;
-
-	Contact _contacts[8];
-	int		_index;
-};
+void Weapon::setType(const std::string &type)
+{
+	this->type = type;
+}
