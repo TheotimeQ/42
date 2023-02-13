@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <tquere@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 15:44:56 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/02/13 11:28:49 by tquere           ###   ########.fr       */
+/*   Created: 2023/02/06 13:30:56 by zelinsta          #+#    #+#             */
+/*   Updated: 2023/02/06 13:48:52 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
-#include "../incs/Zombie.hpp"
+#include <iostream>
 
-#define Horde_Size 5
+#include "../incs/Fixed.hpp"
 
-Zombie* zombieHorde(int N, std::string name);
-
-int main()
+int main(void)
 {
-	Zombie* Zbs = zombieHorde(Horde_Size, "For the Hordeeeee");
-	for (int i = 0; i < Horde_Size; i++)
-		Zbs[i].announce();
-	delete[] Zbs;
+	Fixed a;
+	Fixed b(a);
+	Fixed c;
+
+	c = b;
+
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+
 	return (0);
 }

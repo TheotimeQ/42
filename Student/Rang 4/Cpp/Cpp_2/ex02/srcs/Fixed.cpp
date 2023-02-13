@@ -29,7 +29,6 @@ Fixed::Fixed(const int value)
 	this->Nb = value << this->Nb_Bit_Fract;
 }
 
-//Construit le float
 Fixed::Fixed(const float value)
 {	
 	this->Nb = static_cast<int>(value) << this->Nb_Bit_Fract;
@@ -195,8 +194,6 @@ Fixed Fixed::operator--(int)
 	this->Nb--;
 	return (saved);
 }
-
-
 
 //------------------Functions----------------------
 

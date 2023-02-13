@@ -23,7 +23,7 @@ Fixed::Fixed()
 Fixed::Fixed(const Fixed &other)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	setRawBits(other.getRawBits());
+	*this = other;
 }
 
 Fixed::Fixed(const int value)
@@ -32,18 +32,11 @@ Fixed::Fixed(const int value)
 	this->Nb = value << this->Nb_Bit_Fract;
 }
 
-//Construit le float
 Fixed::Fixed(const float value)
 {	
 	std::cout << "Float constructor called" << std::endl;
-
-	//Recupere la partie entiere et decale de Nb bit pour laisser la place au float
 	this->Nb = static_cast<int>(value) << this->Nb_Bit_Fract;
-
-	//Construit la partie floatante
 	float	float_part = value - toInt();
-
-	//Construit le mask
 	int 	mask = 1 << (this->Nb_Bit_Fract - 1);
 	float 	power_two;
 	int		i = 2;
@@ -68,7 +61,7 @@ Fixed::Fixed(const float value)
 
 Fixed &Fixed::operator=(const Fixed &other)
 {
-	std::cout << "Copy assignment operator function called" << std::endl;
+	std::cout << "Copy assignment operator called" << std::endl;
 	setRawBits(other.getRawBits());
 	return (*this);
 }
@@ -88,7 +81,6 @@ void Fixed::setRawBits(const int Nb)
 	this->Nb = Nb;
 }
 
-//Recupere la partie entiere , puis ajoute la partie decimal bit apres bit
 float Fixed::toFloat() const
 {
 	float 		float_build = toInt();
@@ -109,14 +101,11 @@ float Fixed::toFloat() const
 	return (float_build);
 }
 
-//Decale de 8 bit vers la droite pour detruite la partie à virgule
 int Fixed::toInt() const
 {
 	return (this->Nb >> this->Nb_Bit_Fract);
 }
 
-//Affiche la class fixed
-//std::cout << f << std::endl;
 std::ostream& operator<<(std::ostream &out, const Fixed &fixed)
 {
 	std::cout << fixed.toFloat();

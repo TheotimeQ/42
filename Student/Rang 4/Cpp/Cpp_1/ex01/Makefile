@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
+#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 16:24:04 by zelinsta          #+#    #+#              #
-#    Updated: 2023/02/06 08:59:10 by zelinsta         ###   ########.fr        #
+#    Updated: 2023/02/13 11:22:39 by tquere           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,12 @@ INC_FILE	= Zombie
 INC			= $(addsuffix .hpp, $(addprefix $(INC_DIR)/, $(INC_FILE)))
 
 
-all:		clear $(NAME)
+all:		clear $(NAME) $(SRCS)
 
 clear:
 			clear
 
-$(NAME):	$(INC)
+$(NAME):	$(INC) $(SRCS)
 			$(CMP) $(FLGS) $(SRCS) -I$(INC_DIR) -o $(NAME)
 
 fclean:
