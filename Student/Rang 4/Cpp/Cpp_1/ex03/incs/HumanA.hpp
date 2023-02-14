@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 09:00:30 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/02/06 11:09:49 by zelinsta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef HUMANA_H
 # define HUMANA_H
 
@@ -27,10 +15,7 @@ class HumanA
 
     public:
 
-		// Constructeur de recopie
         HumanA(const std::string& name, Weapon& weapon);
-		
-		// Destructeur
         ~HumanA();
 
         void attack() const;

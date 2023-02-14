@@ -1,25 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Phonebook.cpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 13:57:27 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/02/03 10:02:13 by zelinsta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../incs/Contact.hpp"
 #include "../incs/Phonebook.hpp"
 
-// Constructeur par défaut
 Phonebook::Phonebook() : index(0), nb(0)
 {
 	return;
 }
 
-// Constructeur de recopie
 Phonebook::Phonebook(const Phonebook &src)
 {
 	for (int i = 0; i < src.nb; i++)
@@ -28,7 +14,6 @@ Phonebook::Phonebook(const Phonebook &src)
     nb = src.nb;
 }
 
-// Operateur d'affectation
 Phonebook& Phonebook::operator=(const Phonebook& other)
 {
 	if (this != &other) {
@@ -40,7 +25,6 @@ Phonebook& Phonebook::operator=(const Phonebook& other)
 	return *this;
 }
 
-// Destructeur
 Phonebook::~Phonebook()
 {
 	return;

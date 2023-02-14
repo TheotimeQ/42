@@ -1,24 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   HumanB.cpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 09:00:59 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/02/06 11:09:42 by zelinsta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# include <iostream>
+# include <string>
 
 #include "../incs/HumanB.hpp"
 
-//Constructeur par recopie
-HumanB::HumanB(const std::string &name) : name(name), weapon(nullptr)
+HumanB::HumanB(const std::string &name) : name(name), weapon(NULL)
 {
 	std::cout << this->name << ": Created" << std::endl;
 }
 
-// Destructeur
 HumanB::~HumanB()
 {
 	std::cout << this->name << ": Destroyed" << std::endl;

@@ -1,32 +1,39 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/01 13:34:37 by zelinsta          #+#    #+#              #
-#    Updated: 2023/02/02 08:16:30 by zelinsta         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+.PHONY:		fclean, all, clear, re
 
-.PHONY:		fclean, all, re
+NAME					=	megaphone
 
-NAME		=	megaphone
+CMP						=	c++
+FLG						=	-Wall -Wextra -Werror -std=c++98
+RM						=	rm -rf
+BUILD_DIR				= 	build/
 
-CMP			=	c++
-INC			=
-FLG			=	-Wall -Wextra -Werror -std=c++98
-RM			=	rm -rf
+INC_DIR					=	incs
+INC_FILE				= 	
+INC						= 	$(addsuffix .hpp, $(addprefix $(INC_DIR)/, $(INC_FILE)))
 
-SRCS		=	megaphone.cpp
+SRCS_DIR				=	srcs
+SRCS_FILE				=	megaphone
+SRCS					=  	$(addsuffix .cpp, $(addprefix $(SRCS_DIR)/, $(SRCS_FILE)))
 
-all:		$(NAME)
+OBJS			    	= 	$(SRCS:%.cpp=$(BUILD_DIR)%.o)
 
-$(NAME):	$(INC)
-			$(CMP) $(FLGS) $(SRCS) -o $(NAME)
+$(BUILD_DIR)%.o:		%.cpp $(INC)
+						@echo -n .
+						@mkdir -p $(@D)
+						@$(CMP) $(FLG) -I$(INC_DIR) -c $< -o $@
+
+all:		clear $(NAME)
+
+clear:
+			clear
+
+$(NAME):	$(INC) $(OBJS)
+			@$(CMP) $(FLG) $(OBJS) -I$(INC_DIR) -o $(NAME)
+			@echo "\033[32m\n-- Done compiling $(NAME)--\033[0m"
 
 fclean:
 			$(RM) $(NAME)
+			$(RM) $(BUILD_DIR)
 
 re:			fclean all
+

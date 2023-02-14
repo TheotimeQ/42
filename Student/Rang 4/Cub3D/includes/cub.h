@@ -13,8 +13,8 @@
 #ifndef CUB_H
 # define CUB_H
 
-# define WIN_WIDTH 1880
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 3000
+# define WIN_HEIGHT 1500
 
 # define MM_BG 0x00aaaaaa
 # define MM_PLAYER 0x004499ff

@@ -33,7 +33,7 @@ clear:
 			clear
 
 $(NAME):	$(INC) $(SRCS)
-			$(CMP) $(FLGS) $(SRCS) -I$(INC_DIR) -o $(NAME)
+			$(CMP) $(FLG) $(SRCS) -I$(INC_DIR) -o $(NAME)
 
 fclean:
 			$(RM) $(NAME)

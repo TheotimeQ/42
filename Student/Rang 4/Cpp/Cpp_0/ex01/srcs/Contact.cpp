@@ -1,24 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Contact.cpp                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 15:41:55 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/02/03 10:00:22 by zelinsta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include <string>
 
 #include "../incs/Contact.hpp"
 
-// Constructeur par défaut
 Contact::Contact()
 {
 	return;
 }
 
-// Constructeur de recopie
 Contact::Contact(const Contact &src) 
 {
     First_Name = src.First_Name;
@@ -28,7 +16,6 @@ Contact::Contact(const Contact &src)
     Secret = src.Secret;
 }
 
-// Operateur d'affectation
 Contact& Contact::operator=(const Contact& other)
 {
 	if (this != &other) {
@@ -41,13 +28,11 @@ Contact& Contact::operator=(const Contact& other)
 	return *this;
 }
 
-// Destructeur
 Contact::~Contact()
 {
 	return;
 }
 
-// Get
 std::string Contact::Get_First_Name()	const
 {
 	return (this->First_Name);
@@ -73,7 +58,6 @@ std::string Contact::Get_Secret() 		const
 	return (this->Secret);
 }
 
-//Set
 void Contact::Set_First_Name(std::string str)
 {
 	this->First_Name = str;

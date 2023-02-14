@@ -1,22 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 15:44:56 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/02/03 09:26:38 by zelinsta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <iomanip>
-#include <string>
-#include <limits>
-#include <cctype>
-
 #include <iostream>
 #include <string>
+#include <limits>
 #include <cctype>
 
 #include "../incs/Contact.hpp"
@@ -32,20 +17,55 @@ static std::string cut(std::string str)
 static std::string Get_Str()
 {
     std::string str;
-	
-    std::getline(std::cin, str);
-    while (str.empty()) {
-        std::cout << "Error, empty field: ";
-        std::getline(std::cin, str);
+	int			good;
+	int			i;
+
+	good = 0;
+    
+    while (good == 0) 
+	{	
+		good = 1;
+		std::getline(std::cin, str);
+		if (str.empty())
+		{	
+			good = 0;
+        	std::cout << "Error, empty field: ";
+		}
+		else if (std::isspace(str[0]))
+		{	
+			good = 0;
+        	std::cout << "Error, can't start with space: ";
+		}
+		i = 0;
+		while (str[i]) 
+		{
+			if (std::isdigit(str[i])) 
+			{
+				good = 0;
+				std::cout << "Error, can't contain number: ";
+				break;
+			}
+			i++;
+    	}
     }
     return str;
 }
 
 static bool Is_Number(std::string &str) {
-    for (char c : str) {
-        if (!std::isdigit(c) && !std::isspace(c)) {
+	int i;
+
+	if (std::isspace(str[0]))
+	{	
+        std::cout << "Error, can't start with space: ";
+		return false;
+	}
+
+	i = 0;
+    while (str[i]) {
+        if (!std::isdigit(str[i])) {
             return false;
         }
+		i++;
     }
     return true;
 }
@@ -158,7 +178,7 @@ int main(void)
 			Add_Contact(&ph);
 		else if (cmd == "SEARCH")
 			Search_Contact(&ph);
-		else if (cmd == "EXIT" || cmd == "")
+		else if (cmd == "EXIT")
 			break;
 	}
 }
