@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 13:30:51 by zelinsta          #+#    #+#             */
-/*   Updated: 2023/02/12 16:05:14 by zelinsta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FIXED_H
 #define FIXED_H
 
@@ -25,15 +13,11 @@ class Fixed
     
     public:
 
-        //Constructeur par default
         Fixed();
-
-        //Constructeur par copie
         Fixed(const Fixed& other);
     	Fixed(const int value);
     	Fixed(const float value);
 
-        //Operateur d'affectation
         Fixed& operator=(const Fixed& other);
 
         bool operator<(const Fixed& other) const;
@@ -53,7 +37,6 @@ class Fixed
         Fixed& operator--();
         Fixed operator--(int);
 
-        //Destructeur
         ~Fixed();
 
         int                 getRawBits(void) const;

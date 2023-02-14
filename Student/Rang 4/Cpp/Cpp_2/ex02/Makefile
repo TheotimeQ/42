@@ -1,41 +1,38 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tquere <tquere@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/01 16:24:04 by zelinsta          #+#    #+#              #
-#    Updated: 2023/02/13 11:24:54 by tquere           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 .PHONY:		fclean, all, clear, re
 
-NAME		=	Ex02
+NAME					=	Ex02
 
-CMP			=	c++
-INC_DIR		=	incs
-FLG			=	-Wall -Wextra -Werror -std=c++98
-RM			=	rm -rf
+CMP						=	c++
+FLG						=	-Wall -Wextra -Werror -std=c++98
+RM						=	rm -rf
+BUILD_DIR				= 	build/
 
-SRCS_DIR	=	srcs
-SRCS_FILE	=	main Fixed
-SRCS		=  $(addsuffix .cpp, $(addprefix $(SRCS_DIR)/, $(SRCS_FILE)))
+INC_DIR					=	incs
+INC_FILE				= 	Fixed
+INC						= 	$(addsuffix .hpp, $(addprefix $(INC_DIR)/, $(INC_FILE)))
 
-INC_FILE	= Fixed
-INC			= $(addsuffix .hpp, $(addprefix $(INC_DIR)/, $(INC_FILE)))
+SRCS_DIR				=	srcs
+SRCS_FILE				=	main Fixed
+SRCS					=  	$(addsuffix .cpp, $(addprefix $(SRCS_DIR)/, $(SRCS_FILE)))
 
+OBJS			    	= 	$(SRCS:%.cpp=$(BUILD_DIR)%.o)
 
-all:		clear $(NAME) $(SRCS)
+$(BUILD_DIR)%.o:		%.cpp $(INC)
+						@echo -n .
+						@mkdir -p $(@D)
+						@$(CMP) $(FLG) -I$(INC_DIR) -c $< -o $@
+
+all:		clear $(NAME)
 
 clear:
 			clear
 
-$(NAME):	$(INC) $(SRCS)
-			$(CMP) $(FLG) $(SRCS) -I$(INC_DIR) -o $(NAME)
+$(NAME):	$(INC) $(OBJS)
+			@$(CMP) $(FLG) $(OBJS) -I$(INC_DIR) -o $(NAME)
+			@echo "\033[32m\n-- Done compiling $(NAME)--\033[0m"
 
 fclean:
 			$(RM) $(NAME)
+			$(RM) $(BUILD_DIR)
 
 re:			fclean all
