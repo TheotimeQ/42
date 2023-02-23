@@ -6,15 +6,15 @@
 /*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:18:03 by ldurieux          #+#    #+#             */
-/*   Updated: 2023/02/06 11:47:52 by zelinsta         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:33:24 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# define WIN_WIDTH 3000
-# define WIN_HEIGHT 1500
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
 # define MM_BG 0x00aaaaaa
 # define MM_PLAYER 0x004499ff
