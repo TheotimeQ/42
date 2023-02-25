@@ -1,4 +1,6 @@
-#include "../incs/Bureaucrat.hpp"
+#include "bureaucrat.h"
+#include "form.h"
+#include "intern.h"
 
 int main()
 {
@@ -17,6 +19,7 @@ int main()
 
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
+	std::cout << std::endl;
 
 	try
 	{
@@ -30,6 +33,24 @@ int main()
 
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
+	std::cout << std::endl;
+
+	Intern intern;
+
+	try
+	{
+		Form* form = intern.makeForm("PresidentialPardonForm", "random");
+
+		a.signForm(*form);
+		form->beSigned(a);
+		a.executeForm(*form);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
 
 	return 0;
 }

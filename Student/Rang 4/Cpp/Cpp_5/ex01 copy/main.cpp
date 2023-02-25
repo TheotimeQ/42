@@ -1,4 +1,5 @@
-#include "../incs/Bureaucrat.hpp"
+#include "bureaucrat.h"
+#include "form.h"
 
 int main()
 {
@@ -30,6 +31,20 @@ int main()
 
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
+
+	Form form("form", 50, 50);
+
+	try
+	{
+		a.signForm(form);
+		form.beSigned(a);
+		b.signForm(form);
+		form.beSigned(b);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
 	return 0;
 }
