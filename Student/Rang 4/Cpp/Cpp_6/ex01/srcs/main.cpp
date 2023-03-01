@@ -1,5 +1,6 @@
 #include <iostream>
-#include "data.h"
+
+#include "../incs/Data.hpp"
 
 int main()
 {

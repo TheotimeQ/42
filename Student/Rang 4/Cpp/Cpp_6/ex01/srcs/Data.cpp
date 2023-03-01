@@ -1,9 +1,9 @@
-#include "data.h"
+#include "../incs/Data.hpp"
 
 Data::Data(int integer, const std::string& string, float floating) :
-	_integer(integer),
-	_string(string),
-	_floating(floating)
+	_Integer(integer),
+	_String(string),
+	_Floating(floating)
 {
 }
 
@@ -17,36 +17,39 @@ Data* Data::deserialize(uintptr_t raw)
 	return reinterpret_cast<Data*>(raw);
 }
 
+//------------Getters--------------
 int Data::integer() const
 {
-	return _integer;
-}
-
-void Data::setInteger(int newInteger)
-{
-	_integer = newInteger;
+	return _Integer;
 }
 
 std::string Data::string() const
 {
-	return _string;
-}
-
-void Data::setString(const std::string& newString)
-{
-	_string = newString;
+	return _String;
 }
 
 float Data::floating() const
 {
-	return _floating;
+	return _Floating;
+}
+
+//-----------Setters----------------
+void Data::setInteger(int newInteger)
+{
+	_Integer = newInteger;
+}
+
+void Data::setString(const std::string& newString)
+{
+	_String = newString;
 }
 
 void Data::setFloating(float newFloating)
 {
-	_floating = newFloating;
+	_Floating = newFloating;
 }
 
+//-----------Other-------------------
 std::ostream& operator<<(std::ostream& out, const Data& data)
 {
 	out << "integer: " << data.integer()
