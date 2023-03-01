@@ -4,15 +4,17 @@
 
 int main()
 {
-	Data orig(42, "HEY!", 9.81f);
+	Data My_Data(42, "42!", 42.0f, (void*)42, '4');
 
-	uintptr_t serialized = Data::serialize(&orig);
+	uintptr_t serialized = Data::serialize(&My_Data);
 	Data* deserialized = Data::deserialize(serialized);
 
-	std::cout << orig << std::endl;
+	std::cout << My_Data << std::endl;
 	std::cout << *deserialized << std::endl;
-	std::cout << &orig << std::endl;
+
+	std::cout << &My_Data << std::endl;
 	std::cout << deserialized << std::endl;
 
 	return 0;
 }
+

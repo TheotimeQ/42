@@ -1,9 +1,11 @@
 #include "../incs/Data.hpp"
 
-Data::Data(int integer, const std::string& string, float floating) :
-	_Integer(integer),
-	_String(string),
-	_Floating(floating)
+Data::Data(int int_, const std::string& str_, float float_, void* void_, char char_):
+	_str(str_),
+	_int(int_),
+	_float(float_),
+	_void(void_),
+	_char(char_)
 {
 }
 
@@ -18,42 +20,38 @@ Data* Data::deserialize(uintptr_t raw)
 }
 
 //------------Getters--------------
-int Data::integer() const
+int Data::Get_int() const
 {
-	return _Integer;
+	return _int;
 }
 
-std::string Data::string() const
+std::string Data::Get_str() const
 {
-	return _String;
+	return _str;
 }
 
-float Data::floating() const
+float Data::Get_float() const
 {
-	return _Floating;
+	return _float;
 }
 
-//-----------Setters----------------
-void Data::setInteger(int newInteger)
+void* Data::Get_void() const
 {
-	_Integer = newInteger;
+	return _void;
 }
 
-void Data::setString(const std::string& newString)
+char Data::Get_char() const
 {
-	_String = newString;
-}
-
-void Data::setFloating(float newFloating)
-{
-	_Floating = newFloating;
+	return _char;
 }
 
 //-----------Other-------------------
 std::ostream& operator<<(std::ostream& out, const Data& data)
 {
-	out << "integer: " << data.integer()
-		<< ", string: " << data.string()
-		<< ", floating: " << data.floating();
+	out << "int       : " << data.Get_int() << std::endl;
+	out << "string    : " << data.Get_str() << std::endl;
+	out << "floating  : " << data.Get_float() << std::endl;
+	out << "void      : " << data.Get_void() << std::endl;
+	out << "char*     : " << data.Get_char() << std::endl;
 	return out;
 }
