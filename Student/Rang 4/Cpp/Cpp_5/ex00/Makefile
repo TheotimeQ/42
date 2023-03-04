@@ -8,11 +8,11 @@ RM						=	rm -rf
 BUILD_DIR				= 	build/
 
 INC_DIR					=	incs
-INC_FILE				= 	
+INC_FILE				= 	Bureaucrat
 INC						= 	$(addsuffix .hpp, $(addprefix $(INC_DIR)/, $(INC_FILE)))
 
 SRCS_DIR				=	srcs
-SRCS_FILE				=	
+SRCS_FILE				=	main Bureaucrat
 SRCS					=  	$(addsuffix .cpp, $(addprefix $(SRCS_DIR)/, $(SRCS_FILE)))
 
 OBJS			    	= 	$(SRCS:%.cpp=$(BUILD_DIR)%.o)
