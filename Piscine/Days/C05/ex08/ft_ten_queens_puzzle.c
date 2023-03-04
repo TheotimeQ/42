@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ten_queens_puzzle.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tquere <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: zelinsta <zelinsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:19:28 by tquere            #+#    #+#             */
-/*   Updated: 2022/07/15 13:19:39 by tquere           ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 14:02:12 by zelinsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 
 int	test_diag(char *board, int i)
 {	
@@ -119,4 +120,9 @@ int	ft_ten_queens_puzzle(void)
 		good_comb += 1;
 	}
 	return (good_comb);
+}
+
+int main(void)
+{
+	printf("Solution : %d\n", ft_ten_queens_puzzle());
 }

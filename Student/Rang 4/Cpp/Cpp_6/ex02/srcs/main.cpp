@@ -1,7 +1,12 @@
 #include <iostream>
-#include "a.h"
-#include "b.h"
-#include "c.h"
+#include <stdlib.h>
+#include <cstdlib>
+#include <ctime>
+
+#include "../incs/Base.hpp"
+#include "../incs/A.hpp"
+#include "../incs/B.hpp"
+#include "../incs/C.hpp"
 
 Base* generate()
 {
