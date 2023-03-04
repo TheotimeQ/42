@@ -1,13 +1,17 @@
 #ifndef ITER_HPP
 #define ITER_HPP
 
-#include <cstddef>
-
 template <typename T>
-void iter(T* array, size_t len, void (*callback)(T&))
+void iter(T* tab, size_t size, void (*func)(T&))
 {
-	for (size_t i = 0; i < len; i++)
-		callback(array[i]);
+	for (size_t i = 0; i < size; i++)
+		func(tab[i]);
 }
 
-#endif // ITER_HPP
+template <typename T>
+void print(T& value)
+{
+	std::cout << value << std::endl;
+}
+
+#endif

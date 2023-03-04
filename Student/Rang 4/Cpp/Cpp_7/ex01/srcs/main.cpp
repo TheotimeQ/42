@@ -1,32 +1,15 @@
 #include <iostream>
 #include "../incs/iter.hpp"
 
-void printInt(int& val)
-{
-	std::cout << val << std::endl;
-}
-
-void printString(std::string& val)
-{
-	std::cout << val << std::endl;
-}
-
 int main()
 {
-	int intArray[5] = {
-		5, 4, 3, 2, 1
-	};
-	iter(intArray, 5, printInt);
-
+	int int_tab[10] = {0,1,2,3,4,5,6,7,8,9};
+	iter(int_tab, 10, print);
 	std::cout << std::endl;
 
-	std::string stringArray[4] = {
-		"HEY",
-		"OY",
-		"WUT",
-		"WHAT"
-	};
-	iter(stringArray, 4, printString);
+	std::string string_tab[3] = {"J'adore","les","poneys"};
+	iter(string_tab, 3, print);
+	std::cout << std::endl;
 
 	return 0;
 }

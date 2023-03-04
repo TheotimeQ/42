@@ -1,5 +1,6 @@
 #include <iostream>
-#include "array.hpp"
+
+#include "../incs/Array.hpp"
 
 int main()
 {

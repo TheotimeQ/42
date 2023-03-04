@@ -13,6 +13,25 @@ int print_char(const char c)
 	return (0);
 }
 
+int print_impossible(void)
+{
+	std::cout << "char   : impossible" << std::endl;
+	std::cout << "int    : impossible" << std::endl;
+	std::cout << "float  : impossible" << std::endl;
+	std::cout << "double : impossible" << std::endl;
+	return (0);
+}
+
+int is_convertible(const char* str) {
+    char* endptr;
+    double d = strtod(str, &endptr);
+	(void)d;
+	if (endptr == str)
+        return 0;
+	else
+        return 1;
+}
+
 int main(int argc, char **argv)
 {
 	if (argc != 2)
@@ -25,6 +44,9 @@ int main(int argc, char **argv)
 	if (arg.size() == 1 && !std::isdigit(arg[0]))
 		return (print_char(arg[0]));
 
+	if (!is_convertible(argv[1]))
+		return (print_impossible());
+	
 	to_char(arg);
 	to_int(arg);
 	to_float(arg);
