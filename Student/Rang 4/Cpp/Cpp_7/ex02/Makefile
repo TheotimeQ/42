@@ -8,7 +8,7 @@ RM						=	rm -rf
 BUILD_DIR				= 	build/
 
 INC_DIR					=	incs
-INC_FILE				= 	array
+INC_FILE				= 	Array
 INC						= 	$(addsuffix .hpp, $(addprefix $(INC_DIR)/, $(INC_FILE)))
 
 SRCS_DIR				=	srcs
