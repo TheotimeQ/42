@@ -1,6 +1,6 @@
 .PHONY:		fclean, all, clear, re
 
-NAME					=	Ex00
+NAME					=	Ex02
 
 CMP						=	c++
 FLG						=	-Wall -Wextra -Werror -std=c++98
@@ -8,11 +8,11 @@ RM						=	rm -rf
 BUILD_DIR				= 	build/
 
 INC_DIR					=	incs
-INC_FILE				= 	
+INC_FILE				= 	array
 INC						= 	$(addsuffix .hpp, $(addprefix $(INC_DIR)/, $(INC_FILE)))
 
 SRCS_DIR				=	srcs
-SRCS_FILE				=	
+SRCS_FILE				=	main
 SRCS					=  	$(addsuffix .cpp, $(addprefix $(SRCS_DIR)/, $(SRCS_FILE)))
 
 OBJS			    	= 	$(SRCS:%.cpp=$(BUILD_DIR)%.o)
