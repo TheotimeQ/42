@@ -1,6 +1,6 @@
 .PHONY:		fclean, all, clear, re
 
-NAME					=	Ex00
+NAME					=	btc
 
 CMP						=	c++
 FLG						=	-Wall -Wextra -Werror -std=c++98
@@ -8,7 +8,7 @@ RM						=	rm -rf
 BUILD_DIR				= 	build/
 
 INC_DIR					=	incs
-INC_FILE				= 	easyfind
+INC_FILE				= 	
 INC						= 	$(addsuffix .hpp, $(addprefix $(INC_DIR)/, $(INC_FILE)))
 
 SRCS_DIR				=	srcs

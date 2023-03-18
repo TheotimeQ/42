@@ -15,8 +15,8 @@ int evaluate(const std::string& op, const int& a, const int& b) {
     return (0);
 }
 
-int main(int argc, char* argv[]) {
-
+int main(int argc, char* argv[]) 
+{
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " <RPN expression>" <<  std::endl;
         return 1;
