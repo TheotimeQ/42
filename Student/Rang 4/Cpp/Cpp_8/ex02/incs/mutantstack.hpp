@@ -3,34 +3,42 @@
 
 #include <stack>
 
-template<typename T>
+template <typename T>
 class MutantStack : public std::stack<T>
 {
-public:
-	MutantStack() {}
-	MutantStack(const MutantStack<T>& src)
-	{
-		*this = src;
-	}
-	MutantStack<T>& operator=(const MutantStack<T>& rhs)
-	{
-		if (this == &rhs)
+	private:
+
+	public:
+		MutantStack() {}
+
+		MutantStack(const MutantStack<T> &src)
+		{
+			*this = src;
+		}
+
+		MutantStack<T> &operator=(const MutantStack<T> &other)
+		{
+			if (this == &other)
+				return *this;
+
+			this->c = other.c;
+
 			return *this;
-		this->c = rhs.c;
-		return *this;
-	}
-	~MutantStack() {}
+		}
 
-	typedef typename std::stack<T>::container_type::iterator iterator;
+		~MutantStack() {}
 
-	iterator begin()
-	{
-		return this->c.begin();
-	}
-	iterator end()
-	{
-		return this->c.end();
-	}
+		typedef typename std::stack<T>::container_type::iterator iterator;
+
+		iterator begin()
+		{
+			return this->c.begin();
+		}
+
+		iterator end()
+		{
+			return this->c.end();
+		}
 };
 
-#endif // MUTANTSTACK_HPP
+#endif
