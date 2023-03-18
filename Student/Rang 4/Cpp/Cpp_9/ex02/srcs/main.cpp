@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <chrono>
+// #include <chrono>
 
 int main(int argc, char** argv) {
 
@@ -16,33 +16,33 @@ int main(int argc, char** argv) {
     //Create conteneur 2
 
     //Ligne 1
-    cout << "Before: ";
+    std::cout << "Before: ";
     for (int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
+        std::cout << arr[i] << " ";
     }
-    cout << endl;
+    std::cout << std::endl;
 
     //Ligne 2
     std::sort(arr, arr + size);
-    cout << "After: ";
+    std::cout << "After: ";
     for (int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
+        std::cout << arr[i] << " ";
     }
-    cout << endl;
+    std::cout << std::endl;
 
     // //Ligne 3
     // float stop = chrono::high_resolution_clock::now();
     // //sort using vector 1
     // float start = chrono::high_resolution_clock::now();
     // float duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-    // cout << "Time to process a range of " << size << " elements with std::array : " << duration.count() << " us" << endl;
+    // cout << "Time to process a range of " << size << " elements with std::array : " << duration.count() << " us" << std::endl;
 
     //Ligne 4
-    chrono::microseconds stop = chrono::high_resolution_clock::now();
-    //sort using vector 2
-    chrono::microseconds start = chrono::high_resolution_clock::now();
-    chrono::microseconds duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-    cout << "Time to process a range of " << size << " elements with std::vector : " << duration.count() << " us" << endl;
+    // chrono::microseconds stop = chrono::high_resolution_clock::now();
+    // //sort using vector 2
+    // chrono::microseconds start = chrono::high_resolution_clock::now();
+    // chrono::microseconds duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+    // std::cout << "Time to process a range of " << size << " elements with std::vector : " << chrono::duration.count() << " us" << std::endl;
 
     return 0;
 }
@@ -54,7 +54,9 @@ int main(int argc, char** argv) {
 // Time to process a range of 5 elements with std::[..] : 0.00031 us
 // Time to process a range of 5 elements with std::[..] : 0.00014 us
 
-
+// https://github.com/fdaumas/42-Module-cpp/blob/master/cpp_09/ex02/main.cpp
+// https://iq.opengenus.org/merge-insertion-sort/
+// https://www.google.com/search?q=merge+insert+sort&oq=merge+insert+sort&aqs=chrome..69i57.3682j0j1&sourceid=chrome&ie=UTF-8
 
 
 // $> ./PmergeMe `shuf -i 1-100000 -n 3000 | tr "\n" " "`

@@ -13,6 +13,9 @@ bool is_date_valid(const std::string &str)
 	if (str.find_first_not_of("0123456789") != 4){
 		return 0;
 	}
+    if (str[4] != '-' || str[7] != '-'){
+        return 0;
+    }
 	if (str.find_last_not_of("0123456789") != 7){
 		return 0;
 	}
@@ -39,8 +42,7 @@ double get_value_from_data(std::map<std::string, double>& data, std::string &str
 			break;
 		}
     }
-	return it->second;
-    //int ou strcmp , separater sur date
+	return (--it)->second;
 }
 
 void read_data(std::map<std::string, double>& data){
