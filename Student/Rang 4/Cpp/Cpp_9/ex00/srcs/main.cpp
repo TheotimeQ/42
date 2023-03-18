@@ -40,6 +40,7 @@ double get_value_from_data(std::map<std::string, double>& data, std::string &str
 		}
     }
 	return it->second;
+    //int ou strcmp , separater sur date
 }
 
 void read_data(std::map<std::string, double>& data){

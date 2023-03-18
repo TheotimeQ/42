@@ -1,6 +1,6 @@
 .PHONY:		fclean, all, clear, re
 
-NAME					=	btc
+NAME					=	PmergeMe
 
 CMP						=	c++
 FLG						=	-Wall -Wextra -Werror -std=c++98
