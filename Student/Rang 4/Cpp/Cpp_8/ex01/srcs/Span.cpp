@@ -30,8 +30,8 @@ Span& Span::operator=(const Span& other)
 	delete[] _data;
 	
 	_size = other._size;
-	_data = new int[_size];
 	_index = other._index;
+	_data = new int[_size];
 
 	for (size_t i = 0; i < _size; i++)
 		_data[i] = other._data[i];
@@ -43,6 +43,7 @@ void Span::addNumber(int value)
 {
 	if (_index >= _size)
 		throw Full();
+		
 	_data[_index] = value;
 	_index++;
 }

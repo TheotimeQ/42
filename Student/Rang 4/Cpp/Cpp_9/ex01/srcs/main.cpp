@@ -12,7 +12,7 @@ int evaluate(const std::string& op, const int& a, const int& b) {
     if (op == "-") return a - b;
     if (op == "*") return a * b;
     if (op == "/") return a / b;
-    return (0);
+    return 0;
 }
 
 int main(int argc, char* argv[]) 
@@ -34,7 +34,6 @@ int main(int argc, char* argv[])
                 return 1;
             }
             s.push(token[0] - 48);
-            // std::cerr << "Adding :" << s.top() <<  std::endl;
         }
         else {
             if (s.size() < 2) {
@@ -45,9 +44,13 @@ int main(int argc, char* argv[])
             s.pop();
             int a = s.top(); 
             s.pop();
+            if (token == "/" && b == 0)
+            {
+                std::cerr << "Invalid expression: can't divide by 0" <<  std::endl;
+                return 1;
+            }
             int result = evaluate(token, a, b);
             s.push(result);
-            // std::cerr << a << token << b << "=" << s.top() <<  std::endl;
         }
     }
 

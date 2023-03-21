@@ -9,6 +9,7 @@ class MutantStack : public std::stack<T>
 	private:
 
 	public:
+	
 		MutantStack() {}
 
 		MutantStack(const MutantStack<T> &src)
