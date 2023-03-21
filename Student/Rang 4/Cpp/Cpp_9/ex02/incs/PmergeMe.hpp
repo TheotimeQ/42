@@ -1,6 +1,13 @@
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
+#include <climits>
+#include <iostream>
+#include <iostream>
+
+#include <vector>
+#include <list>
+
 #define ERROR 1
 #define GOOD  0
 
@@ -13,8 +20,12 @@ bool check_double(T &container, int value)
     return GOOD;
 }
 
-bool check_valid_number(int value)
+bool check_valid_number(int value, char *str)
 {
+    double 	d = std::atof(str);
+
+	if (d > static_cast<double> (INT_MAX))
+        return ERROR;
     if (value < 0)
 		return ERROR;
     return GOOD;
@@ -35,12 +46,12 @@ bool create_container(T &container, int argc, char** argv)
         int value = atoi(argv[index]);
 
         if (check_double(container, value)){
-			std::cout << "Error: " << value << " -> double" << std::endl;
+			std::cout << "Error: " << argv[index] << " -> double" << std::endl;
             return ERROR;
         }
 
-        if (check_valid_number(value)){
-			std::cout << "Error: " << value << " -> not valid ( < 0 )" << std::endl;
+        if (check_valid_number(value, argv[index])){
+			std::cout << "Error: " << argv[index] << " -> not valid ( < 0 or > MAXINT)" << std::endl;
             return ERROR;
         }
 
