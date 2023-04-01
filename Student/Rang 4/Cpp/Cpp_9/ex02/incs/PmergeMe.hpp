@@ -45,6 +45,11 @@ bool create_container(T &container, int argc, char** argv)
 	{
         int value = atoi(argv[index]);
 
+        if (check_nan(value, argv[index])){
+			std::cout << "Error: " << argv[index] << " -> not valid ( nan )" << std::endl;
+            return ERROR;
+        }
+        
         if (check_double(container, value)){
 			std::cout << "Error: " << argv[index] << " -> double" << std::endl;
             return ERROR;
@@ -55,10 +60,6 @@ bool create_container(T &container, int argc, char** argv)
             return ERROR;
         }
 
-        if (check_nan(value, argv[index])){
-			std::cout << "Error: " << argv[index] << " -> not valid ( nan )" << std::endl;
-            return ERROR;
-        }
         container.push_back(value); 
 	}
     return GOOD;

@@ -45,12 +45,12 @@ double get_value_from_data(std::map<std::string, double>& data, std::string &str
 	return (--it)->second;
 }
 
-void read_data(std::map<std::string, double>& data){
+int read_data(std::map<std::string, double>& data){
 	
     std::ifstream input_file("data.csv");
     if (!input_file.is_open()) {
         std::cerr << "Unable to open data.csv file." << std::endl;
-        return;
+        return 1;
     }
     
     std::string line;
@@ -74,14 +74,15 @@ void read_data(std::map<std::string, double>& data){
     }
     
     input_file.close();
+    return 0;
 }
 
-void read_input(std::map<std::string, double>& data, char *file_name){
+int read_input(std::map<std::string, double>& data, char *file_name){
 
 	std::ifstream input_file(file_name);
     if (!input_file.is_open()) {
         std::cerr << "Unable to open " << file_name << " file." << std::endl;
-        return;
+        return 1;
     }
     std::string line;
 	std::getline(input_file, line);
@@ -114,6 +115,7 @@ void read_input(std::map<std::string, double>& data, char *file_name){
 			std::cout << date_str << " => " << value << " => " << exchange_rate * value <<std::endl;
     }
     input_file.close();	
+    return 0;
 }
 
 int main(int argc, char **argv)
@@ -123,7 +125,13 @@ int main(int argc, char **argv)
         return 1;
     }
     std::map<std::string, double> data;
-    read_data(data);
-	read_input(data, argv[1]);
+    if (read_data(data))
+    {
+        return 1;
+    }
+	if (read_input(data, argv[1]))
+    {
+        return 1;
+    }   
     return 0;
 }
