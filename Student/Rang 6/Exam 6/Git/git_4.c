@@ -26,6 +26,10 @@ typedef struct s_client
 	struct s_client	*next;
 }					t_client;
 
+t_client	*clients = NULL;
+fd_set		current, read_set, write_set;
+int			sockfd, g_id;
+char		msg[200000], buff[200040];
 
 void	fatal()
 {

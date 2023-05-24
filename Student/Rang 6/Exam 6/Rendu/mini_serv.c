@@ -12,48 +12,27 @@
 #include <stdlib.h>
 #include <sys/select.h>
 
-#define MAX_MSG     200000
-#define MAX_BUFF    200040
-#define MAX_CLIENTS 10000
 
 //Structure pour les client 
 typedef struct s_client
 {
 
-	int		fd;
-	int		id;
+	int				fd;
+	int				id;
+	struct s_client	*next;
 
-}   t_client;
+}					t_client;
 
 //Global
+t_client	*clients = NULL;
 fd_set		current, read_set, write_set;
 int			sockfd, g_id;
-int         g_id;
-
-//Pas malloc
-char		msg[MAX_MSG];
-char        buff[MAX_BUFF];   // Necessaire ?
-t_client    *clients[MAX_CLIENTS];
-
-//Fonctions qui clear toute la liste chainees ( a ajouter dans fatal et a la fin du programme )
-void    clear_clients(void)
-{
-    int i = 0;
-    while (clients[i])
-    {   
-        FD_CLR(clients[i]->fd, &current);
-        close(clients[i]->fd);
-        free(clients[i]);
-        clients[i] = NULL;
-        i++;
-    }
-}
+char		msg[200000], buff[200040];
 
 //Erreur fatal 
 void	fatal()
 {
 	write(2, "Fatal error\n", strlen("Fatal error\n"));
-    clear_clients();
 	close(sockfd);
 	exit(1);
 }
@@ -61,87 +40,131 @@ void	fatal()
 //Parcour les client pour choper le plus gros fd 
 int	get_max_fd()
 {
-    int	max_fd = sockfd;
+	int			max_fd = sockfd;
+	t_client	*tmp = clients;
 
-    int i = 0;
-    while (clients[i])
-    {   
-        if (clients[i]->fd > max_fd)
-			max_fd = clients[i]->fd;
-        i++;
-    }
-    return (max_fd);
+	while (tmp)
+	{
+		if (tmp->fd > max_fd)
+			max_fd = tmp->fd;
+		tmp = tmp->next;
+	}
+	return (max_fd);
 }
 
 //Recupere l'id du client associe au fd
 int	get_id(int fd)
 {
-    if (clients[fd - sockfd - 1])
-    {
-        return clients[fd - sockfd - 1]->id;
-    }
+	t_client	*tmp = clients;
 
+	while (tmp)
+	{
+		if (tmp->fd == fd)
+			return (tmp->id);
+		tmp = tmp->next;
+	}
 	return (-10);
 }
 
 //Envoi un message a tout les client qui on un autre fd
 void	send_to_all(int fd)
 {
-    int i = 0;
-    while (clients[i])
-    {   
-        t_client *client = clients[i];
-        if (client->fd != fd && FD_ISSET(client->fd, &write_set))
+	t_client	*tmp = clients;
+
+	while (tmp)
+	{
+		if (tmp->fd != fd && FD_ISSET(tmp->fd, &write_set))
 		{
-			if (send(client->fd, buff, strlen(buff), 0) == -1)
+			if (send(tmp->fd, buff, strlen(buff), 0) == -1)
 				fatal();
 		}
-        i++;
-    }
+		tmp = tmp->next;
+	}
 }
+
+//Fonctions qui clear toute la liste chainees ( a ajouter dans fatal et a la fin du programme )
+// void    clear_client_liste()
+// {
+
+// }
 
 //Add le client
 void	add_client()
 {
-	int					client_fd;
+	t_client			*tmp = clients;
+	t_client			*new;
+
+	int					client;
 	struct sockaddr_in	clientaddr;
 	socklen_t			len = sizeof(clientaddr);
 
     //Accept la connection
-	client_fd = accept(sockfd, (struct sockaddr *)&clientaddr, &len);
-	if (client_fd == -1)
+	client = accept(sockfd, (struct sockaddr *)&clientaddr, &len);
+	if (client == -1)
 		fatal();
 
     //Previens les autres client
 	bzero(&buff, sizeof(buff));
 	sprintf(buff, "server: client %d just arrived\n", g_id);
-	send_to_all(client_fd);
+	send_to_all(client);
 
     //Ajoute a la liste de fd listen
-	FD_SET(client_fd, &current);
+	FD_SET(client, &current);
 
     //Allou le client
-	t_client *new = malloc(sizeof(t_client));
+	new = malloc(sizeof(t_client));
 	if (!new)
 		fatal();
 
-	new->fd = client_fd;
+	new->fd = client;
 	new->id = g_id++;
+	new->next = NULL;
 
-    clients[client_fd - sockfd - 1] = new;
+    //Si debut de liste
+	if (!clients)
+		clients = new;
+
+    //Si fin de liste
+	else
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
 }
 
 //Remove le client de la liste chainer
 void	rm_client(int fd)
 {
+	t_client	*to_del = NULL;
+	t_client	*tmp = clients;
+    
     //Envoi a tout le monde le message de quit
 	bzero(&buff, sizeof(buff));
 	sprintf(buff, "server: client %d just left\n", get_id(fd));
 	send_to_all(fd);
 
     //Delete le client 
-    if (clients[fd])
-	    free(clients[fd]);
+	if (clients && clients->fd == fd)
+	{
+		to_del = clients;
+		clients = clients->next;
+	}
+	else
+	{
+		while (tmp && tmp->next && tmp->next->fd != fd)
+			tmp = tmp->next;
+
+		if (tmp && tmp->next && tmp->next->fd == fd)
+		{
+			to_del = tmp->next;
+			tmp->next = tmp->next->next;
+		}
+	}
+
+    //Free le client
+	if (to_del)
+		free(to_del);
 
     //Ferme le descripteur
 	FD_CLR(fd, &current);
@@ -201,7 +224,7 @@ int	main(int argc, char **argv)
         //Parcours tout les fd connus
 		for (int fd = 0; fd <= get_max_fd(); ++fd)
 		{
-
+            
             //Si fd pret en lecture 
 			if (FD_ISSET(fd, &read_set))
 			{
@@ -242,7 +265,6 @@ int	main(int argc, char **argv)
 		}
 	}
 
-    clear_clients();
     FD_CLR(sockfd, &current);
     close(sockfd);
 
