@@ -10,7 +10,7 @@ If no argument is given, it should write in stderr "Wrong number of arguments" f
 If a System Calls returns an error before the program start accepting connection, it should write in stderr "Fatal error" followed by a \n and exit with status 1
 If you cant allocate memory                                                       it should write in stderr "Fatal error" followed by a \n and exit with status 1
 
-Your program must be non-blocking but client can be lazy and if they don't read your message you must NOT disconnect them...
+===========Your program must be non-blocking but client can be lazy and if they don't read your message you must NOT disconnect them...
 
 Your program must not contains #define preproc
 Your program must only listen to 127.0.0.1

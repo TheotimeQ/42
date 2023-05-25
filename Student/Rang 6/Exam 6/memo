@@ -1,0 +1,64 @@
+
+
+//bzero apres send message 
+//bzero apres utilisation du bugg et sprintf
+
+void    clear_sockets(void);
+// Parcours les clients , si id FD_CLR + id = -1 + close(fd)
+
+void	fatal();
+// Affiche le message
+// clear socket
+// clear serv_sock
+// close serv_sock
+
+int	    get_id(int fd);
+// Recuperer l'id au fd select si id > 0
+
+void	send_to_all(int fd);
+// Parcours jusau'au fd max , si =! du client fd et FD_ISSET(write) , et id > 0
+// send 0) == -1 => fatal
+
+void	add_client();
+// Accept socket + FD_SET current
+// Ajoute id + agmente l'id
+// update max fd
+// send_to_all message
+
+void	rm_client(int fd);
+//  message
+//  FD_CLR
+//  close 
+//  id -1
+
+int	    main(int argc, char **argv);
+// Verif arg
+// Clear socket
+// bzero stuct
+// htol htons af_net
+// creer socket
+// bind
+// listen
+// global sock
+// global id
+
+// FD_ZERO
+// FD SET 
+// bzero msg
+
+//while
+//rest = write = curret
+//select maxfd + 1
+// continu
+
+//parcours les fd 
+//si fd isset read
+//si socker serv add
+//creer le essage
+//revc fd, msg concataine
+//si ret < 0 -> remove
+//si messge /n
+//send all buff
+
+
+//clear sock close

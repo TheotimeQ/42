@@ -38,9 +38,15 @@ void    clear_sockets(void)
 void	fatal()
 {
 	write(2, "Fatal error\n", strlen("Fatal error\n"));
+
     clear_sockets();
+
+	FD_CLR(sockfd, &write_set);
+	FD_CLR(sockfd, &read_set);
 	FD_CLR(sockfd, &current);
+
 	close(sockfd);
+	
 	exit(1);
 }
 
@@ -85,9 +91,6 @@ void	add_client()
 
 	clients[client_fd] = g_id++;
 
-	sprintf(buff, "Added client: fd %d, id : %d\n", client_fd, clients[client_fd]);
-	write(2,buff,strlen(buff));
-
 	if (client_fd > max_fd)
 		max_fd = client_fd;
 }
@@ -131,12 +134,12 @@ int	main(int argc, char **argv)
 	if (listen(sockfd, 100) == -1)
 		fatal();
 
-	max_fd = sockfd;
-	g_id = 0;
-
 	FD_ZERO(&current);
 	FD_SET(sockfd, &current);
 	bzero(&msg, sizeof(msg));
+
+	max_fd = sockfd;
+	g_id = 0;
 
 	while (1)
 	{
@@ -181,7 +184,11 @@ int	main(int argc, char **argv)
 	}
 
     clear_sockets();
-    FD_CLR(sockfd, &current);
+
+    FD_CLR(sockfd, &write_set);
+	FD_CLR(sockfd, &read_set);
+	FD_CLR(sockfd, &current);
+
     close(sockfd);
 
 	return (0);
