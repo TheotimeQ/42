@@ -11,82 +11,59 @@
 #include <stdlib.h>
 #include <sys/select.h>
 
-#define MAX_MSG     200000
-#define MAX_BUFF    200040
-#define MAX_CLIENTS 10000
-
-typedef struct s_client
-{
-
-	int		fd;
-	int		id;
-
-}   t_client;
-
 fd_set		current, read_set, write_set;
-int			sockfd, g_id;
+int			sockfd;
 int         g_id;
-char		msg[MAX_MSG];
-char        buff[MAX_BUFF];
-t_client    *clients[MAX_CLIENTS];
+int			max_fd;
 
-void    clear_clients(void)
+char		msg[200000];
+char        buff[200040];
+int    		clients[10000];
+
+void    clear_sockets(void)
 {
-    int i = 0;
-    while (clients[i])
+    int fd = 0;
+    while (fd <= max_fd)
     {   
-        FD_CLR(clients[i]->fd, &current);
-        close(clients[i]->fd);
-        free(clients[i]);
-        clients[i] = NULL;
-        i++;
+		if (clients[fd] > 0)
+		{
+        	FD_CLR(clients[fd], &current);
+        	close(fd);
+		}
+        clients[fd] = -1;
+        fd++;
     }
 }
 
 void	fatal()
 {
 	write(2, "Fatal error\n", strlen("Fatal error\n"));
-    clear_clients();
+    clear_sockets();
+	FD_CLR(sockfd, &current);
 	close(sockfd);
 	exit(1);
 }
 
-int	get_max_fd()
-{
-    int	max_fd = sockfd;
-
-    int i = 0;
-    while (clients[i])
-    {   
-        if (clients[i]->fd > max_fd)
-			max_fd = clients[i]->fd;
-        i++;
-    }
-    return (max_fd);
-}
-
 int	get_id(int fd)
 {
-    if (clients[fd - sockfd - 1])
-    {
-        return clients[fd - sockfd - 1]->id;
-    }
-
-	return (-10);
+    if (clients[fd] >= 0)
+	{
+        return clients[fd];
+	}
+	return (-1);
 }
 
 void	send_to_all(int fd)
 {
-    int i = 0;
-    while (clients[i])
+    int client_fd = 0;
+    while (client_fd <= max_fd)
     {   
-        t_client *client = clients[i];
-        if (client->fd != fd && FD_ISSET(client->fd, &write_set))
+		if (client_fd != fd && FD_ISSET(client_fd, &write_set) && clients[client_fd] >= 0)
 		{
-			if (send(client->fd, buff, strlen(buff), 0) == -1)
+			if (send(client_fd, buff, strlen(buff), 0) == -1)
 				fatal();
 		}
-        i++;
+        client_fd++;
     }
 }
 
@@ -104,14 +81,15 @@ void	add_client()
 	sprintf(buff, "server: client %d just arrived\n", g_id);
 	send_to_all(client_fd);
 
-	t_client *new = malloc(sizeof(t_client));
-	if (!new)
-		fatal();
-
 	FD_SET(client_fd, &current);
-	new->fd = client_fd;
-	new->id = g_id++;
-    clients[client_fd - sockfd - 1] = new;
+
+	clients[client_fd] = g_id++;
+
+	sprintf(buff, "Added client: fd %d, id : %d\n", client_fd, clients[client_fd]);
+	write(2,buff,strlen(buff));
+
+	if (client_fd > max_fd)
+		max_fd = client_fd;
 }
 
 void	rm_client(int fd)
@@ -120,11 +98,10 @@ void	rm_client(int fd)
 	sprintf(buff, "server: client %d just left\n", get_id(fd));
 	send_to_all(fd);
 
-    if (clients[fd])
-	    free(clients[fd]);
-
 	FD_CLR(fd, &current);
 	close(fd);
+
+    clients[fd] = -1;
 }
 
 int	main(int argc, char **argv)
@@ -134,6 +111,8 @@ int	main(int argc, char **argv)
 		write(2, "Wrong number of arguments\n", strlen("Wrong number of arguments\n"));
 		exit(1);
 	}
+
+	clear_sockets();
 
 	struct sockaddr_in	servaddr;
 	bzero(&servaddr, sizeof(servaddr));
@@ -152,6 +131,9 @@ int	main(int argc, char **argv)
 	if (listen(sockfd, 100) == -1)
 		fatal();
 
+	max_fd = sockfd;
+	g_id = 0;
+
 	FD_ZERO(&current);
 	FD_SET(sockfd, &current);
 	bzero(&msg, sizeof(msg));
@@ -160,10 +142,10 @@ int	main(int argc, char **argv)
 	{
 		read_set = write_set = current;
 
-		if (select(get_max_fd() + 1, &read_set, &write_set, NULL, NULL) == -1)
+		if (select(max_fd + 1, &read_set, &write_set, NULL, NULL) == -1)
 			continue ;
 
-		for (int fd = 0; fd <= get_max_fd(); ++fd)
+		for (int fd = 0; fd <= max_fd ; ++fd)
 		{
 			if (FD_ISSET(fd, &read_set))
 			{
@@ -181,6 +163,12 @@ int	main(int argc, char **argv)
 						break ;
 				}
             
+				if (ret <= 0)
+				{
+					rm_client(fd);
+					break ;
+				}
+
                 if (msg[strlen(msg) - 1] == '\n')
                 {
                     bzero(&buff, sizeof(buff));
@@ -188,17 +176,11 @@ int	main(int argc, char **argv)
                     send_to_all(fd);
                     bzero(&msg, sizeof(msg));
                 }
-
-				if (ret <= 0)
-				{
-					rm_client(fd);
-					break ;
-				}
 			}
 		}
 	}
 
-    clear_clients();
+    clear_sockets();
     FD_CLR(sockfd, &current);
     close(sockfd);
 
